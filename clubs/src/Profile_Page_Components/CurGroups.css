@@ -1,0 +1,44 @@
+.container {
+  width: 65vw;
+  margin: auto;
+}
+
+.headerContainer {
+  border-bottom: 1px solid black;
+  padding-top: 2px;
+  text-align: left;
+}
+
+.headerContainer > h3 {
+  padding-left: 3px;
+}
+
+.listedGroup {
+  list-style-type: none;
+  text-align: left;
+  border: 3px solid green;
+  margin-top: 3px;
+  margin-right: 5%;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.listedGroup:hover {
+  cursor: pointer;
+  border: 3px solid lightgreen;
+}
+
+.listedClub {
+  list-style-type: none;
+  text-align: left;
+  border: 3px solid #00204e;
+  margin-top: 3px;
+  margin-right: 5%;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.listedClub:hover {
+  cursor: pointer;
+  border: 3px solid blue;
+}

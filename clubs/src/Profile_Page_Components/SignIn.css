@@ -1,0 +1,14 @@
+.signInContainer {
+  width: 65vw;
+}
+
+.headerContainer {
+  border-bottom: 1px solid black;
+  padding-top: 2px;
+  text-align: left;
+}
+
+.inputContainer {
+  width: 60vw;
+  padding-top: 15px;
+}
