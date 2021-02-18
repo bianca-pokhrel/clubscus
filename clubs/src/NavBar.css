@@ -32,12 +32,16 @@
   color: white;
 } */
 
+.navBarContainer {
+  background-color: #00204e;
+}
+
 .header {
   color: white;
   cursor: pointer;
-  /* float: none; */
-  padding-top: 3px;
-  width: ;
+  margin-left: 25%;
+  margin-top: 3px;
+  width: fit-content;
 }
 
 .ant-menu.menu {
@@ -47,10 +51,6 @@
 .subMenu {
   float: right;
   color: white;
-}
-
-.navBarContainer {
-  background-color: #00204e;
 }
 
 .signOut {
