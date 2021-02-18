@@ -1,0 +1,58 @@
+/* Colour is 00204E */
+
+/* .navBarContainer {
+  margin-top: 0;
+  background-color: #00204e;
+  color: white;
+  float: top;
+  height: 7vh;
+} */
+
+/* .MuiAppBar-colorPrimary {
+  background-color: #00204e;
+}
+
+.logo {
+  float: left;
+  padding-bottom: 20px;
+  padding-left: 2vw;
+}
+
+.MuiToolbar-root {
+  justify-content: space-between;
+}
+
+.navBarRight {
+  margin-right: 10px;
+  padding-top: 5px;
+  float: right;
+}
+
+.navBarRight > Button {
+  color: white;
+} */
+
+.header {
+  color: white;
+  cursor: pointer;
+  /* float: none; */
+  padding-top: 3px;
+  width: ;
+}
+
+.ant-menu.menu {
+  background-color: #00204e;
+}
+
+.subMenu {
+  float: right;
+  color: white;
+}
+
+.navBarContainer {
+  background-color: #00204e;
+}
+
+.signOut {
+  color: red;
+}
