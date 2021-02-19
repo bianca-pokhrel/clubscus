@@ -9,6 +9,8 @@ const { SubMenu } = Menu;
 class NavBar extends React.Component{
     state = {
         current: 'mail',
+        signedIn: false,
+        userType: ""
       };
     
     handleClick = e => {
@@ -17,28 +19,52 @@ class NavBar extends React.Component{
     };
 
     render (){
-        const { current } = this.state;
+        const { current, signedIn, userType } = this.state;
+        
+        const navBarView = () => {
+            if (!signedIn) {
+                return (
+                    // Not Signed In
+                    <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                        <Menu.Item className="navBarOption" key="createAcc">Create an Account</Menu.Item>
+                        <Menu.Item className="navBarOption" key="signIn">Sign In</Menu.Item>
+                    </Menu>
+                )
+            } else {
+                if (userType == "user") {
+                    return(
+                        // User
+                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                            <SubMenu className="navBarOption" key="accountSubMenu" title="My Account">
+                                <Menu.Item key="memberships">Group Memberships</Menu.Item>      
+                                <Menu.Item key="pendingGroups">Pending Group Requests</Menu.Item>
+                                <Menu.Item className="signOut" key="signOut">Sign Out</Menu.Item>
+                            </SubMenu>
+                            <SubMenu className="navBarOption" key="clubSubMenu" title="My Groups">
+                                <Menu.Item key="temp1">Temp Group</Menu.Item>      
+                                <Menu.Item key="temp2">Temp Club</Menu.Item>
+                            </SubMenu>
+                        </Menu>
+                    )
+                } else if (userType == "admin" || userType == "superadmin") {
+                    return(
+                        // Admin
+                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">  
+                            <Menu.Item className="navBarOption" key="signOut">Sign Out</Menu.Item>
+                        </Menu>
+                    )
+                }
+            }
+        }
+
         return(
             <div className="navBarContainer">
                 <Row>
                     <Col span={6}>
-                            <h2 className ="header">Lorem Impsum</h2>
+                        <h2 className ="header">Lorem Impsum</h2>
                     </Col>
                     <Col span={18}>
-                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-                                {/* <SubMenu className="subMenu" key="SubMenu2" title="My Account">
-                                    <Menu.Item className="signOut" key="setting:3">Log In / Register</Menu.Item>
-                                </SubMenu> */}
-                                <SubMenu className="subMenu" key="SubMenu2" title="My Account">
-                                    <Menu.Item key="setting:1">Group Memberships</Menu.Item>      
-                                    <Menu.Item key="setting:2">Pending Group Requests</Menu.Item>
-                                    <Menu.Item className="signOut" key="setting:3">Sign Out</Menu.Item>
-                                </SubMenu>
-                                <SubMenu className="subMenu" key="SubMenu1" title="My Groups">
-                                    <Menu.Item key="setting:1">Temp Group</Menu.Item>      
-                                    <Menu.Item key="setting:2">Temp Club</Menu.Item>
-                                </SubMenu>
-                        </Menu>
+                        {navBarView()}     
                     </Col>
                 </Row>
             </div>
