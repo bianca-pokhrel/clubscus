@@ -50,9 +50,6 @@ class SignIn extends React.Component{
             if (!signedIn) {
                 return (
                     <div>
-                        <div id="headerContainer">
-                            <h3>Sign-In</h3>
-                        </div>
                         <div id="inputContainer">
                             <Form
                                 name="signIn"
@@ -88,7 +85,7 @@ class SignIn extends React.Component{
               } else {
                 return (
                     <div id="signedIn">
-                        <h1 className="message">
+                        <h1>
                             Signed In!
                         </h1>
                         <Button className="signOutButton" onClick={this.handleSignOut}>Sign Out</Button>
@@ -99,6 +96,9 @@ class SignIn extends React.Component{
 
         return(
             <div id="signInContainer">
+                <div id="headerContainer">
+                    <h3>Sign-In</h3>
+                </div>
                 {signedInStatus()}
             </div>
         )

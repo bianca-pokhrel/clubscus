@@ -3,6 +3,7 @@
   /* margin: auto; */
   border: 1px solid #004099;
   border-radius: 3px;
+  padding-bottom: 10px;
 }
 
 #headerContainer {
@@ -15,10 +16,6 @@
   width: 50vw;
   padding-top: 15px;
   margin: auto;
-}
-
-.ant-row.ant-form-item.formBottom {
-  margin-bottom: 20px;
 }
 
 .signOutButton {
