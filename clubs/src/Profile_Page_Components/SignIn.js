@@ -36,42 +36,70 @@ class SignIn extends React.Component{
         }
     }
 
+    handleSignOut = (e) => {
+        this.setState({signedIn:false});
+        this.setState({userType:""});
+        console.log('signed out')
+    }
+
     render (){
+
+        let {signedIn} = this.state;
+
+        const signedInStatus = () => {
+            if (!signedIn) {
+                return (
+                    <div>
+                        <div id="headerContainer">
+                            <h3>Sign-In</h3>
+                        </div>
+                        <div id="inputContainer">
+                            <Form
+                                name="signIn"
+                                className="signInForm"
+                                initialValues={{ remember: true }}
+                                onFinish={this.onFinish}
+                                onFinishFailed={this.onFinishFailed}
+                                >
+                                <Form.Item
+                                    label="Username"
+                                    name="username"
+                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label="Password"
+                                    name="password"
+                                    rules={[{ required: true, message: 'Please input your password!' }]}
+                                >
+                                    <Input.Password />
+                                </Form.Item>
+                                <Form.Item className="formBottom">
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                            <a href="url">Don't Have An Account? Register for One!</a>
+                        </div>
+                    </div>
+                )
+              } else {
+                return (
+                    <div id="signedIn">
+                        <h1 className="message">
+                            Signed In!
+                        </h1>
+                        <Button className="signOutButton" onClick={this.handleSignOut}>Sign Out</Button>
+                    </div>
+                )
+              }
+        }
+
         return(
-            <div className="signInContainer">
-                <div className="headerContainer">
-                    <h3>Sign-In</h3>
-                </div>
-                <div className="inputContainer">
-                    <Form
-                        name="basic"
-                        initialValues={{ remember: true }}
-                        onFinish={this.onFinish}
-                        onFinishFailed={this.onFinishFailed}
-                        >
-                        <Form.Item
-                            label="Username"
-                            name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-
-                        <Form.Item
-                            label="Password"
-                            name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </div>
+            <div id="signInContainer">
+                {signedInStatus()}
             </div>
         )
     }
