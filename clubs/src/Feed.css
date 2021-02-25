@@ -1,0 +1,19 @@
+.club_banner {
+	width: 100%;
+}
+#club_container {
+	text-align: center;
+	width: 100%;
+	float: left;
+}
+.side_bars {
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+#club_feed {
+	width: 60%;
+	height: 100%;
+	float: left;
+}
+
