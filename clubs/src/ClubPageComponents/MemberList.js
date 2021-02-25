@@ -4,7 +4,7 @@ import './MemberList.css'
 
 var members;
 class MemberLinks extends React.Component {
-	members = [{id: 0, first_name: "Chuck", last_name: "Jones"}, {id: 1, first_name: "Friz", last_name: "Freleng"}]
+	members = [{id: 0, first_name: "Chuck", last_name: "Berry"}, {id: 1, first_name: "Louis", last_name: "Armstrong"}]
 
 	render() {
     		return (
