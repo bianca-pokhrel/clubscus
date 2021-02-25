@@ -1,0 +1,78 @@
+.ant-card-body {
+	padding-left: 10px;
+}
+
+.ant-card-bordered {
+	border: none;
+}
+
+.ant-typography {
+	color: black;
+}
+
+.centered {
+    position: absolute;
+    left: 0;
+    right: 0; 
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  
+  .no-results {
+      height: 10vh;
+      width: 10vw;
+  }
+
+  .clubscontainer {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+.ant-layout-sider, .background {
+	background: white;
+}
+
+.row {
+	margin: 1.5em;
+}
+
+.submenu {
+	border-bottom: 1px solid #333;
+}
+
+.menu {
+	border: none;
+}
+
+.menu > * {
+	color: #333333;
+}
+
+.ant-menu-inline .ant-menu-item:after, 
+.ant-menu-vertical-left .ant-menu-item:after, 
+.ant-menu-vertical-right .ant-menu-item:after, 
+.ant-menu-vertical .ant-menu-item:after {
+	border-right: none;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+	background-color: white;
+}
+
+.ant-menu-item:hover {
+	background-color: #F9F9F9;
+}
+
+.ant-menu-submenu-title:hover {
+	color: #333;
+}
+
+.ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before {
+	background: #333;
+}
+
+.ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after {
+	background: #333;
+}
