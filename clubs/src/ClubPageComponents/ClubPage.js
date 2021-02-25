@@ -6,6 +6,7 @@ import NavBar from '../NavBar'
 import Links from './ClubLinks'
 import MemberList from './MemberList'
 import Feed from '../Feed'
+import About from './About'
 
 class ClubPage extends React.Component{
 	state = {
@@ -19,11 +20,9 @@ class ClubPage extends React.Component{
         
         	const about_us = () => {
         		return (
-		            // Not Signed In
-		            <div>
-		            	Future about us page
+		            <div class="club_container">
+		            	<About/>
 		            </div>
-		            //
 		        ) 
         	}
         
@@ -47,7 +46,7 @@ class ClubPage extends React.Component{
 		    }
 		}
 		return(
-		    <div>
+		    <div id="club_bg">
 		        <div>
 		        	<NavBar/>
 		 		<img class="club_banner" src={banner}/>

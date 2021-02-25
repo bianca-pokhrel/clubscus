@@ -9,8 +9,8 @@ const { SubMenu } = Menu;
 class NavBar extends React.Component{
     state = {
         current: 'mail',
-        signedIn: true,
-        userType: "user"
+        signedIn: false,
+        userType: ""
       };
     
     handleClick = e => {

@@ -1,19 +1,15 @@
-.club_banner {
-	width: 100%;
-}
-#club_container {
+#feed_container {
 	text-align: center;
 	width: 100%;
 	float: left;
+	padding: 10px;
 }
-.side_bars {
-	width: 20%;
-	height: 100%;
-	float: left;
+.feed_sorting_container {
+	float: right;
+	padding-top: 10px;
+	padding-right: 10px;
 }
-#club_feed {
-	width: 60%;
-	height: 100%;
-	float: left;
+#feed_sort_button {
+	margin-left: 10px;
 }
 
