@@ -1,0 +1,30 @@
+#signInContainer {
+  width: 65vw;
+  /* margin: auto; */
+  border: 1px solid #004099;
+  border-radius: 3px;
+  padding-bottom: 10px;
+}
+
+#headerContainer {
+  border-bottom: 1px solid lightgray;
+  padding-top: 2px;
+  text-align: left;
+}
+
+#inputContainer {
+  width: 50vw;
+  padding-top: 15px;
+  margin: auto;
+}
+
+.signOutButton {
+  background-color: rgba(255, 0, 0, 0.685);
+  color: white;
+}
+
+.signOutButton:hover {
+  background-color: rgba(255, 255, 255, 0.685);
+  color: rgba(255, 0, 0, 0.685);
+  border-color: rgba(255, 0, 0, 0.685);
+}
