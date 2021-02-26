@@ -1,16 +1,14 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ClubPage from './ClubPageComponents/ClubPage.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Test page.
-        </p>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+	render() {
+	    	return (
+	       	<ClubPage/>
+	    	);  
+    	}
 }
 
 export default App;

@@ -1,0 +1,9 @@
+#comment_container {
+	width: 100%;
+	text-align: center;
+	background-color: red;
+	border-radius: 10px;
+}
+.comment_input {
+	width: 100%;
+}
