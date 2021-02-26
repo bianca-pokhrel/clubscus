@@ -1,0 +1,14 @@
+#admin_feed_container {
+    text-align: center;
+    width: 100%;
+    float: left;
+    padding: 10px;
+}
+.admin_feed_sorting_container {
+    float: right;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+#admin_feed_sort_button {
+    margin-left: 10px;
+}
