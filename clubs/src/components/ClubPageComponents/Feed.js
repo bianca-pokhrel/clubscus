@@ -1,7 +1,7 @@
 import React from "react"
 import './Feed.css'
 import 'antd/dist/antd.css';
-import PostContent from './ClubPost/PostContent'
+import PostContent from '../ClubPost/PostContent'
 import { Button } from 'antd'
 
 class Feed extends React.Component{

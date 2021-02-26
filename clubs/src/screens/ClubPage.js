@@ -1,12 +1,12 @@
 import React from "react"
 import './ClubPage.css'
 import 'antd/dist/antd.css';
-import banner from "./static/banner.jpg"
-import NavBar from '../NavBar'
-import Links from './ClubLinks'
-import MemberList from './MemberList'
-import Feed from '../Feed'
-import About from './About'
+import banner from "../components/ClubPageComponents/static/banner.jpg"
+import NavBar from '../components/NavBar/NavBar'
+import Links from '../components/ClubPageComponents/ClubLinks'
+import MemberList from '../components/ClubPageComponents/MemberList'
+import Feed from '../components/ClubPageComponents/Feed'
+import About from '../components/ClubPageComponents/About'
 
 class ClubPage extends React.Component{
 	state = {
