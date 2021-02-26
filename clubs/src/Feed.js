@@ -20,30 +20,31 @@ class Feed extends React.Component{
    	
 	render() {
 		const gen = (post) => {
-			return (<PostContent post = {post}/>)
-		}		
-		const gen_all = () => {
-			this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : (Date.parse(a.date) > 				Date.parse(b.date) ? this.state.ascending : 0)))
-			
-			let arr = this.state.posts
-			let map = arr.map(p => (<PostContent post = {p}/>))
-			return (map)
+			return <PostContent data post = {post} expand = {true}/>
 		}
-		
+				
+		const gen_all = () => {
+			this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
+			
+			return this.state.posts.map(p => {
+				return <PostContent post = {p} expand = {false}/>
+			})
+		}
 		const check_url = () => {
 			if (window.location.pathname.startsWith("/post")) {
 				let id = parseInt(window.location.pathname.substring(5,window.location.pathname.length))
 				
 				for (let i = 0; i < this.state.posts.length; i++) {
 					let post = this.state.posts[i]
-					if (post.id == id) return gen(post)
+					if (post.id == id) 
+						return(
+							<div id="feed_container">
+								{gen(post)}
+			    				</div>
+						)
 				}
 			}
-			return gen_all()
-		}
-		
-		return(
-			<div>
+			return (<div>
 				<div class="feed_sorting_container">
 		    			<Button id="feed_sort_button" onClick={this.handleClick}>
 		    				Descending
@@ -53,8 +54,15 @@ class Feed extends React.Component{
 		    			</Button>
 				</div>
 				<div id="feed_container">
-					{check_url()}
+					{gen_all()}
 			    	</div>
+			    	</div>
+			)
+		}
+		
+		return(
+			<div>
+				{check_url()}
 		    	</div>
         	)
     	}
