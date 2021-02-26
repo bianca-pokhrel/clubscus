@@ -7,12 +7,15 @@ import Links from '../components/ClubPageComponents/ClubLinks'
 import MemberList from '../components/ClubPageComponents/MemberList'
 import Feed from '../components/ClubPageComponents/Feed'
 import About from '../components/ClubPageComponents/About'
+import AdminLinks from "../components/AdminPage/AdminLinks";
+import AdminMemberList from "../components/AdminPage/AdminMemberList";
+import AdminFeed from '../components/AdminPage/AdminFeed';
 
 class ClubPage extends React.Component{
 	state = {
 		current: 'mail',
         	signedIn: true,
-        	userType: ""
+        	userType: "user"
 	};
     
 	render() {
@@ -29,7 +32,7 @@ class ClubPage extends React.Component{
 		const clubPageView = () => {
 		    if (!signedIn || window.location.pathname == "/about") {
 		        return about_us();
-		    }else {
+		    } else if (userType == "user") {
 		        return(
 				<div>
 					<div class="side_bars">
@@ -43,7 +46,26 @@ class ClubPage extends React.Component{
 		        		</div>
 		        	</div>
 		        );
-		    }
+		    } else if (userType == "admin") {
+				return(
+					<div>
+						<div class="side_bars">
+							<AdminLinks/>
+						</div>
+						<div id="club_feed">
+							<AdminFeed/>
+						</div>
+						<div class="side_bars">
+							<AdminMemberList/>
+						</div>
+					</div>
+				);
+			} else if (userType == "superadmin") {
+		    	return (
+		    		<div>
+					</div>
+				)
+			}
 		}
 		return(
 		    <div id="club_bg">

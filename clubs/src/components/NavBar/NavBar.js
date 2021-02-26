@@ -46,11 +46,29 @@ class NavBar extends React.Component{
                             </SubMenu>
                         </Menu>
                     )
-                } else if (userType == "admin" || userType == "superadmin") {
+                } else if (userType == "admin") {
                     return(
                         // Admin
-                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">  
-                            <Menu.Item className="navBarOption" key="signOut">Sign Out</Menu.Item>
+                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                            <SubMenu className="navBarOption" key="groupSubMenu" title="Group Account">
+                                <Menu.Item key="pendingGroups">Pending Group Requests</Menu.Item>
+                                <Menu.Item className="signOut" key="signOut">Sign Out</Menu.Item>
+                            </SubMenu>
+                            <SubMenu className="navBarOption" key="createSubMenu" title="Create">
+                                <Menu.Item key="createPosts">Create a Post</Menu.Item>
+                                <Menu.Item key="createLinks">Add a Link</Menu.Item>
+                                <Menu.Item key="pendingOfficiates">Send an Officiate Request</Menu.Item>
+                            </SubMenu>
+                        </Menu>
+                    )
+                } else if (userType == "superadmin") {
+                    return (
+                        // Super admin
+                        <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+                            <SubMenu className="navBarOption" key="accountSubMenu" title="Admin Account">
+                                <Menu.Item key="pendingOfficiates">Pending Officiate Requests</Menu.Item>
+                                <Menu.Item className="signOut" key="signOut">Sign Out</Menu.Item>
+                            </SubMenu>
                         </Menu>
                     )
                 }
