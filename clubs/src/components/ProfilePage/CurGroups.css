@@ -1,0 +1,51 @@
+#curGroupsContainer {
+  width: 65vw;
+  margin: auto;
+  border: 1px solid #004099;
+  border-radius: 3px;
+  padding-bottom: 10px;
+}
+
+#headerContainer {
+  border-bottom: 1px solid lightgray;
+  padding-top: 2px;
+  text-align: left;
+}
+
+#headerContainer > h3 {
+  padding-left: 3px;
+}
+
+#groupListContainer {
+  padding-top: 10px;
+}
+
+.listedGroup {
+  list-style-type: none;
+  text-align: left;
+  border: 3px solid green;
+  margin-top: 3px;
+  margin-right: 5%;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.listedGroup:hover {
+  cursor: pointer;
+  border: 3px solid lightgreen;
+}
+
+.listedClub {
+  list-style-type: none;
+  text-align: left;
+  border: 3px solid #00204e;
+  margin-top: 3px;
+  margin-right: 5%;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.listedClub:hover {
+  cursor: pointer;
+  border: 3px solid blue;
+}
