@@ -1,7 +1,8 @@
 #signInContainer {
   width: 65vw;
-  /* margin: auto; */
-  border: 1px solid #004099;
+  margin: auto;
+  margin-top: 40px;
+  border: 3px solid #004099;
   border-radius: 3px;
   padding-bottom: 10px;
 }
@@ -21,6 +22,7 @@
 .signOutButton {
   background-color: rgba(255, 0, 0, 0.685);
   color: white;
+  justify-self: center;
 }
 
 .signOutButton:hover {
