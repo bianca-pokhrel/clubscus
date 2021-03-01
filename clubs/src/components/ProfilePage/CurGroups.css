@@ -8,7 +8,7 @@
 }
 
 #headerContainer {
-  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid lightgray; */
   padding-top: 2px;
   text-align: left;
 }

@@ -59,26 +59,29 @@ class SignIn extends React.Component{
                                 onFinishFailed={this.onFinishFailed}
                                 >
                                 <Form.Item
-                                    label="Username"
+                                    // label="Username"
                                     name="username"
                                     rules={[{ required: true, message: 'Please input your username!' }]}
                                 >
-                                    <Input />
+                                    <Input placeholder="Username"/>
                                 </Form.Item>
                                 <Form.Item
-                                    label="Password"
+                                    // label="Password"
                                     name="password"
+                                    place
                                     rules={[{ required: true, message: 'Please input your password!' }]}
                                 >
-                                    <Input.Password />
+                                    <Input.Password placeholder="Password"/>
                                 </Form.Item>
-                                <Form.Item className="formBottom">
-                                    <Button type="primary" htmlType="submit">
+                                <Form.Item>
+                                    <Button id="LogIn" type="primary" htmlType="submit">
                                         Submit
                                     </Button>
                                 </Form.Item>
                             </Form>
-                            <a href="url">Don't Have An Account? Register for One!</a>
+                            <div id="register">
+                                Don't Have An Account?  <a href="url">Register for One!</a>
+                            </div>
                         </div>
                     </div>
                 )
@@ -97,7 +100,7 @@ class SignIn extends React.Component{
         return(
             <div id="signInContainer">
                 <div id="headerContainer">
-                    <h3>Sign-In</h3>
+                    <h1>Log In To Your Account</h1>
                 </div>
                 {signedInStatus()}
             </div>
