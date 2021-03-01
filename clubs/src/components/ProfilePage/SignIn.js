@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Button } from 'antd';
 import './SignIn.css';
+import { Link } from 'react-router-dom';
 
 class SignIn extends React.Component{
 
@@ -59,14 +60,12 @@ class SignIn extends React.Component{
                                 onFinishFailed={this.onFinishFailed}
                                 >
                                 <Form.Item
-                                    // label="Username"
                                     name="username"
                                     rules={[{ required: true, message: 'Please input your username!' }]}
                                 >
                                     <Input placeholder="Username"/>
                                 </Form.Item>
                                 <Form.Item
-                                    // label="Password"
                                     name="password"
                                     place
                                     rules={[{ required: true, message: 'Please input your password!' }]}
@@ -80,7 +79,7 @@ class SignIn extends React.Component{
                                 </Form.Item>
                             </Form>
                             <div id="register">
-                                Don't Have An Account?  <a href="url">Register for One!</a>
+                                Don't Have An Account?  <Link to="/Register">Register for One!</Link>
                             </div>
                         </div>
                     </div>
@@ -99,7 +98,7 @@ class SignIn extends React.Component{
 
         return(
             <div id="signInContainer">
-                <div id="headerContainer">
+                <div id="headerContainerS">
                     <h1>Log In To Your Account</h1>
                 </div>
                 {signedInStatus()}

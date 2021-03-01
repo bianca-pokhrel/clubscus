@@ -4,6 +4,7 @@ import ClubPage from './screens/ClubPage.js';
 import SignInPage from './screens/SignInPage.js'
 import ProfilePage from './screens/ProfilePage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import RegisterPage from './screens/RegisterPage';
 
 class App extends React.Component {
 	render() {
@@ -14,7 +15,8 @@ class App extends React.Component {
 							{/* <ClubPage/>
 							<ProfilePage/> */}
 							<Route exact path="/" component={ClubPage} />
-							<Route path="/login" component={SignInPage}/>
+							<Route path="/SignIn" component={SignInPage}/>
+							<Route path="/Register" component={RegisterPage}/>
 						</Switch>
 					</Router>
 				</div>
