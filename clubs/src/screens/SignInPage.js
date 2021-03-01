@@ -14,7 +14,10 @@ class SignInPage extends React.Component{
 	render() {
 		return(
 		    <div id="page_container">
-				<h1>Clubcus</h1>
+				<div id="title">
+					<h1>Clubcus</h1>
+					<h3>Meet Like-Minded Students. Make Some New Friends.</h3>
+				</div>
 		        <SignIn/>
 		    </div>
         	)
