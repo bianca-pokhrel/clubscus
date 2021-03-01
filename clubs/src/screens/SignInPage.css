@@ -1,11 +1,6 @@
-body {
+#page_container {
   background: url(../components/ProfilePage/bluekingscollege.jpg) no-repeat
     center center fixed;
-  align-content: center;
-  margin-top: 0;
-}
-
-#page_container {
   margin-top: 0;
   width: 100vw;
   height: 100vh;
