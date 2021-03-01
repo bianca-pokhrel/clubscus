@@ -34,14 +34,3 @@
   padding-top: 40px;
 }
 
-.signOutButton {
-  background-color: rgba(255, 0, 0, 0.685);
-  color: white;
-  justify-self: center;
-}
-
-.signOutButton:hover {
-  background-color: rgba(255, 255, 255, 0.685);
-  color: rgba(255, 0, 0, 0.685);
-  border-color: rgba(255, 0, 0, 0.685);
-}

@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import './SignIn.css';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 class SignIn extends React.Component{
 
@@ -24,76 +25,73 @@ class SignIn extends React.Component{
         if (values.username == "superadmin" && values.password == "superadmin") {
             console.log('superadmin signed in')
             this.setState({userType:"superAdmin"})
+            message.success("Super Admin Logged In")
         } else if (values.username == "admin" && values.password == "admin") {
             console.log('admin signed in')
             this.setState({userType:"admin"})
+            message.success("Group Admin Logged In")
         } else if (values.username == "user" && values.password == "user") {
             console.log('user signed in')
             this.setState({userType:"user"})
+            message.success("Logged In!")
         } else {
             console.log('non-valid user')
             this.setState({signedIn:false})
-            this.onFinishFailed("Not a valid userName")
+            message.error("Non Valid Information")
         }
-    }
-
-    handleSignOut = (e) => {
-        this.setState({signedIn:false});
-        this.setState({userType:""});
-        console.log('signed out')
     }
 
     render (){
 
-        let {signedIn} = this.state;
+        let {signedIn, userType} = this.state;
 
-        const signedInStatus = () => {
-            if (!signedIn) {
-                return (
-                    <div>
-                        <div id="inputContainer">
-                            <Form
-                                name="signIn"
-                                className="signInForm"
-                                initialValues={{ remember: true }}
-                                onFinish={this.onFinish}
-                                onFinishFailed={this.onFinishFailed}
-                                >
-                                <Form.Item
-                                    name="username"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
-                                >
-                                    <Input placeholder="Username"/>
-                                </Form.Item>
-                                <Form.Item
-                                    name="password"
-                                    place
-                                    rules={[{ required: true, message: 'Please input your password!' }]}
-                                >
-                                    <Input.Password placeholder="Password"/>
-                                </Form.Item>
-                                <Form.Item>
-                                    <Button id="LogIn" type="primary" htmlType="submit">
-                                        Submit
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                            <div id="register">
-                                Don't Have An Account?  <Link to="/Register">Register for One!</Link>
-                            </div>
+        // REDIRECT FOR ACCOUNT TYPES
+        if (signedIn) {
+            if (userType == "user"){
+                return <Redirect to="/" push={true} />
+            } else if (userType == "admin"){
+                return <Redirect to="/" push={true} />
+            } else if (userType == "superAdmin"){
+                return <Redirect to="/" push={true} />
+            } 
+        }
+
+        const signInPrompt = () => {
+            return (
+                <div>
+                    <div id="inputContainer">
+                        <Form
+                            name="signIn"
+                            className="signInForm"
+                            initialValues={{ remember: true }}
+                            onFinish={this.onFinish}
+                            onFinishFailed={this.onFinishFailed}
+                            >
+                            <Form.Item
+                                name="username"
+                                rules={[{ required: true, message: 'Please input your username!' }]}
+                            >
+                                <Input placeholder="Username"/>
+                            </Form.Item>
+                            <Form.Item
+                                name="password"
+                                place
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                            >
+                                <Input.Password placeholder="Password"/>
+                            </Form.Item>
+                            <Form.Item>
+                                <Button id="LogIn" type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                        <div id="register">
+                            Don't Have An Account?  <Link to="/Register">Register for One!</Link>
                         </div>
                     </div>
-                )
-              } else {
-                return (
-                    <div id="signedIn">
-                        <h1>
-                            Signed In!
-                        </h1>
-                        <Button className="signOutButton" onClick={this.handleSignOut}>Sign Out</Button>
-                    </div>
-                )
-              }
+                </div>
+            )
         }
 
         return(
@@ -101,7 +99,7 @@ class SignIn extends React.Component{
                 <div id="headerContainerS">
                     <h1>Log In To Your Account</h1>
                 </div>
-                {signedInStatus()}
+                {signInPrompt()}
             </div>
         )
     }

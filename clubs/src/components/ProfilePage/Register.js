@@ -20,9 +20,11 @@ class Register extends React.Component{
         if (this.state.passwordMatch){
             if(this.state.isAdmin){
                 //GO TO ADMIN PAGE
+                message.success("New Group Created!");
                 this.setState({redirectFor:"Admin"});
             } else {
                 //Go TO USER MAIN PAGE
+                message.success("Account Created!");
                 this.setState({redirectFor:"User"});
             }
         } else {
