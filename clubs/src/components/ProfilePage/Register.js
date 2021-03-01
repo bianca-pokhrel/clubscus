@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, message } from 'antd';
 import './Register.css';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 const { Option } = Select;
 
@@ -9,11 +10,24 @@ class Register extends React.Component{
 
     state = {
         isAdmin: false,
+        passwordMatch: false,
+        redirectFor: ""
     }
 
     onFinish = (values) => {
         console.log('Success:', values);
-        this.checkInfo(values)
+        this.checkPasswordMatch(values)
+        if (this.state.passwordMatch){
+            if(this.state.isAdmin){
+                //GO TO ADMIN PAGE
+                this.setState({redirectFor:"Admin"});
+            } else {
+                //Go TO USER MAIN PAGE
+                this.setState({redirectFor:"User"});
+            }
+        } else {
+            message.error('Your Passwords Do Not Match');
+        }
     };
     
     onFinishFailed = (errorInfo) => {
@@ -26,6 +40,16 @@ class Register extends React.Component{
         }
         else {
             this.setState({isAdmin:false});
+        }
+    }
+
+    checkPasswordMatch = (values) => {
+        if (values.password1 == values.password2) {
+            console.log('Passwords match')
+            this.setState({passwordMatch:true})
+        } else {
+            console.log('Passwords do not match')
+            this.setState({passwordMatch:false})
         }
     }
 
@@ -42,6 +66,14 @@ class Register extends React.Component{
                     </Form.Item>
                 )
             }
+        }
+
+        // Redirect Filled Form To Next Page. ADD URLS HERE WHEN MADE
+        if (this.state.redirectFor == "User") {
+            return <Redirect to="/" push={true} />
+        }
+        if (this.state.redirectFor == "Admin") {
+            return <Redirect to="/" push={true} />
         }
 
         return(
