@@ -1,0 +1,10 @@
+#member_box {
+	border: 2px solid black;
+	margin: 5px;
+	padding: 5px;
+}
+.member_text {
+	font-size: 50px;
+	text-decoration: none;
+	color: black;
+}

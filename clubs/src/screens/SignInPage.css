@@ -1,0 +1,27 @@
+#page_container {
+  background: url(../components/Login/bluekingscollege.jpg) no-repeat
+    center center fixed;
+  margin-top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#title {
+  padding-top: 110px;
+}
+
+
+#title > h1 {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  padding-bottom: 0px;
+  margin-bottom: 5px;
+}
+
+#title > h3 {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 20px;
+}

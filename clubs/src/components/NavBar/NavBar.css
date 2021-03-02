@@ -1,0 +1,25 @@
+.navBarContainer {
+  background-color: #00204e;
+}
+
+.header {
+  color: white;
+  cursor: pointer;
+  margin-left: 25%;
+  margin-top: 3px;
+  width: fit-content;
+}
+
+.ant-menu.menu {
+  background-color: #00204e;
+  bottom: -10px;
+}
+
+.navBarOption {
+  float: right;
+  color: white;
+}
+
+.signOut {
+  color: red;
+}
