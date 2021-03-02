@@ -1,7 +1,7 @@
 import React from "react"
 import './RegisterPage.css'
 import 'antd/dist/antd.css'
-import Register from "../components/ProfilePage/Register";
+import Register from "../components/Login/Register";
 
 
 class RegisterPage extends React.Component{

@@ -1,7 +1,7 @@
 import React from "react"
 import './SignInPage.css'
 import 'antd/dist/antd.css'
-import SignIn from "../components/ProfilePage/SignIn";
+import SignIn from "../components/Login/SignIn";
 
 
 class SignInPage extends React.Component{
