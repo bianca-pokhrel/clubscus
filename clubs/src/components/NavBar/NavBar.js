@@ -42,8 +42,7 @@ class NavBar extends React.Component{
                     // User
                     <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
                         <SubMenu className="navBarOption" key="accountSubMenu" title="My Account">
-                            <Menu.Item key="memberships">Group Memberships</Menu.Item>      
-                            <Menu.Item key="pendingGroups">Pending Group Requests</Menu.Item>
+                            <Menu.Item key="memberships">Account Info<Link to="/UserProfile"/></Menu.Item>      
                             {signOutButton()}
                         </SubMenu>
                         <SubMenu className="navBarOption" key="clubSubMenu" title="My Groups">
