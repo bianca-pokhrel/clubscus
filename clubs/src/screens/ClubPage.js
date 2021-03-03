@@ -11,6 +11,15 @@ import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
 
+var club = {
+	name: "Test Club",
+	founder: "Some guy",
+	started: "2020/09/27",
+	members: [{id: 0, first_name: "Chuck", last_name: "Jones"}, {id: 1, first_name: "Friz", last_name: "Freleng"}],
+	links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+	posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
+	about: "This is the about page"
+}
 class ClubPage extends React.Component{
 	state = {
 		current: 'mail',
@@ -24,7 +33,7 @@ class ClubPage extends React.Component{
         	const about_us = () => {
         		return (
 		            <div class="club_container">
-		            	<About/>
+		            	<About about={club.about}/>
 		            </div>
 		        ) 
         	}
@@ -36,13 +45,13 @@ class ClubPage extends React.Component{
 		        return(
 				<div>
 					<div class="side_bars">
-						<Links/>
+						<Links links={club.links}/>
 					</div>
 					<div id="club_feed">
-						<Feed/>
+						<Feed posts={club.posts}/>
 					</div>
 					<div class="side_bars">
-						<MemberList/>
+						<MemberList members={club.members}/>
 		        		</div>
 		        	</div>
 		        );
@@ -73,10 +82,10 @@ class ClubPage extends React.Component{
 		        	<NavBar/>
 		 		<img class="club_banner" src={banner}/>
 		 		<div id="club_name_header">
-		 			<span id="club_name_text">Test Club</span>
+		 			<span id="club_name_text">{club.name}</span>
 		 			<div id="club_name_right">
-		 				<p><span id="club_name_metadata_text">Founded by: </span> A guy</p>
-		 				<p><span id="club_name_metadata_text">Started: </span> 2020/09/12</p>
+		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
+		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>
 		 			</div>
 		 		</div>
 
