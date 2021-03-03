@@ -20,6 +20,14 @@
   color: white;
 }
 
-.signOut {
+.navBarOption > Link > span {
+  float: right;
+  color: white;
+}
+
+#signOutColor {
   color: red;
+}
+#signOutColor:hover {
+  color: salmon;
 }
