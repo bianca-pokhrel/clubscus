@@ -72,6 +72,14 @@ class ClubPage extends React.Component{
 		        <div>
 		        	<NavBar/>
 		 		<img class="club_banner" src={banner}/>
+		 		<div id="club_name_header">
+		 			<span id="club_name_text">Test Club</span>
+		 			<div id="club_name_right">
+		 				<p><span id="club_name_metadata_text">Founded by: </span> A guy</p>
+		 				<p><span id="club_name_metadata_text">Started: </span> 2020/09/12</p>
+		 			</div>
+		 		</div>
+
 		        </div>
 		        <div id="club_container">
 		        	{clubPageView()}

@@ -29,7 +29,7 @@ class PostContent extends React.Component{
 			else return (<div>
 		    			&nbsp;
 			    		<Button id="post_button" onClick={this.commentsClick}>
-			    			<p id="post_button_text"><span class="grey">{post.comments.length} Comments</span></p>
+			    			<p id="post_button_text"><span class="grey">{post.comments.length} Comment{post.comments.length == 1 ? "" : "s"}</span></p>
 			    			<img id="post_button_img" src="/comment.png"/>
 			    		</Button>
 		    			</div>

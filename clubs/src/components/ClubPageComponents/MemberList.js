@@ -8,12 +8,18 @@ class MemberLinks extends React.Component {
 
 	render() {
     		return (
-      			<div id="member_box">
-      				{this.members.map(member => (		
-					<p class="member_text">{member.first_name} {member.last_name}</p>
-      				))}
+    			<div id="member_box">
+    				<span id="members_title">Members</span>
+      				{this.members.map(member => (
+      					<div id="ind_member_container">
+						<img id="member_pic" src="profile-pic.png"/>
+						<a id="member_text">{member.first_name} {member.last_name}</a>
 
-      			</div>
+					</div>
+
+				))}
+			</div>
+
       		);
   	}
 }
