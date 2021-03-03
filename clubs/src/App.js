@@ -9,17 +9,7 @@ import RegisterPage from './screens/RegisterPage';
 class App extends React.Component {
 	render() {
 	    	return (
-				<div>
-					<Router>
-						<Switch>
-							{/* <ClubPage/>
-							<ProfilePage/> */}
-							<Route exact path="/" component={ClubPage} />
-							<Route path="/SignIn" component={SignInPage}/>
-							<Route path="/Register" component={RegisterPage}/>
-						</Switch>
-					</Router>
-				</div>
+				<ClubPage/>
 	    	);  
     }
 }

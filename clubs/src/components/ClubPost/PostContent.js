@@ -6,7 +6,14 @@ import CommentSection from './CommentSection'
 
 class PostContent extends React.Component{
 	likesClick = e => {
-       	this.props.post.likes++
+		if (this.props.post.likes.includes("user")) {
+			this.props.post.likes = this.props.post.likes.filter(function(item) {
+    				return item !== "user"
+			})
+		}else{
+			this.props.post.likes.push("user")
+		}
+       	
        	this.forceUpdate()
    	};
 	commentsClick = e => {		
@@ -29,6 +36,15 @@ class PostContent extends React.Component{
 		    	)
 		}
 		
+		const get_liked = () => {
+			console.log(this.props.post)
+			if (this.props.post.likes.includes("user")) {
+				return ("heart_filled.png")
+			}else{
+				return ("heart.png")
+			}
+		}
+		
 		const get_image = () => {
 			if (post.image == "") return ("")
 		
@@ -40,8 +56,8 @@ class PostContent extends React.Component{
 		return(
 		    <div id="post_container">
 		    	<Button id="post_button" onClick={this.likesClick}>
-		    		<p id="post_button_text"><span class="red">{post.likes}</span></p>
-		    		<img id="post_button_img" src="/heart.png"/>
+		    		<p id="post_button_text"><span class="red">{post.likes.length}</span></p>
+		    		<img id="post_button_img" src={get_liked()}/>
 		    	</Button>
 		    	<div class="post_date">
 		    		<p>{post.date}</p>
