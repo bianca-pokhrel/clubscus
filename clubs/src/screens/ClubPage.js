@@ -1,7 +1,6 @@
 import React from "react"
 import './ClubPage.css'
 import 'antd/dist/antd.css';
-import banner from "../components/ClubPageComponents/static/banner.jpg"
 import NavBar from '../components/NavBar/NavBar'
 import Links from '../components/ClubPageComponents/ClubLinks'
 import MemberList from '../components/ClubPageComponents/MemberList'
@@ -13,6 +12,7 @@ import AdminFeed from '../components/AdminPage/AdminFeed';
 
 var club = {
 	name: "Test Club",
+	banner: "banner.jpg",
 	founder: "Some guy",
 	started: "2020/09/27",
 	members: [{id: 0, first_name: "Chuck", last_name: "Jones"}, {id: 1, first_name: "Friz", last_name: "Freleng"}],
@@ -80,7 +80,7 @@ class ClubPage extends React.Component{
 		    <div id="club_bg">
 		        <div>
 		        	<NavBar/>
-		 		<img class="club_banner" src={banner}/>
+		 		<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.name}</span>
 		 			<div id="club_name_right">
