@@ -1,6 +1,5 @@
 import React from "react";
 import './UserInfo.css'
-import pic from './ProfilePic.jpg';
 import { Link } from 'react-router-dom';
 import { Typography, Divider, Button } from 'antd';
 
