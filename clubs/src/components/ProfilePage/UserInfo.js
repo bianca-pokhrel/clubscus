@@ -1,6 +1,6 @@
 import React from "react";
 import './UserInfo.css'
-
+import pic from './ProfilePic.jpg';
 import { Link } from 'react-router-dom';
 import { Typography, Divider, Button } from 'antd';
 
@@ -12,6 +12,7 @@ let userData = {
     name: "John Doe",
     instagram: "@john_doe",
     facebook: "John Doe",
+    profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
 }
 
 
@@ -22,6 +23,7 @@ class UserInfo extends React.Component{
 		name: userData.name,
         instagram: userData.instagram,
         facebook: userData.facebook,
+        profilePicture: userData.profilePicture
     };
 
     handleNameChange = (changeName) => {
@@ -36,20 +38,21 @@ class UserInfo extends React.Component{
 
     render (){
 
-        const { username, name, instagram, facebook } = this.state;
+        const { username, name, instagram, facebook, profilePicture } = this.state;
 
         return(
             <div id="profileInfoContainer">
-                <input type="file" name="image" id="image" accept="image/*" />
-                    <div id="preview-wrapper">
-                        <div id="preview"></div>
+                    <div id="imageContainer">
+                        {/* <div id="preview"></div>
                         <button
                             id="upload-button"
                             aria-label="upload image"
                             aria-describedby="image"
                         >
                             🙂
-                        </button>
+                        </button> */}
+                        <input type="file" name="image" id="image" accept="image/*" />
+                        <img width="300px" height="300px" src={profilePicture} alt="Harold"/>
                     </div>
                 <Divider />
                     <span className="infoHeader">Username:</span> <Paragraph className="infoLine">{username}</Paragraph>
@@ -57,11 +60,13 @@ class UserInfo extends React.Component{
                     <span className="infoHeader">Instagram:</span> <Paragraph className="infoLine" editable={{ onChange: this.handleInstaChange }}>{instagram}</Paragraph>
                     <span className="infoHeader">FaceBook:</span> <Paragraph className="infoLine" editable={{ onChange: this.handleFaceBookChange }}>{facebook}</Paragraph>
                 <Divider />
-                    <Link to="/">
-                        <Button id="LogOut">
-                            Log Out
-                        </Button>
-                    </Link>
+                    <div id="logOutContainer">
+                        <Link to="/">
+                            <Button id="LogOut">
+                                Log Out
+                            </Button>
+                        </Link>
+                    </div>
             </div>
         )
     }

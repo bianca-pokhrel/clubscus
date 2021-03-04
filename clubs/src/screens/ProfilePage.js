@@ -1,5 +1,3 @@
-// How to Upload Image: https://dev.to/bugs_bunny/upload-user-avatar-with-a-custom-upload-button-j6l
-
 import React from "react"
 import './ProfilePage.css'
 import 'antd/dist/antd.css';
@@ -53,10 +51,10 @@ class ProfilePage extends React.Component{
                 <NavBar userType="user"/>
                 <div id="profileBody">
                     <Row>
-                        <Col span={8}>
+                        <Col span={6}>
                             <UserInfo/>
                         </Col>
-                        <Col span={16}>
+                        <Col span={18}>
                             <div id="groupTabsContainer">
                                 {groupTabs()}
                             </div>

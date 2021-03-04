@@ -1,3 +1,8 @@
+#imageContainer {
+    display: flex;
+    justify-content: center;
+}
+
 .infoHeader {
     font-weight: bold; 
 }
@@ -6,49 +11,23 @@
     width: 300px;
   }
   
-  /* Code From https://dev.to/bugs_bunny/upload-user-avatar-with-a-custom-upload-button-j6l */
-  #avatar {
-    background-color: antiquewhite;
-    height: 200px;
-    width: 200px;
-    border: 3px solid #0af;
-    border-radius: 50%;
-    transition: background ease-out 200ms;
-  }
+#preview {
+position: relative;
+}
+
+input[type="file"] {
+display: none;
+}
   
-  #preview {
-    position: relative;
-  }
-  
-  input[type="file"] {
-    display: none;
-  }
-  
-  #upload-button {
-    padding: 14px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    background-color: #08f;
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-                           0px 6px 10px 0px rgba(0, 0, 0, 0.14), 
-                           0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    transition: background-color ease-out 120ms;
-    /* position: absolute;
-    right: -5%;
-    bottom: 0%; */
-  }
-  
-  #upload-button:hover {
-    background-color: #45a;
-  }
-  
+
+#logOutContainer{
+    margin-left: 25%;
+}
 #LogOut {
     width: 200px;
     background-color: salmon;
     border-radius: 5px;
     color: white;
-    margin-left: 25%;
   }
   #LogOut:hover {
     background-color: pink;
