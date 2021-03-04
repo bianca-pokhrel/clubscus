@@ -1,9 +1,15 @@
+#pageBG {
+  background-color: #F0F2F2;
+  height: 100vh;
+}
+
 #profileBody {
   margin: auto;
   margin-top: 80px;
   width: 1500px;
   height: 700px;
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
+  background-color: white;
 }
 
 #profileInfoContainer {

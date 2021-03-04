@@ -47,7 +47,7 @@ class ProfilePage extends React.Component{
         }
 
         return(
-            <div>
+            <div id="pageBG">
                 <NavBar userType="user"/>
                 <div id="profileBody">
                     <Row>
