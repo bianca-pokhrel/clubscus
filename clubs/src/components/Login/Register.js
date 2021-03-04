@@ -128,7 +128,7 @@ class Register extends React.Component{
                         </Form.Item>
                     </Form>
                     <div id="signIn">
-                        Already Have An Account?  <Link to="/SignIn">Sign In!</Link>
+                        <Link to="/SignIn">Already Have An Account? Sign In!</Link>
                     </div>
                 </div>
             </div>
