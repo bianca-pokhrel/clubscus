@@ -164,10 +164,10 @@ const clubsData = [
 	{
 		groupName: "Test Club",
 		about: "This is the about page",
-		banner: "banner.jpg",
+		banner: "/banner.jpg",
 		founder: "Some guy",
 		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		url: "/tc", 
 		
 		members: [
 			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
@@ -205,12 +205,11 @@ class App extends React.Component {
 	render() {
 
 		const getUrls = () => {
-			console.log("Worked")
-			{clubsData.map((group) => {
-				return <Route exact path={`/clubs${group.url}`}><ClubPage club={group}/></Route>
-					}
-				)
-			}
+			return (clubsData.map((group) => {
+				return <Route exact path={`/clubs${group.url}`}>
+				<ClubPage club={group}/>
+				</Route>
+			}))
 		}
 
 	    	return (
