@@ -31,7 +31,7 @@ class ClubPage extends React.Component{
         	}
         
 		const clubPageView = () => {
-		    if (!signedIn || window.location.pathname == "/about") {
+		    if (this.props.about == true) {
 		        return about_us();
 		    } else if (userType == "user") {
 		        return(
