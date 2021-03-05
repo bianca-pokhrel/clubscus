@@ -23,6 +23,7 @@ class AddMember extends React.Component {
                         <h2 id="requested_member_text">{requested_member.first_name} {requested_member.last_name}</h2>
                         <div id="accept_button">
                         <Button shape="round" size="medium" onClick={this.acceptMember}>Accept</Button>
+                            {console.log(requested_member)}
                         </div>
                     </div>
 

@@ -60,7 +60,6 @@ class NavBar extends React.Component{
                         </SubMenu>
                         <SubMenu className="navBarOption" key="createSubMenu" title="Create">
                             <Menu.Item key="createPosts">Create a Post</Menu.Item>
-                            <Menu.Item key="createLinks">Add a Link</Menu.Item>
                             <Menu.Item key="sendOfficiates">Send an Officiate Request</Menu.Item>
                         </SubMenu>
                     </Menu>

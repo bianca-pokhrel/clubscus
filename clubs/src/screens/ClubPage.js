@@ -11,13 +11,15 @@ import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
 import AddMember from "../components/AdminPage/AddMember";
 import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
+import {Button} from "antd";
 
 
 class ClubPage extends React.Component{
 	state = {
 		current: 'mail',
         	signedIn: true,
-        	userType: "admin"
+        	userType: "admin",
+		isOfficial: false
 	};
     
 	render() {
@@ -80,6 +82,9 @@ class ClubPage extends React.Component{
 				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>
+					<div id="officiateButton">
+						<Button shape="round" size="medium" onClick={this.acceptMember}>Officiate</Button>
+					</div>
 		 			<div id="club_name_right">
 		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
 		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>
