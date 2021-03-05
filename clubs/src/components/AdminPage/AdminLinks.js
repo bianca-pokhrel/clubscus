@@ -1,6 +1,8 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import './AdminLinks.css'
+import {Button} from "antd";
+import {Link} from "react-router-dom";
 
 var links;
 class AdminLinks extends React.Component {
@@ -12,6 +14,7 @@ class AdminLinks extends React.Component {
                     <div id="link_container">
                         <img id="links_image" src="/link.jpg"/>
                         <p><a href={link.url} id="link_text">{link.name}</a></p>
+                        <Button shape="round" size="medium" href="/">Edit</Button>
                     </div>
                 ))}
 
