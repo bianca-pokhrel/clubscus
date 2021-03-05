@@ -13,12 +13,9 @@ import "./SuperAdminComponents.css";
 import ClubsList from "../components/ClubsList/ClubsList.js";
 import NavBar from "../components/NavBar/NavBar.js";
 import ApprovalRequest from "../components/ApprovalRequest/ApprovalRequest.js"
-//import SearchBar from "../components/GroupSearch/SearchBar.js"
 
-//import { Link } from "react-router-dom";
 const { Text } = Typography;
 const { Content, Sider } = Layout;
-const { SubMenu } = Menu;
 
 let clubsData = [
     {
