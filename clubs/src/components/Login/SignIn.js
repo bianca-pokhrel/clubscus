@@ -48,11 +48,11 @@ class SignIn extends React.Component{
         // REDIRECT FOR ACCOUNT TYPES
         if (signedIn) {
             if (userType == "user"){
-                return <Redirect to="/" push={true} />
+                return <Redirect to="/user" push={true} />
             } else if (userType == "admin"){
                 return <Redirect to="/" push={true} />
             } else if (userType == "superAdmin"){
-                return <Redirect to="/" push={true} />
+                return <Redirect to="/superadmin" push={true} />
             } 
         }
 
@@ -87,7 +87,7 @@ class SignIn extends React.Component{
                             </Form.Item>
                         </Form>
                         <div id="register">
-                            <Link to="/Register">Don't Have An Account? Register for One!</Link>
+                            <Link to="/register">Don't Have An Account? Register for One!</Link>
                         </div>
                     </div>
                 </div>

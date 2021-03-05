@@ -13,11 +13,17 @@ const { Paragraph } = Typography;
 
 class GroupSearch extends React.Component{
 
+    state = {
+        signedIn: this.props.signedIn,
+    }
+
 	render() {
+
+        const { signedIn } = this.state;
 
         return(
             <div id="pageBG">
-                <NavBar userType="user"/>
+                <NavBar userType={signedIn ? "user": "none"}/>
                 <div id="searchBody">
                     <SearchBar/>
                     <div className="category">

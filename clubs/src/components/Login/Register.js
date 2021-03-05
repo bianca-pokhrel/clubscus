@@ -72,7 +72,7 @@ class Register extends React.Component{
 
         // Redirect Filled Form To Next Page. ADD URLS HERE WHEN MADE
         if (this.state.redirectFor == "User") {
-            return <Redirect to="/" push={true} />
+            return <Redirect to="/user" push={true} />
         }
         if (this.state.redirectFor == "Admin") {
             return <Redirect to="/" push={true} />
@@ -128,7 +128,7 @@ class Register extends React.Component{
                         </Form.Item>
                     </Form>
                     <div id="signIn">
-                        <Link to="/SignIn">Already Have An Account? Sign In!</Link>
+                        <Link to="/signin">Already Have An Account? Sign In!</Link>
                     </div>
                 </div>
             </div>

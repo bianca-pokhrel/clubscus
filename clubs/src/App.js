@@ -238,15 +238,17 @@ class App extends React.Component {
 				<div>
 					<Router>
 						<Switch>
-							{/* <ClubPage/>
-							<ProfilePage/> */}
-							<Route exact path="/" component={GroupSearch}/>
+							<Route exact path="/">
+								<GroupSearch signedIn={false}/>
+							</Route>
+							<Route exact path="/user">
+								<GroupSearch signedIn={true}/>
+							</Route>
 							<Route exact path="/signin" component={SignInPage}/>
 							<Route exact path="/register" component={RegisterPage}/>
-							<Route exact path="/userprofile" component={ProfilePage}/>
+							<Route exact path="/user/profile" component={ProfilePage}/>
 							<Route exact path="/superadmin" component={SuperAdminScreen}/>
 							{getUrls()}
-							<Route exact path={clubsData[0].url} component={ClubPage} />
 						</Switch>
 					</Router>
 				</div>
