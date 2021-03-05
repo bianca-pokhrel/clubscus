@@ -24,7 +24,9 @@ const clubsData = [
 			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
 			{id: 1, first_name: "Friz", last_name: "Freleng"}
 		],
-		club: false
+		club: false,
+		links: ["hello"],
+		posts: []
     },
     {
         groupName: "English",
@@ -231,7 +233,7 @@ class App extends React.Component {
 							<Route exact path="/UserProfile" component={ProfilePage}/>
 							<Route exact path="/superadmin" component={SuperAdminScreen}/>
 							{getUrls()}
-							{/* // <Route exact path={clubsData[0].url} component={ClubPage} /> */}
+							<Route exact path={clubsData[0].url} component={ClubPage} />
 						</Switch>
 					</Router>
 				</div>

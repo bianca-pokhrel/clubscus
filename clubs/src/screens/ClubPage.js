@@ -9,13 +9,17 @@ import About from '../components/ClubPageComponents/About'
 import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
+import AddMember from "../components/AdminPage/AddMember";
 import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
+import {Button} from "antd";
+
 
 class ClubPage extends React.Component{
 	state = {
 		current: 'mail',
         	signedIn: true,
-        	userType: "user"
+        	userType: "admin",
+		isOfficial: false
 	};
     
 	render() {
@@ -51,13 +55,16 @@ class ClubPage extends React.Component{
 				return(
 					<div>
 						<div class="side_bars">
-							<AdminLinks/>
+							<AdminLinks links={club.links}/>
+						</div>
+						<div id="groupRequest">
+							<AddMember members={club.members}/>
 						</div>
 						<div id="club_feed">
-							<AdminFeed/>
+							<AdminFeed posts={club.posts} main_feed={0} focus={-1}/>
 						</div>
 						<div class="side_bars">
-							<AdminMemberList/>
+							<AdminMemberList members={club.members}/>
 						</div>
 					</div>
 				);
@@ -72,9 +79,12 @@ class ClubPage extends React.Component{
 		return(<div id="club_bg">
 			<div>
 				<NavBar/>
-		 		<img class="club_banner" src={club.banner}/>
+				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>
+					<div id="officiateButton">
+						<Button shape="round" size="medium" onClick={this.acceptMember}>Officiate</Button>
+					</div>
 		 			<div id="club_name_right">
 		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
 		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>
