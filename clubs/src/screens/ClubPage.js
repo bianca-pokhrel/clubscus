@@ -25,7 +25,7 @@ class ClubPage extends React.Component{
         	const about_us = () => {
         		return (
 		            <div class="club_container">
-		            	<About about={club.about}/>
+		            	<About about={club.description}/>
 		            </div>
 		        ) 
         	}
@@ -74,7 +74,7 @@ class ClubPage extends React.Component{
 				<NavBar/>
 		 		<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
-		 			<span id="club_name_text">{club.name}</span>
+		 			<span id="club_name_text">{club.groupName}</span>
 		 			<div id="club_name_right">
 		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
 		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>

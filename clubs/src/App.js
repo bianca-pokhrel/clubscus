@@ -18,7 +18,7 @@ const clubsData = [
         banner: "/math-club.png",
 		founder: "Some guy",
 		started: "2020/09/27",
-		url: "/math", 
+		url: "/math1", 
 		
 		members: [
 			{id: 0, first_name: "Chuck", last_name: "Jones"}, 

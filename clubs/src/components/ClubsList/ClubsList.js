@@ -18,6 +18,7 @@ const generateCard = (club) => {
             //onClick={}
             cover={
                 <img 
+                    id="cardImage"
                     alt="example"
                     src={club["image"]}/>
             }
