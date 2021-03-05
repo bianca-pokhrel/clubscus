@@ -10,7 +10,7 @@ class ClubLinks extends React.Component {
       			<div id="link_box">
       				{links.map(link => (
       					<div id="link_container">		
-      						<img id="links_image" src="link.jpg"/>
+      						<img id="links_image" src="/link.jpg"/>
 						<p><a href={link.url} id="link_text">{link.name}</a></p>
 					</div>
       				))}

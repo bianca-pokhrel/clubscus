@@ -8,11 +8,14 @@ import RegisterPage from './screens/RegisterPage';
 
 class App extends React.Component {
 	render() {
+		let path = "/clubs"
 	    	return (
 				<div>
 					<Router>
 						<Switch>
-							<Route path="/clubs" component={ClubPage} />
+							<Route path={"/clubs/club0"}>
+								<ClubPage club="0"/>
+							</Route>
 							<Route path="/SignIn" component={SignInPage}/>
 							<Route path="/Register" component={RegisterPage}/>
 							<Route path="/UserProfile" component={ProfilePage}/>

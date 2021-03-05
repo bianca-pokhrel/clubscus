@@ -17,7 +17,7 @@ class PostContent extends React.Component{
        	this.forceUpdate()
    	};
 	commentsClick = e => {		
-		window.location.href = "/post" + this.props.post.id;
+		this.props.changeFocus(this.props.post.id)
    	};
 
 	render() {
@@ -37,11 +37,11 @@ class PostContent extends React.Component{
 		}
 		
 		const get_liked = () => {
-			console.log(this.props.post)
+
 			if (this.props.post.likes.includes("user")) {
-				return ("heart_filled.png")
+				return ("/heart_filled.png")
 			}else{
-				return ("heart.png")
+				return ("/heart.png")
 			}
 		}
 		
@@ -57,7 +57,7 @@ class PostContent extends React.Component{
 			if (this.props.main_feed == 0) return ("")
 			
 			return (<div id="post_top">
-					<img id="post_banner" src="banner.jpg"/>
+					<img id="post_banner" src="/banner.jpg"/>
 					<p id="post_club_color">
 						<a href="/clubs/club0">
 							{post.club}

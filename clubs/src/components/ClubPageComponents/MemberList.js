@@ -11,7 +11,7 @@ class MemberLinks extends React.Component {
     				<span id="members_title">Members</span>
       				{members.map(member => (
       					<div id="ind_member_container">
-						<img id="member_pic" src="profile-pic.png"/>
+						<img id="member_pic" src="/profile-pic.png"/>
 						<a id="member_text">{member.first_name} {member.last_name}</a>
 
 					</div>

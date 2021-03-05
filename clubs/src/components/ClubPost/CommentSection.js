@@ -50,7 +50,7 @@ class CommentSection extends React.Component{
 				let c = comments[i]
 				list.push(<div id="individual_comment_container">
 						<div>
-							<img id="comment_profile_pic" src="profile-pic.png"/>
+							<img id="comment_profile_pic" src="/profile-pic.png"/>
 						</div>
 						<div id="comment_content">
 							<p> 

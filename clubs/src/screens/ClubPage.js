@@ -9,11 +9,11 @@ import About from '../components/ClubPageComponents/About'
 import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
 
 var club = {
 	name: "Test Club",
-	banner: "banner.jpg",
+	banner: "/banner.jpg",
 	founder: "Some guy",
 	started: "2020/09/27",
 	members: [{id: 0, first_name: "Chuck", last_name: "Jones"}, {id: 1, first_name: "Friz", last_name: "Freleng"}],
@@ -49,7 +49,7 @@ class ClubPage extends React.Component{
 						<Links links={club.links}/>
 					</div>
 					<div id="club_feed">
-						<Feed posts={club.posts} main_feed={1}/>
+						<Feed posts={club.posts} main_feed={0} focus={-1}/>
 					</div>
 					<div class="side_bars">
 						<MemberList members={club.members}/>

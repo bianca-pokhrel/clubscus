@@ -9,6 +9,7 @@ class Feed extends React.Component{
 	state = {
 		ascending: -1,
 		focus: -1,
+		main_feed: 0
 	}
 	handleClick = e => {
 		if (e.domEvent.target.innerHTML == "Ascending") {
@@ -16,10 +17,16 @@ class Feed extends React.Component{
 		}else{
 			this.setState({ascending: -1})
 		}
+		console.log(this.state)
    	};
+   	
+   	changeFocus = (id) => {
+   		this.setState({focus: id})
+   	}
    	
 	render() {
 		this.state.posts = this.props.posts
+		this.state.main_feed = this.props.main_feed
 		
 		const get_menu = () => {
 			return(
@@ -35,19 +42,19 @@ class Feed extends React.Component{
 		}
 		
 		const gen = (post) => {
-			return <PostContent data post = {post} expand = {true} main_feed={this.props.main_feed}/>
+			return <PostContent data post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
 		}
 				
 		const gen_all = () => {
 			this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
 			
 			return this.state.posts.map(p => {
-				return <PostContent post = {p} expand = {false} main_feed={this.props.main_feed}/>
+				return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
 			})
 		}
 		const check_url = () => {
-			if (window.location.pathname.startsWith("/post")) {
-				let id = parseInt(window.location.pathname.substring(5,window.location.pathname.length))
+			if (this.state.focus != -1) {
+				let id = this.state.focus
 				
 				for (let i = 0; i < this.state.posts.length; i++) {
 					let post = this.state.posts[i]
