@@ -78,7 +78,7 @@ class ClubPage extends React.Component{
 		
 		return(<div id="club_bg">
 			<div>
-				<NavBar/>
+				<NavBar userType="user"/>
 				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>

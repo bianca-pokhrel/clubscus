@@ -17,29 +17,31 @@ const clubsData = [
         description: "A club for math enthusiasts",
         banner: "/math-club.png",
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/math1", 
+		started: "2020/08/27",
+		url: "/math", 
 		
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Matt", last_name: "Jones"}, 
+			{id: 1, first_name: "Math-ew", last_name: "Freleng"}
 		],
-		club: false,
-		links: ["hello"],
-		posts: []
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
+		club: false
     },
     {
         groupName: "English",
         description: "A club for lit nerds",
         banner: "/english-club.png",
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/09/23",
+		url: "/english", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Pompadour", last_name: "Jones"}, 
+			{id: 1, first_name: "Benedict", last_name: "Freleng"}
 		],
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: false
     },
     {
@@ -47,13 +49,17 @@ const clubsData = [
         description: "A club for those who want to dip their toes in the French language",
         banner: "/french-club.png",
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/09/24",
+		function() {
+			return this.groupName.toLowerCase().split(" ").join("")
+		},  
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Pierre", last_name: "Jones"}, 
+			{id: 1, first_name: "Hans", last_name: "Freleng"}
 		],
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: false
     },
 	//Where JJ Starts
@@ -62,14 +68,15 @@ const clubsData = [
 		description: "This is a group for the project",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/09/25",
+		url: "/csc309projectgroup", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Suguru", last_name: "Jones"}, 
+			{id: 1, first_name: "JJ", last_name: "Freleng"}
 		],
-		url: "/CSC309ProjectGroup", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: false
 	},
     {
@@ -77,14 +84,15 @@ const clubsData = [
 		description: "The puppies of UofT!",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/09/26",
+		url: "/uoftpuppiesclub", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Milo", last_name: "Jones"}, 
+			{id: 1, first_name: "Rocky", last_name: "Freleng"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: true
 	},
     {
@@ -92,14 +100,15 @@ const clubsData = [
 		description: "Talk about some weeb stuff",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/09/28",
+		url: "/attackontitanfanclub", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Eren", last_name: "Jones"}, 
+			{id: 1, first_name: "Mikasa", last_name: "Freleng"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: false
 	},
 	{
@@ -107,14 +116,15 @@ const clubsData = [
 		description: "For when your puppy stuff grows up",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/10/27",
+		url: "/uoftfullgrowndogsclubs", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Spot", last_name: "Jones"}, 
+			{id: 1, first_name: "Skip", last_name: "Freleng"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: true
 	},
     {
@@ -122,14 +132,15 @@ const clubsData = [
 		description: "This is a cooler group for the project",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/07/27",
+		url: "/csc309projectgroup10", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Marni", last_name: "Jones"}, 
+			{id: 1, first_name: "Boris", last_name: "Freleng"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+		posts: [],
 		club: false
 	},
     {
@@ -137,14 +148,15 @@ const clubsData = [
 		description: "The official anime club of UofT",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2020/06/27",
+		url: "/animeclub", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Luck", last_name: "Jones"}, 
+			{id: 1, first_name: "Miz", last_name: "Freleng"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
+		posts: [],
 		club: true
 	},
     {
@@ -152,24 +164,25 @@ const clubsData = [
 		description: "Study group for LEC001",
 		banner: "banner.jpg", 
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/CSC309ProjectGroup", 
+		started: "2021/01/27",
+		url: "/fml300winter2021studygroup", 
 
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, first_name: "Buck", last_name: "Jones"}, 
+			{id: 1, first_name: "Joe", last_name: "Schmoe"}
 		],
-		url: "/", 
+		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
+		posts: [],
 		club: false
 	},
 	//Where Nic's starts
 	{
 		groupName: "Test Club",
-		description: "This is the about page",
+		about: "This is the about page",
 		banner: "/banner.jpg",
 		founder: "Some guy",
-		started: "2020/09/27",
-		url: "/tc", 
+		started: "2020/09/21",
+		url: "/testclub", 
 		
 		members: [
 			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
@@ -228,9 +241,9 @@ class App extends React.Component {
 							{/* <ClubPage/>
 							<ProfilePage/> */}
 							<Route exact path="/" component={GroupSearch}/>
-							<Route exact path="/SignIn" component={SignInPage}/>
-							<Route exact path="/Register" component={RegisterPage}/>
-							<Route exact path="/UserProfile" component={ProfilePage}/>
+							<Route exact path="/signin" component={SignInPage}/>
+							<Route exact path="/register" component={RegisterPage}/>
+							<Route exact path="/userprofile" component={ProfilePage}/>
 							<Route exact path="/superadmin" component={SuperAdminScreen}/>
 							{getUrls()}
 							<Route exact path={clubsData[0].url} component={ClubPage} />
