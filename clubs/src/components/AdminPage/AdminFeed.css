@@ -1,14 +1,19 @@
-#admin_feed_container {
+#feed_container {
     text-align: center;
     width: 100%;
     float: left;
     padding: 10px;
 }
-.admin_feed_sorting_container {
+#feed_sorting_container {
+    margin-right: 10px;
+    margin-top: 10px;
     float: right;
-    padding-top: 10px;
-    padding-right: 10px;
 }
-#admin_feed_sort_button {
+#feed_sorting_color {
+    font-size: 20px;
+    font-weight: bold;
+    color: #002157;
+}
+#feed_sort_button {
     margin-left: 10px;
 }

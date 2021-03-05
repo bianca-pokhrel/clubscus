@@ -37,7 +37,6 @@ class PostContent extends React.Component{
 		}
 		
 		const get_liked = () => {
-
 			if (this.props.post.likes.includes("user")) {
 				return ("/heart_filled.png")
 			}else{

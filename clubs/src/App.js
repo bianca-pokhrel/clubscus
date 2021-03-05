@@ -24,7 +24,9 @@ const clubsData = [
 			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
 			{id: 1, first_name: "Friz", last_name: "Freleng"}
 		],
-		club: false
+		club: false,
+		links: ["hello"],
+		posts: []
     },
     {
         groupName: "English",
@@ -163,7 +165,7 @@ const clubsData = [
 	//Where Nic's starts
 	{
 		groupName: "Test Club",
-		about: "This is the about page",
+		description: "This is the about page",
 		banner: "/banner.jpg",
 		founder: "Some guy",
 		started: "2020/09/27",
@@ -205,11 +207,18 @@ class App extends React.Component {
 	render() {
 
 		const getUrls = () => {
-			return (clubsData.map((group) => {
-				return <Route exact path={`/clubs${group.url}`}>
-				<ClubPage club={group}/>
-				</Route>
+			let g = clubsData.map((group) => {
+				return (<Route exact path={`/clubs${group.url}/about`}>
+					<ClubPage club={group} about={true}/>
+					</Route>)
+			})
+			
+			g = g.concat(clubsData.map((group) => {
+				return (<Route exact path={`/clubs${group.url}`}>
+					<ClubPage club={group}/>
+					</Route>)
 			}))
+			return (g)
 		}
 
 	    	return (
@@ -224,7 +233,7 @@ class App extends React.Component {
 							<Route exact path="/UserProfile" component={ProfilePage}/>
 							<Route exact path="/superadmin" component={SuperAdminScreen}/>
 							{getUrls()}
-							{/* // <Route exact path={clubsData[0].url} component={ClubPage} /> */}
+							<Route exact path={clubsData[0].url} component={ClubPage} />
 						</Switch>
 					</Router>
 				</div>
