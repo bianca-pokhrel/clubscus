@@ -11,50 +11,81 @@ import {
 import "./SuperAdminComponents.css";
 
 import ClubsList from "../components/ClubsList/ClubsList.js";
+import NavBar from "../components/NavBar/NavBar.js";
+import ApprovalRequest from "../components/ApprovalRequest/ApprovalRequest.js"
+//import SearchBar from "../components/GroupSearch/SearchBar.js"
 
 //import { Link } from "react-router-dom";
 const { Text } = Typography;
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
+let clubsData = [
+    {
+        "title": "Math",
+        "description": "A club for math enthusiasts",
+        "image": "/math-club.png"
+                     
+    },
+    {
+        "title": "English",
+        "description": "A club for lit nerds",
+        "image": "/english-club.png"
+                     
+    },
+    {
+        "title": "French",
+        "description": "A club for those who want to dip their toes in the French language",
+        "image": "/french-club.png"
+                   
+    }
+]
 
-const generateRequestsMenu = (title, children) => {
-    return (
-        <SubMenu 
-            key={title}
-            title={<span>{title.toUpperCase()}</span>}
-            children={children}
-            className="submenu"/>
-        
-    );
-};
+let clubsRequests = [
+    {
+        "id": "a",
+        "title": "Astronomy Club",
+        "description": "A club for those who are interested in what is out there in our universe",
+        "approved": false
+    },
+    {
+        "id": "b",
+        "title": "Computer Science Club",
+        "description": "A club for those who love to code",
+        "approved": false
+    },
+    {
+        "id": "c",
+        "title": "Chess Club",
+        "description": "A club for those who want to be like Beth Harmon",
+        "approved": false
+    }
+]
+
+
 
 class SuperAdminScreen extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
-    isempty(obj) {
-        for (var key in obj){
-            return false;
-        }
-        return true;
-    }
+    
 
     render() {
         //const resultQuery = this.props.location.state.query;
         //const amountOfResults = this.props.location.state.data.length;
 
-        const amountOfResults = 3;
+        const amountOfResults = clubsData.length;
+
+        
         //let clubsResults = this.props.location.state.data;
     
 
     return (
         <div>
             <Layout>
+                <NavBar userType="superadmin"/>
+                
                 {amountOfResults !=0 && (
 
-                    <Layout class="background">
+                    <Layout className="background">
                     <Row className="row" justify="space-between" align="middle">
                         <Col>
                             {amountOfResults == 1 ? (
@@ -74,20 +105,17 @@ class SuperAdminScreen extends React.Component {
                 
             </Layout>
             
-            <Layout class="background">
+            <Layout className="background">
                 <Sider>
                     <Row justify="center" className="refresh">
                         <Button>REFRESH REQUESTS</Button>
                     </Row>
-                    <Menu onClick={this.handleClick} 
-                          defaultSelectedKeys={["1"]} 
-                          mode="inline" 
-                          className="submenu">
-                        
-                    </Menu>
+                    <ApprovalRequest data={clubsRequests}/>
                 </Sider>
                 <Content className="clubscontainer background">
-                    <ClubsList clubs={["math", "english", "french"]}></ClubsList>
+                    <ClubsList clubs={clubsData}>
+
+                    </ClubsList>
                 </Content>
             </Layout>
         </div>
