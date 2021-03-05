@@ -1,31 +1,23 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import './AdminLinks.css'
-import {Avatar, List} from "antd";
 
 var links;
-links = [{name: "Instagram", url: "test"}, {name: "Facebook", url: "test"}, {name: "About Us", url: "about"}]
-
-class ClubLinks extends React.Component {
-
+class AdminLinks extends React.Component {
     render() {
+        const links = this.props.links
         return (
-            <div id="admin_link_box">
-                <List
-                    itemLayout="horizontal"
-                    dataSource={links}
-                    renderItem={item => (
-                        <List.Item>
-                            <List.Item.Meta
-                                title={<a href={item.url}>{item.name}</a>}
-                            />
-                        </List.Item>
-                    )}
-                />
+            <div id="link_box">
+                {links.map(link => (
+                    <div id="link_container">
+                        <img id="links_image" src="/link.jpg"/>
+                        <p><a href={link.url} id="link_text">{link.name}</a></p>
+                    </div>
+                ))}
 
             </div>
         );
     }
 }
 
-export default ClubLinks;
+export default AdminLinks;

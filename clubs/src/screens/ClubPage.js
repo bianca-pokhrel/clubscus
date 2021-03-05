@@ -51,10 +51,10 @@ class ClubPage extends React.Component{
 				return(
 					<div>
 						<div class="side_bars">
-							<AdminLinks/>
+							<AdminLinks links={club.links}/>
 						</div>
 						<div id="club_feed">
-							<AdminFeed/>
+							<AdminFeed posts={club.posts} main_feed={0} focus={-1}/>
 						</div>
 						<div class="side_bars">
 							<AdminMemberList/>
@@ -72,7 +72,7 @@ class ClubPage extends React.Component{
 		return(<div id="club_bg">
 			<div>
 				<NavBar/>
-		 		<img class="club_banner" src={club.banner}/>
+				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>
 		 			<div id="club_name_right">

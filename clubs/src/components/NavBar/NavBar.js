@@ -56,13 +56,12 @@ class NavBar extends React.Component{
                     // Admin
                     <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
                         <SubMenu className="navBarOption" key="groupSubMenu" title="Group Account">
-                            <Menu.Item key="pendingGroups">Pending Group Requests</Menu.Item>
                             {signOutButton()}
                         </SubMenu>
                         <SubMenu className="navBarOption" key="createSubMenu" title="Create">
                             <Menu.Item key="createPosts">Create a Post</Menu.Item>
                             <Menu.Item key="createLinks">Add a Link</Menu.Item>
-                            <Menu.Item key="pendingOfficiates">Send an Officiate Request</Menu.Item>
+                            <Menu.Item key="sendOfficiates">Send an Officiate Request</Menu.Item>
                         </SubMenu>
                     </Menu>
                 )

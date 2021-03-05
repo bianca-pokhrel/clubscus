@@ -22,4 +22,4 @@ class Links extends React.Component {
   	}
 }
 
-export default ClubLinks;
+export default Links;
