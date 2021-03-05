@@ -6,6 +6,22 @@
 	margin-bottom: 20px;
 	border: 3px solid grey;
 }
+#post_top {
+	width: 100%;
+	float: left;
+}
+#post_banner {
+	height: 50px;
+	float: left;
+	border-radius: 10%;
+}
+#post_club_color {
+	float: left;
+	margin-left: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #002157;
+}
 #post_button {
 	float: right;
 }

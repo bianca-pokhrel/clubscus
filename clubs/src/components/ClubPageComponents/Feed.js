@@ -20,6 +20,7 @@ class Feed extends React.Component{
    	
 	render() {
 		this.state.posts = this.props.posts
+		
 		const get_menu = () => {
 			return(
 				<Menu>
@@ -34,14 +35,14 @@ class Feed extends React.Component{
 		}
 		
 		const gen = (post) => {
-			return <PostContent data post = {post} expand = {true}/>
+			return <PostContent data post = {post} expand = {true} main_feed={this.props.main_feed}/>
 		}
 				
 		const gen_all = () => {
 			this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
 			
 			return this.state.posts.map(p => {
-				return <PostContent post = {p} expand = {false}/>
+				return <PostContent post = {p} expand = {false} main_feed={this.props.main_feed}/>
 			})
 		}
 		const check_url = () => {

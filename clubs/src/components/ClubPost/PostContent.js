@@ -53,19 +53,36 @@ class PostContent extends React.Component{
 			)
 		}
 		
+		const get_club_name = () => {
+			if (this.props.main_feed == 0) return ("")
+			
+			return (<div id="post_top">
+					<img id="post_banner" src="banner.jpg"/>
+					<p id="post_club_color">
+						<a href="/clubs/club0">
+							{post.club}
+						</a>
+					</p>
+				</div>
+			)
+		}
+		
 		return(
 		    <div id="post_container">
+		    	{get_club_name()}
 		    	<Button id="post_button" onClick={this.likesClick}>
 		    		<p id="post_button_text"><span class="red">{post.likes.length}</span></p>
 		    		<img id="post_button_img" src={get_liked()}/>
 		    	</Button>
-		    	<div class="post_date">
-		    		<p>{post.date}</p>
+		    	<div>
+			    	<div class="post_date">
+			    		<p>{post.date}</p>
+			    	</div>
+			    	<h1 class="post_title">{post.title}</h1>
+			    	<p class="post_text">{post.text}</p>
+			       {get_image()}
+			    	{expand_comments(expand)}
 		    	</div>
-		    	<h1 class="post_title">{post.title}</h1>
-		    	<p class="post_text">{post.text}</p>
-		       {get_image()}
-		    	{expand_comments(expand)}
 		    </div>
         	)
     	}
