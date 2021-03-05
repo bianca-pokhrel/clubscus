@@ -87,7 +87,7 @@ class SignIn extends React.Component{
                             </Form.Item>
                         </Form>
                         <div id="register">
-                            Don't Have An Account?  <Link to="/Register">Register for One!</Link>
+                            <Link to="/Register">Don't Have An Account? Register for One!</Link>
                         </div>
                     </div>
                 </div>

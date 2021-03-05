@@ -1,10 +1,27 @@
 #link_box {
-	border: 2px solid black;
 	margin: 5px;
 	padding: 5px;
 }
-.link_text {
-	font-size: 50px;
+#link_container {
+	width: 100%;
+	float: left;
+	vertical-align: middle;
+	padding: 5px;
+}
+#link_text {
+	font-size: 20px;
 	text-decoration: none;
+	color: black;
+	margin-left: 10px;
+	margin-top: 5px;
+	float: left;
+}
+#links_image {
+	width: 50px;
+	height: 50px;
+	float: left;
+	border-radius: 50%;
+}
+a {
 	color: black;
 }
