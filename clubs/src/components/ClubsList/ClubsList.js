@@ -6,21 +6,25 @@ import {
     Col
 } from "antd";
 
-//import './SuperAdminComponents.css'
+import './ClubsList.css'
 
 const { Meta } = Card;
 const { Text } = Typography;
-
 
 const generateCard = (club) => {
     return (
         <Card
             hoverable
             //onClick={}
-            //cover={}
+            cover={
+                <img 
+                    alt="example"
+                    src={club["image"]}/>
+            }
         >
         
-        <Text> {club} </Text>
+            <Meta>description={club["description"]}</Meta>
+            <Text > {club["title"]} </Text>
 
         </Card>
     );
@@ -29,8 +33,8 @@ const generateCard = (club) => {
 const generateGrid = (clubs) => {
     return (
         <Row gutter={[32,48]}>
-            {clubs.map((club) => {
-                return <Col span={6}>{generateCard(club)} </Col>;
+            {clubs.map((club, i) => {
+                return <Col span={6} key={i}>{generateCard(club)} </Col>;
             })}
         </Row>    
     );
