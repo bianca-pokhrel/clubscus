@@ -13,7 +13,6 @@ class AdminMemberList extends React.Component {
     acceptMember = (member) => {
         this.props.members.push({id: member.id, first_name: member.first_name, last_name: member.last_name})
         requested_members = requested_members.filter(item => item !== member)
-        console.log(this.props.members)
         this.forceUpdate()
     }
     render() {
@@ -32,7 +31,7 @@ class AdminMemberList extends React.Component {
                 ))}
                 </div>
                 <div id="requested_member_box">
-                    <h2>Requested Member</h2>
+                    <h2>Member Requests</h2>
                     {requested_members.map(requested_member => (
                         <div id="requested_member_container">
                             <img id="requested_member_pic" src="/profile-pic.png"/>

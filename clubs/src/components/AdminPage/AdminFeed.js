@@ -2,8 +2,29 @@ import React from "react"
 import './AdminFeed.css'
 import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
-import { Button, Menu, Dropdown } from 'antd'
+import { Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
+import { Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+const { TextArea } = Input;
+
+const layout = {
+    labelCol: { span: 2 },
+    wrapperCol: { span: 24 },
+};
+
+/* eslint-disable no-template-curly-in-string */
+const validateMessages = {
+    required: '${label} is required!',
+    types: {
+        title: '${label} is not a valid email!',
+        number: '${label} is not a valid number!',
+    },
+    number: {
+        range: '${label} must be between ${min} and ${max}',
+    },
+};
+
 
 class AdminFeed extends React.Component{
     state = {
@@ -24,9 +45,19 @@ class AdminFeed extends React.Component{
         this.setState({focus: id})
     }
 
+
+
+
     render() {
         this.state.posts = this.props.posts
         this.state.main_feed = this.props.main_feed
+
+        const onFinish = (values: any) => {
+            var time = new Date()
+            this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate(), comments: []})
+            console.log(this.props.posts)
+            this.forceUpdate()
+        };
 
         const get_menu = () => {
             return(
@@ -46,7 +77,7 @@ class AdminFeed extends React.Component{
         }
 
         const gen_all = () => {
-            this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
+            this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : (Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
 
             return this.state.posts.map(p => {
                 return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
@@ -66,7 +97,21 @@ class AdminFeed extends React.Component{
                         )
                 }
             }
-            return (<div>
+            return (
+                <div>
+                    <div id="new_post_container">
+                        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                            <Form.Item  name={['user', 'title']} label="Title" rules={[{ required: true }]} >
+                                <Input  />
+                            </Form.Item>
+                            <Form.Item name={['user', 'post']} label="Post">
+                                <Input.TextArea />
+                            </Form.Item>
+                            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
+                            <Button type="primary" shape="round"  htmlType="submit">Post</Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
                     <div id="feed_sorting_container">
                         <Dropdown overlay={get_menu()}>
                             <a id="feed_sorting_color">
