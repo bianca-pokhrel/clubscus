@@ -9,7 +9,6 @@ import About from '../components/ClubPageComponents/About'
 import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
-import AddMember from "../components/AdminPage/AddMember";
 import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
 import {Button} from "antd";
 
@@ -57,13 +56,10 @@ class ClubPage extends React.Component{
 						<div class="side_bars">
 							<AdminLinks links={club.links}/>
 						</div>
-						<div id="groupRequest">
-							<AddMember members={club.members}/>
-						</div>
 						<div id="club_feed">
 							<AdminFeed posts={club.posts} main_feed={0} focus={-1}/>
 						</div>
-						<div class="side_bars">
+						<div class="member_bars">
 							<AdminMemberList members={club.members}/>
 						</div>
 					</div>

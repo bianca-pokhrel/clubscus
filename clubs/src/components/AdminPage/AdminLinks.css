@@ -3,12 +3,14 @@
     padding: 5px;
 }
 #link_container {
+    position: relative;
     width: 100%;
     float: left;
     vertical-align: middle;
     padding: 5px;
 }
 #link_text {
+    position: absolute;
     font-size: 20px;
     text-decoration: none;
     color: black;
@@ -24,4 +26,10 @@
 }
 a {
     color: black;
+}
+
+#linkEditButton {
+    position: absolute;
+    top: 10px;
+    margin-left: 150px;
 }
