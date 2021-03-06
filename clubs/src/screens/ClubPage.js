@@ -18,7 +18,7 @@ class ClubPage extends React.Component{
 	state = {
 		current: 'mail',
         	signedIn: true,
-        	userType: "admin",
+        	userType: this.props.userType,
 		isOfficial: false
 	};
     
@@ -78,7 +78,7 @@ class ClubPage extends React.Component{
 		
 		return(<div id="club_bg">
 			<div>
-				<NavBar userType="user"/>
+				<NavBar userType={userType=="user"? "user": "admin"}/>
 				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>

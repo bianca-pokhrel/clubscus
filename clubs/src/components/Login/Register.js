@@ -75,7 +75,7 @@ class Register extends React.Component{
             return <Redirect to="/user" push={true} />
         }
         if (this.state.redirectFor == "Admin") {
-            return <Redirect to="/" push={true} />
+            return <Redirect to="/admin" push={true} />
         }
 
         return(

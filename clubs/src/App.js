@@ -222,13 +222,13 @@ class App extends React.Component {
 		const getUrls = () => {
 			let g = clubsData.map((group) => {
 				return (<Route exact path={`/clubs${group.url}/about`}>
-					<ClubPage club={group} about={true}/>
+					<ClubPage club={group} about={true} userType="user"/>
 					</Route>)
 			})
 			
 			g = g.concat(clubsData.map((group) => {
 				return (<Route exact path={`/clubs${group.url}`}>
-					<ClubPage club={group}/>
+					<ClubPage club={group} userType="user"/>
 					</Route>)
 			}))
 			return (g)
@@ -248,6 +248,9 @@ class App extends React.Component {
 							<Route exact path="/register" component={RegisterPage}/>
 							<Route exact path="/user/profile" component={ProfilePage}/>
 							<Route exact path="/superadmin" component={SuperAdminScreen}/>
+							<Route exact path="/admin">
+								<ClubPage club={clubsData[0]} userType="admin"/>
+							</Route>
 							{getUrls()}
 						</Switch>
 					</Router>

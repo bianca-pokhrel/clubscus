@@ -7,6 +7,63 @@ import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
 
+const userData = {
+    username: "DoeBoy99",
+    name: "John Doe",
+    instagram: "@john_doe",
+    facebook: "John Doe",
+    curGroups: [
+        {	
+            groupName: "CSC309 Project Group", 
+            description: "This is a group for the project",
+            banner: "banner.jpg", 
+            founder: "Some guy",
+            started: "2020/09/25",
+            url: "/csc309projectgroup", 
+    
+            members: [
+                {id: 0, first_name: "Suguru", last_name: "Jones"}, 
+                {id: 1, first_name: "JJ", last_name: "Freleng"}
+            ],
+            links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+            posts: [],
+            club: false
+        },
+        {
+            groupName: "UofT Puppies Club", 
+            description: "The puppies of UofT!",
+            banner: "banner.jpg", 
+            founder: "Some guy",
+            started: "2020/09/26",
+            url: "/uoftpuppiesclub", 
+    
+            members: [
+                {id: 0, first_name: "Milo", last_name: "Jones"}, 
+                {id: 1, first_name: "Rocky", last_name: "Freleng"}
+            ],
+            links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+            posts: [],
+            club: true
+        },
+        {
+            groupName: "Attack On Titan Fanclub", 
+            description: "Talk about some weeb stuff",
+            banner: "banner.jpg", 
+            founder: "Some guy",
+            started: "2020/09/28",
+            url: "/attackontitanfanclub", 
+    
+            members: [
+                {id: 0, first_name: "Eren", last_name: "Jones"}, 
+                {id: 1, first_name: "Mikasa", last_name: "Freleng"}
+            ],
+            links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
+            posts: [],
+            club: false
+        },
+    ]
+}
+
 class NavBar extends React.Component{
     
     state = {
@@ -24,8 +81,15 @@ class NavBar extends React.Component{
 
         const signOutButton = () => {
             return (
-                <Menu.Item key="signOut" id="signOutColor"><Link to="/" />Sign Out</Menu.Item>
+                <Menu.Item key="signOut" id="signOutColor"><Link to="/"/>Sign Out</Menu.Item>
             )
+        }
+
+        const getUserGroups = () => {
+            let temp = userData.curGroups.map((group) => {
+                return (<Menu.Item>{group.groupName}<Link to={`/clubs${group.url}`}/></Menu.Item>)
+            })
+            return temp;
         }
 
         const navBarView = () => {
@@ -46,8 +110,7 @@ class NavBar extends React.Component{
                             {signOutButton()}
                         </SubMenu>
                         <SubMenu className="navBarOption" key="clubSubMenu" title="My Groups">
-                            <Menu.Item key="temp1">Temp Group</Menu.Item>      
-                            <Menu.Item key="temp2">Temp Club</Menu.Item>
+                            {getUserGroups()}
                         </SubMenu>
                     </Menu>
                 )

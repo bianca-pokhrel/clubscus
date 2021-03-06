@@ -50,7 +50,7 @@ class SignIn extends React.Component{
             if (userType == "user"){
                 return <Redirect to="/user" push={true} />
             } else if (userType == "admin"){
-                return <Redirect to="/" push={true} />
+                return <Redirect to="/admin" push={true} />
             } else if (userType == "superAdmin"){
                 return <Redirect to="/superadmin" push={true} />
             } 
