@@ -2,24 +2,37 @@ import React from "react";
 import 'antd/dist/antd.css';
 import './AdminLinks.css'
 import {Button} from "antd";
-import {Link} from "react-router-dom";
+import NotEditLinks from "./NotEditLinks";
+import EditLinks from "./EditLinks";
 
-var links;
 class AdminLinks extends React.Component {
+   state = {
+            openEditLink: false
+    }
+
+    editStatusToTrue = () => {
+        this.setState((state) => {
+            return {openEditLink: true}
+    });
+    }
+
+    editStatusToFalse = () => {
+        this.setState((state) => {
+            return {openEditLink: false}
+        });
+    }
+
     render() {
-        const links = this.props.links
+        let link_cover;
+        if ( !this.state.openEditLink) {
+            link_cover = <NotEditLinks links={this.props.links} changeStatusToTrue={() => {this.editStatusToTrue()}}/>
+        } else {
+            link_cover = <EditLinks links={this.props.links} changeStatusToFalse={() => {this.editStatusToFalse()}}/>
+            console.log("here go")
+        }
         return (
             <div id="link_box">
-                {links.map(link => (
-                    <div id="link_container">
-                        <img id="links_image" src="/link.jpg"/>
-                        <p><a href={link.url} id="link_text">{link.name}</a></p>
-                        <div id="linkEditButton">
-                            <Button shape="round" size="medium" href="/">Edit</Button>
-                        </div>
-                    </div>
-                ))}
-
+                {link_cover}
             </div>
         );
     }

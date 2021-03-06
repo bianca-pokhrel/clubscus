@@ -1,7 +1,7 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import './AdminMemberList.css'
-import {Button} from "antd";
+import {message, Button} from "antd";
 
 let requested_members = [
     {id: 3 , first_name: "Harry", last_name: "Musk"},
@@ -13,6 +13,7 @@ class AdminMemberList extends React.Component {
     acceptMember = (member) => {
         this.props.members.push({id: member.id, first_name: member.first_name, last_name: member.last_name})
         requested_members = requested_members.filter(item => item !== member)
+        message.success('New Member Accepted');
         this.forceUpdate()
     }
     render() {

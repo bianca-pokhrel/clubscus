@@ -2,7 +2,7 @@ import React from "react"
 import './AdminFeed.css'
 import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
-import { Form, Input, Button, Menu, Dropdown, Col } from 'antd'
+import { message, Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
 
 
@@ -40,6 +40,7 @@ class AdminFeed extends React.Component{
         let time = new Date()
         this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
         console.log(this.props.posts)
+        message.success('New Post Has Been Made');
         this.forceUpdate()
     };
 
