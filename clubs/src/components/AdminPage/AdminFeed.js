@@ -4,9 +4,7 @@ import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
 import { Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
-import { Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-const { TextArea } = Input;
+
 
 const layout = {
     labelCol: { span: 2 },
@@ -16,13 +14,6 @@ const layout = {
 /* eslint-disable no-template-curly-in-string */
 const validateMessages = {
     required: '${label} is required!',
-    types: {
-        title: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-    },
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
 };
 
 
@@ -45,19 +36,18 @@ class AdminFeed extends React.Component{
         this.setState({focus: id})
     }
 
-
+    addPost = (values) => {
+        var time = new Date()
+        this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
+        console.log(this.props.posts)
+        this.forceUpdate()
+    };
 
 
     render() {
         this.state.posts = this.props.posts
         this.state.main_feed = this.props.main_feed
 
-        const onFinish = (values: any) => {
-            var time = new Date()
-            this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate(), comments: [], image: ""})
-            console.log(this.props.posts)
-            this.forceUpdate()
-        };
 
         const get_menu = () => {
             return(
@@ -100,7 +90,7 @@ class AdminFeed extends React.Component{
             return (
                 <div>
                     <div id="new_post_container">
-                        <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                        <Form {...layout} name="nest-messages" onFinish={this.addPost} validateMessages={validateMessages}>
                             <Form.Item  name={['user', 'title']} label="Title" rules={[{ required: true }]} >
                                 <Input  />
                             </Form.Item>
