@@ -75,6 +75,16 @@ class ClubPage extends React.Component{
 				)
 			}
 		}
+
+		const officiateButton = () => {
+			if (userType=="admin"){
+				return(
+					<div id="officiateButton">
+							<Button shape="round" size="medium" onClick={this.acceptMember}>Officiate</Button>
+					</div>
+				)
+			}
+		}
 		
 		return(<div id="club_bg">
 			<div>
@@ -82,9 +92,7 @@ class ClubPage extends React.Component{
 				<img class="club_banner" src={club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.groupName}</span>
-					<div id="officiateButton">
-						<Button shape="round" size="medium" onClick={this.acceptMember}>Officiate</Button>
-					</div>
+					{officiateButton()}
 		 			<div id="club_name_right">
 		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
 		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>
