@@ -11,7 +11,7 @@ class NotEditLinks extends React.Component {
         return(
             <div id="link_box">
                 <div id="addLinksButtonCoinainer">
-                    <Button shape="round" size="medium" onClick={this.editLinks}>Edit Links</Button>
+                    <Button shape="round" size="medium" onClick={this.editLinks}>Add</Button>
                 </div>
                 {this.props.links.map(link => (
                     <div id="link_container">
