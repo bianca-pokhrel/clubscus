@@ -28,9 +28,9 @@ class PostContent extends React.Component{
 			if (expand) return (<CommentSection post = {this.props.post}/>)
 			else return (<div>
 		    			&nbsp;
-			    		<Button id="post_button" onClick={this.commentsClick}>
-			    			<p id="post_button_text"><span class="grey">{post.comments.length} Comment{post.comments.length == 1 ? "" : "s"}</span></p>
-			    			<img id="post_button_img" src="/comment.png"/>
+			    		<Button className="post_button" onClick={this.commentsClick}>
+			    			<p className="post_button_text"><span className="grey">{post.comments.length} Comment{post.comments.length == 1 ? "" : "s"}</span></p>
+			    			<img className="post_button_img" src="/comment.png"/>
 			    		</Button>
 		    			</div>
 		    	)
@@ -69,16 +69,16 @@ class PostContent extends React.Component{
 		return(
 		    <div id="post_container">
 		    	{get_club_name()}
-		    	<Button id="post_button" onClick={this.likesClick}>
-		    		<p id="post_button_text"><span class="red">{post.likes.length}</span></p>
-		    		<img id="post_button_img" src={get_liked()}/>
+		    	<Button className="post_button" onClick={this.likesClick}>
+		    		<p className="post_button_text"><span className="red">{post.likes.length}</span></p>
+		    		<img className="post_button_img" src={get_liked()}/>
 		    	</Button>
 		    	<div>
-			    	<div class="post_date">
+			    	<div className="post_date">
 			    		<p>{post.date}</p>
 			    	</div>
-			    	<h1 class="post_title">{post.title}</h1>
-			    	<p class="post_text">{post.text}</p>
+			    	<h1 className="post_title">{post.title}</h1>
+			    	<p className="post_text">{post.text}</p>
 			       {get_image()}
 			    	{expand_comments(expand)}
 		    	</div>

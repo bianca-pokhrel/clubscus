@@ -121,9 +121,9 @@ class NavBar extends React.Component{
                         <SubMenu className="navBarOption" key="groupSubMenu" title="Group Account">
                             {signOutButton()}
                         </SubMenu>
-                        <SubMenu className="navBarOption" key="createSubMenu" title="Create">
-                            <Menu.Item key="createPosts">Create a Post</Menu.Item>
-                        </SubMenu>
+                        {/* <SubMenu className="navBarOption" key="createSubMenu" title="Create"> */}
+                        {/*   <Menu.Item key="createPosts">Create a Post<Link to="/admin"/></Menu.Item> */}
+                        {/* </SubMenu>  */}
                     </Menu>
                 )
             } else if (userType == "superadmin") {

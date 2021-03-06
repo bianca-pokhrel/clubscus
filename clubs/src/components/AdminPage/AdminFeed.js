@@ -37,7 +37,7 @@ class AdminFeed extends React.Component{
     }
 
     addPost = (values) => {
-        var time = new Date()
+        let time = new Date()
         this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
         console.log(this.props.posts)
         this.forceUpdate()

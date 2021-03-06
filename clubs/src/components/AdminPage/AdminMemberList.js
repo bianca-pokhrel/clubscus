@@ -8,7 +8,7 @@ let requested_members = [
     {id: 4, first_name: "Alex", last_name: "Ramirez"}
 ]
 
-var members;
+
 class AdminMemberList extends React.Component {
     acceptMember = (member) => {
         this.props.members.push({id: member.id, first_name: member.first_name, last_name: member.last_name})

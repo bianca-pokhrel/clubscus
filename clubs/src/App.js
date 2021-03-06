@@ -7,6 +7,7 @@ import GroupSearch from './screens/GroupSearch';
 import SuperAdminScreen from './screens/SuperAdminScreen';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RegisterPage from './screens/RegisterPage';
+import AdminFeed from "./components/AdminPage/AdminFeed";
 
 
 //Club Data
@@ -251,6 +252,8 @@ class App extends React.Component {
 							<Route exact path="/admin">
 								<ClubPage club={clubsData[0]} userType="admin"/>
 							</Route>
+							{/*<Route exact path="/admin" component={AdminFeed}>*/}
+							{/*}</Route>*/}
 							{getUrls()}
 						</Switch>
 					</Router>
