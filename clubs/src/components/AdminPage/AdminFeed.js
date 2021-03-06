@@ -54,7 +54,7 @@ class AdminFeed extends React.Component{
 
         const onFinish = (values: any) => {
             var time = new Date()
-            this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate(), comments: []})
+            this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate(), comments: [], image: ""})
             console.log(this.props.posts)
             this.forceUpdate()
         };
@@ -77,7 +77,7 @@ class AdminFeed extends React.Component{
         }
 
         const gen_all = () => {
-            this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : (Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
+            this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
 
             return this.state.posts.map(p => {
                 return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
