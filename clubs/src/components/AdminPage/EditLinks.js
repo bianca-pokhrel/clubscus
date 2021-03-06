@@ -12,7 +12,7 @@ class EditLinks extends React.Component {
     editLinks = () => {
         this.props.changeStatusToFalse()
     }
-    addLink = (values: any) => {
+    addLink = (values) => {
         this.props.links.push({name: values.name, url: values.url})
         this.props.changeStatusToFalse()
         message.success('New Link Added');
