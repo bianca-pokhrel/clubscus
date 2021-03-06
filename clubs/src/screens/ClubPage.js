@@ -9,7 +9,6 @@ import About from '../components/ClubPageComponents/About'
 import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
-import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
 import {message, Button} from "antd";
 
 
@@ -19,7 +18,6 @@ class ClubPage extends React.Component{
 		current: 'mail',
         	signedIn: true,
         	userType: this.props.userType,
-		isOfficial: false
 	};
 
 	success = () => {
