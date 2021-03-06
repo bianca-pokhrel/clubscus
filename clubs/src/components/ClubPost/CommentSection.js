@@ -14,7 +14,8 @@ class CommentSection extends React.Component{
 	post_button = e => {
 			let input = document.getElementById("comment_bar");
 			if (input.value != "") {
-				this.props.post.comments.push({id: 0, msg: input.value, date: "2020-01-12"})
+				let time = new Date()
+				this.props.post.comments.push({id: 0, msg: input.value, date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2)})
 				console.log(input)
 				this.forceUpdate();
 				

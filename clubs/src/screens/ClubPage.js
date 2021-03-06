@@ -9,17 +9,27 @@ import About from '../components/ClubPageComponents/About'
 import AdminLinks from "../components/AdminPage/AdminLinks";
 import AdminMemberList from "../components/AdminPage/AdminMemberList";
 import AdminFeed from '../components/AdminPage/AdminFeed';
-import AddMember from "../components/AdminPage/AddMember";
 import { BrowserRouter as Router, Switch, Route, useRouteMatch} from 'react-router-dom';
-import {Button} from "antd";
+import {message, Button} from "antd";
 
 
 class ClubPage extends React.Component{
 	state = {
+		officiateRequestSent: false,
 		current: 'mail',
         	signedIn: true,
         	userType: this.props.userType,
 		isOfficial: false
+	};
+
+	success = () => {
+		message.success('Officiate Request Has Been Sent');
+		this.setState({officiateRequestSent: true})
+	};
+
+	reverse = () => {
+		message.success('Officiate Request Has Been Canceled');
+		this.setState({officiateRequestSent: false})
 	};
     
 	render() {
@@ -57,13 +67,10 @@ class ClubPage extends React.Component{
 						<div class="side_bars">
 							<AdminLinks links={club.links}/>
 						</div>
-						<div id="groupRequest">
-							<AddMember members={club.members}/>
-						</div>
 						<div id="club_feed">
 							<AdminFeed posts={club.posts} main_feed={0} focus={-1}/>
 						</div>
-						<div class="side_bars">
+						<div class="member_bars">
 							<AdminMemberList members={club.members}/>
 						</div>
 					</div>
@@ -77,10 +84,16 @@ class ClubPage extends React.Component{
 		}
 
 		const officiateButton = () => {
-			if (userType=="admin"){
+			if (userType=="admin" && !(this.state.officiateRequestSent)){
 				return(
 					<div id="officiateButton">
-							<Button shape="round" size="medium" onClick={this.acceptMember}>Officiate</Button>
+							<Button shape="round" size="medium" onClick={this.success}>Officiate Request</Button>
+					</div>
+				)
+			} else if (userType=="admin") {
+				return (
+					<div id="officiateButton">
+						<Button shape="round" size="medium" onClick={this.reverse}>Officiate Request Has Been Sent</Button>
 					</div>
 				)
 			}

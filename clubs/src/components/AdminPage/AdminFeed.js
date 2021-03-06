@@ -2,8 +2,20 @@ import React from "react"
 import './AdminFeed.css'
 import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
-import { Button, Menu, Dropdown } from 'antd'
+import { Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
+
+
+const layout = {
+    labelCol: { span: 2 },
+    wrapperCol: { span: 24 },
+};
+
+/* eslint-disable no-template-curly-in-string */
+const validateMessages = {
+    required: '${label} is required!',
+};
+
 
 class AdminFeed extends React.Component{
     state = {
@@ -24,9 +36,18 @@ class AdminFeed extends React.Component{
         this.setState({focus: id})
     }
 
+    addPost = (values) => {
+        let time = new Date()
+        this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
+        console.log(this.props.posts)
+        this.forceUpdate()
+    };
+
+
     render() {
         this.state.posts = this.props.posts
         this.state.main_feed = this.props.main_feed
+
 
         const get_menu = () => {
             return(
@@ -66,7 +87,21 @@ class AdminFeed extends React.Component{
                         )
                 }
             }
-            return (<div>
+            return (
+                <div>
+                    <div id="new_post_container">
+                        <Form {...layout} name="nest-messages" onFinish={this.addPost} validateMessages={validateMessages}>
+                            <Form.Item  name={['user', 'title']} label="Title" rules={[{ required: true }]} >
+                                <Input  />
+                            </Form.Item>
+                            <Form.Item name={['user', 'post']} label="Post">
+                                <Input.TextArea />
+                            </Form.Item>
+                            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
+                            <Button type="primary" shape="round"  htmlType="submit">Post</Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
                     <div id="feed_sorting_container">
                         <Dropdown overlay={get_menu()}>
                             <a id="feed_sorting_color">

@@ -14,7 +14,9 @@ class AdminLinks extends React.Component {
                     <div id="link_container">
                         <img id="links_image" src="/link.jpg"/>
                         <p><a href={link.url} id="link_text">{link.name}</a></p>
-                        <Button shape="round" size="medium" href="/">Edit</Button>
+                        <div id="linkEditButton">
+                            <Button shape="round" size="medium" href="/">Edit</Button>
+                        </div>
                     </div>
                 ))}
 

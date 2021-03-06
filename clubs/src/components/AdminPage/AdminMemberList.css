@@ -1,10 +1,11 @@
 #member_box {
+    width: 20%;
     padding: 5px;
     text-align: center;
+    float: right;
 }
 #ind_member_container {
     width: 100%;
-    float: left;
     padding: 10px;
 }
 #members_title {
@@ -25,4 +26,39 @@
     height: 70px;
     float: right;
     border-radius: 50%;
+}
+
+#requested_member_box {
+    position: absolute;
+    left: 10px;
+    width: 100%;
+    top: 400px;
+    float: left;
+}
+#requested_member_container {
+    position: relative;
+    width: 100%;
+    float: left;
+    padding: 10px;
+}
+
+#requested_member_text {
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 20px;
+    float: left;
+    text-decoration: none;
+    color: black;
+}
+#requested_member_pic {
+    width: 70px;
+    height: 70px;
+    float: left;
+    border-radius: 50%;
+}
+
+#accept_button {
+    position: absolute;
+    top: 50px;
+    left: 80px;
 }
