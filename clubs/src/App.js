@@ -22,8 +22,20 @@ const clubsData = [
 		url: "/math", 
 		
 		members: [
-			{id: 0, name: "Matt Jones"}, 
-			{id: 1, name: "Math Freleng"}
+			{
+				id: 0, 
+				name: "Matt Jones",
+				instagram: "@matt_jones",
+				facebook: "Matt Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Math Freleng",
+				instagram: "@math_freleng",
+				facebook: "Math Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
@@ -38,8 +50,20 @@ const clubsData = [
 		url: "/english", 
 
 		members: [
-			{id: 0, name: "Pompadour Jones"}, 
-			{id: 1, name: "Benedict Freleng"}
+			{
+				id: 0, 
+				name: "Pompadour Jones",
+				instagram: "@pompadourj",
+				facebook: "Pompadour Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Benedict Freleng",
+				instagram: "@bfrel",
+				facebook: "Benedict Fre.",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -51,13 +75,23 @@ const clubsData = [
         banner: "/french-club.png",
 		founder: "Some guy",
 		started: "2020/09/24",
-		function() {
-			return this.groupName.toLowerCase().split(" ").join("")
-		},  
+		url: "/french",
 
 		members: [
-			{id: 0, name: "Pierre Jones"}, 
-			{id: 1, name: "Hans Freleng"}
+			{
+				id: 0, 
+				name: "Pierre Jones",
+				instagram: "@yopierre",
+				facebook: "Pierre J",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Hans Freleng",
+				instagram: "@MANSFrel",
+				facebook: "Maaaaans",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -73,8 +107,20 @@ const clubsData = [
 		url: "/csc309projectgroup", 
 
 		members: [
-			{id: 0, name: "Suguru Jones"}, 
-			{id: 1, name: "JJ Freleng"}
+			{
+				id: 0, 
+				name: "Suguru Jones",
+				instagram: "@SugureS",
+				facebook: "SUguru Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "JJ Freleng",
+				instagram: "@jj_free",
+				facebook: "JJ Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -89,8 +135,20 @@ const clubsData = [
 		url: "/uoftpuppiesclub", 
 
 		members: [
-			{id: 0, name: "Milo Jones"}, 
-			{id: 1, name: "Rocky Freleng"}
+			{
+				id: 0, 
+				name: "Milo Jones",
+				instagram: "@milo_jones",
+				facebook: "Milo J",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Rocky Freleng",
+				instagram: "@rocky_frel",
+				facebook: "Rocky Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -105,8 +163,20 @@ const clubsData = [
 		url: "/attackontitanfanclub", 
 
 		members: [
-			{id: 0, name: "Eren Jones"}, 
-			{id: 1, name: "Mikasa Freleng"}
+			{
+				id: 0, 
+				name: "Eren Jones",
+				instagram: "@eren_titan",
+				facebook: "Eren Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Mikasa Freleng",
+				instagram: "@mikasaaa",
+				facebook: "Mikasa Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -121,8 +191,20 @@ const clubsData = [
 		url: "/uoftfullgrowndogsclubs", 
 
 		members: [
-			{id: 0, name: "Spot Jones"}, 
-			{id: 1, name: "Skip Freleng"}
+			{
+				id: 0, 
+				name: "Eren Jones",
+				instagram: "@eren_titan",
+				facebook: "Eren Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Mikasa Freleng",
+				instagram: "@mikasaaa",
+				facebook: "Mikasa Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -137,8 +219,20 @@ const clubsData = [
 		url: "/csc309projectgroup10", 
 
 		members: [
-			{id: 0, name: "Marni Jones"}, 
-			{id: 1, name: "Boris Freleng"}
+			{
+				id: 0, 
+				name: "Eren Jones",
+				instagram: "@eren_titan",
+				facebook: "Eren Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Mikasa Freleng",
+				instagram: "@mikasaaa",
+				facebook: "Mikasa Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -153,8 +247,20 @@ const clubsData = [
 		url: "/animeclub", 
 
 		members: [
-			{id: 0, name: "Luck Jones"}, 
-			{id: 1, name: "Miz Freleng"}
+			{
+				id: 0, 
+				name: "Eren Jones",
+				instagram: "@eren_titan",
+				facebook: "Eren Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Mikasa Freleng",
+				instagram: "@mikasaaa",
+				facebook: "Mikasa Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
 		posts: [],
@@ -169,8 +275,20 @@ const clubsData = [
 		url: "/fml300winter2021studygroup", 
 
 		members: [
-			{id: 0, name: "Buck Jones"}, 
-			{id: 1, name: "Joe Schmoe"}
+			{
+				id: 0, 
+				name: "Eren Jones",
+				instagram: "@eren_titan",
+				facebook: "Eren Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Mikasa Freleng",
+				instagram: "@mikasaaa",
+				facebook: "Mikasa Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
 		posts: [],
@@ -186,8 +304,20 @@ const clubsData = [
 		url: "/testclub", 
 		
 		members: [
-			{id: 0, name: "Chuck Jones"}, 
-			{id: 1, name: "Friz Freleng"}
+			{
+				id: 0, 
+				name: "Chuck Jones",
+				instagram: "@Chuck-jones",
+				facebook: "Chuck Jones",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}, 
+			{
+				id: 1, 
+				name: "Friz Freleng",
+				instagram: "@whatsfriz",
+				facebook: "Friz Freleng",
+				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-1-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
