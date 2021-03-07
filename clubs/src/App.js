@@ -22,8 +22,8 @@ const clubsData = [
 		url: "/math", 
 		
 		members: [
-			{id: 0, first_name: "Matt", last_name: "Jones"}, 
-			{id: 1, first_name: "Math", last_name: "Freleng"}
+			{id: 0, name: "Matt Jones"}, 
+			{id: 1, name: "Math Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
@@ -38,8 +38,8 @@ const clubsData = [
 		url: "/english", 
 
 		members: [
-			{id: 0, first_name: "Pompadour", last_name: "Jones"}, 
-			{id: 1, first_name: "Benedict", last_name: "Freleng"}
+			{id: 0, name: "Pompadour Jones"}, 
+			{id: 1, name: "Benedict Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -56,8 +56,8 @@ const clubsData = [
 		},  
 
 		members: [
-			{id: 0, first_name: "Pierre", last_name: "Jones"}, 
-			{id: 1, first_name: "Hans", last_name: "Freleng"}
+			{id: 0, name: "Pierre Jones"}, 
+			{id: 1, name: "Hans Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -73,8 +73,8 @@ const clubsData = [
 		url: "/csc309projectgroup", 
 
 		members: [
-			{id: 0, first_name: "Suguru", last_name: "Jones"}, 
-			{id: 1, first_name: "JJ", last_name: "Freleng"}
+			{id: 0, name: "Suguru Jones"}, 
+			{id: 1, name: "JJ Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -89,8 +89,8 @@ const clubsData = [
 		url: "/uoftpuppiesclub", 
 
 		members: [
-			{id: 0, first_name: "Milo", last_name: "Jones"}, 
-			{id: 1, first_name: "Rocky", last_name: "Freleng"}
+			{id: 0, name: "Milo Jones"}, 
+			{id: 1, name: "Rocky Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -105,8 +105,8 @@ const clubsData = [
 		url: "/attackontitanfanclub", 
 
 		members: [
-			{id: 0, first_name: "Eren", last_name: "Jones"}, 
-			{id: 1, first_name: "Mikasa", last_name: "Freleng"}
+			{id: 0, name: "Eren Jones"}, 
+			{id: 1, name: "Mikasa Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -121,8 +121,8 @@ const clubsData = [
 		url: "/uoftfullgrowndogsclubs", 
 
 		members: [
-			{id: 0, first_name: "Spot", last_name: "Jones"}, 
-			{id: 1, first_name: "Skip", last_name: "Freleng"}
+			{id: 0, name: "Spot Jones"}, 
+			{id: 1, name: "Skip Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -137,8 +137,8 @@ const clubsData = [
 		url: "/csc309projectgroup10", 
 
 		members: [
-			{id: 0, first_name: "Marni", last_name: "Jones"}, 
-			{id: 1, first_name: "Boris", last_name: "Freleng"}
+			{id: 0, name: "Marni Jones"}, 
+			{id: 1, name: "Boris Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [],
@@ -153,8 +153,8 @@ const clubsData = [
 		url: "/animeclub", 
 
 		members: [
-			{id: 0, first_name: "Luck", last_name: "Jones"}, 
-			{id: 1, first_name: "Miz", last_name: "Freleng"}
+			{id: 0, name: "Luck Jones"}, 
+			{id: 1, name: "Miz Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
 		posts: [],
@@ -169,8 +169,8 @@ const clubsData = [
 		url: "/fml300winter2021studygroup", 
 
 		members: [
-			{id: 0, first_name: "Buck", last_name: "Jones"}, 
-			{id: 1, first_name: "Joe", last_name: "Schmoe"}
+			{id: 0, name: "Buck Jones"}, 
+			{id: 1, name: "Joe Schmoe"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}], 
 		posts: [],
@@ -186,8 +186,8 @@ const clubsData = [
 		url: "/testclub", 
 		
 		members: [
-			{id: 0, first_name: "Chuck", last_name: "Jones"}, 
-			{id: 1, first_name: "Friz", last_name: "Freleng"}
+			{id: 0, name: "Chuck Jones"}, 
+			{id: 1, name: "Friz Freleng"}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
 		posts: [{id: 0, title: "A Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2003-11-01', image: "/post.jpg", comments: [{id: 0, msg: "hello this is a comment", date: "2020-1-12"}], likes: ["Tom","Dick", "Larry"]},{id: 1, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2020-11-01', image: "", comments: [], likes: []},{id: 2, title: "Test Post", text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", date: '2012-11-01', image: "/post.jpg", comments: [], likes: []}],
