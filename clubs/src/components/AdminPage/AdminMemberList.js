@@ -11,7 +11,7 @@ let requested_members = [
 
 class AdminMemberList extends React.Component {
     acceptMember = (member) => {
-        this.props.members.push({id: member.id, name: member.name})
+        this.props.members.push({id: member.id, first_name: member .name, last_name: member.last_name})
         requested_members = requested_members.filter(item => item !== member)
         message.success('New Member Accepted');
         this.forceUpdate()
@@ -34,7 +34,7 @@ class AdminMemberList extends React.Component {
                     <h2>Member Requests</h2>
                     {requested_members.map(requested_member => (
                         <div id="requested_member_container">
-                            <img id="requested_member_pic" src="/profile-pic.png"/>
+                            <img id="requested_member_pic"  src={requested_member.profilePicture}/>
                             <h2 id="requested_member_text">{requested_member.name}</h2>
                             <div id="accept_button">
                                 <Button shape="round" size="medium" onClick={(e) => this.acceptMember(requested_member, e)}>Accept</Button>

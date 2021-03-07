@@ -1,17 +1,21 @@
 import React from "react";
 import 'antd/dist/antd.css';
-import './MemberList.css'
+import './MemberList.css';
+
+import MemberModal from './MemberModal.js';
+import { Modal } from "antd";
 
 var members;
 class MemberLinks extends React.Component {
 	render() {
+
 		const members = this.props.members
     		return (
     			<div id="member_box">
     				<span id="members_title">Members</span>
       				{members.map(member => (
       					<div id="ind_member_container">
-						<img id="member_pic" src="/profile-pic.png"/>
+						<img id="member_pic" src={member.profilePicture}/>
 						<a id="member_text">{member.name}</a>
 					</div>
 				))}
