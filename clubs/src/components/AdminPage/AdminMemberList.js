@@ -11,7 +11,7 @@ let requested_members = [
 
 class AdminMemberList extends React.Component {
     acceptMember = (member) => {
-        this.props.members.push({id: member.id, first_name: member .name, last_name: member.last_name})
+        this.props.members.push({id: member.id, name: member.name})
         requested_members = requested_members.filter(item => item !== member)
         message.success('New Member Accepted');
         this.forceUpdate()
