@@ -5,7 +5,6 @@ import './MemberList.css';
 import MemberModal from './MemberModal.js';
 import { Modal } from "antd";
 
-var members;
 class MemberLinks extends React.Component {
 
 	state = {
@@ -31,8 +30,6 @@ class MemberLinks extends React.Component {
 			this.setState({modalInsta:member.instagram});
 			this.setState({modalFacebook:member.facebook});
 			this.setState({modalProfilePic:member.profilePicture});
-			console.log(modalInsta)
-			console.log(modalVis)
 		}
 
 		const handleCancel = () => {
@@ -40,7 +37,6 @@ class MemberLinks extends React.Component {
 		}
 
 		if (modalVis) {
-			console.log("it turned true")
 			modalView = (
 				<Modal 
 					title={modalName} 
@@ -48,9 +44,7 @@ class MemberLinks extends React.Component {
 					onCancel={handleCancel} 
 					footer={null}
 				>
-					<p>{modalInsta}</p>
-					<p>{modalName}</p>
-					<p>Some contents...</p>
+					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook}/>
 				</Modal>
 			)
 		}
@@ -61,7 +55,7 @@ class MemberLinks extends React.Component {
     				<span id="members_title">Members</span>
       				{members.map(member => (
       					<div id="ind_member_container">
-						<img id="member_pic" src={member.profilePicture}/>
+						<img id="member_pic" src={member.profilePicture} onClick={(e) => passMemberInfo(member, e)}/>
 						<a id="member_text" onClick={(e) => passMemberInfo(member, e)}>{member.name}</a>
 						{modalView}
 					</div>
