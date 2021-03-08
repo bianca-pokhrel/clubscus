@@ -143,7 +143,8 @@ class NavBar extends React.Component{
             <div className="navBarContainer">
                 <Row>
                     <Col span={6}>
-                        <h2 className ="header">Lorem Impsum</h2>
+                        {/* Only make logo a link if user  */}
+                        <h2 className ="header">{userType=="user" || userType=="none"? <Link className ="header" to={userType=="user"? "/user": "/"}>Clubcus</Link>:"Clubcus"}</h2>
                     </Col>
                     <Col span={18}>
                         {navBarView()}     
