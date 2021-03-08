@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import NavBar from "../components/NavBar/NavBar";
 import GroupCard from "../components/GroupSearch/GroupCard";
 import SearchBar from "../components/GroupSearch/SearchBar";
+import SiteBanner from "../components/GroupSearch/SiteBanner";
 
 const { TabPane } = Tabs;
 const { Paragraph } = Typography;
@@ -23,7 +24,7 @@ class GroupSearch extends React.Component{
 
         return(
             <div id="pageBG">
-                <NavBar userType={signedIn ? "user": "none"}/>
+                {signedIn? <NavBar userType="user"/>: <SiteBanner/>}
                 <div id="searchBody">
                     <SearchBar/>
                     <div className="category">
