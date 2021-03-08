@@ -16,8 +16,8 @@ class MemberModal extends React.Component {
                         <img width="300px" height="300px" src={this.props.profilePicture} alt="profilePic"/>
                     </div>
                 <Divider />
-                    <span className="infoHeader">Instagram:</span> <Paragraph><a href={`https://www.instagram.com/${this.props.instagram}`}>{this.props.instagram}</a></Paragraph>
-                    <span className="infoHeader">FaceBook:</span> <Paragraph><a href="https://www.facebook.com/">{this.props.facebook}</a></Paragraph>
+                    <span className="infoHeader">Instagram:</span> <Paragraph><a href={`https://www.instagram.com/${this.props.instagram.substring(1)}`} target="_blank">{this.props.instagram}</a></Paragraph>
+                    <span className="infoHeader">FaceBook:</span> <Paragraph><a href={`https://www.facebook.com/${this.props.facebook.replace(/\s/g, '')}`} target="_blank">{this.props.facebook}</a></Paragraph>
             </div>
         )
   	}

@@ -101,36 +101,53 @@ const clubsData = [
 	{	
 		groupName: "CSC309 Project Group", 
 		description: "This is a group for the project",
-		banner: "banner.jpg", 
-		founder: "Some guy",
-		started: "2020/09/25",
+		banner: "https://coursework.vschool.io/content/images/2017/09/JavaScriptBanner.png", 
+		founder: "Suguru Seo",
+		started: "2021/01/25",
 		url: "/csc309projectgroup", 
 
 		members: [
 			{
 				id: 0, 
-				name: "Suguru Jones",
-				instagram: "@SugureS",
-				facebook: "SUguru Jones",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+				name: "Suguru Seo",
+				instagram: "@Sug_Seo",
+				facebook: "Suguru Seo",
+				profilePicture: "https://avatars.githubusercontent.com/u/26561677?s=460&u=0e76846367b28095f4225089da95fe734561eded&v=4"
 			}, 
 			{
 				id: 1, 
-				name: "JJ Freleng",
-				instagram: "@jj_free",
-				facebook: "JJ Freleng",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+				name: "JJ Kanu",
+				instagram: "@jj_kanu",
+				facebook: "JJ Kanu",
+				profilePicture: "https://avatars.githubusercontent.com/u/62584273?s=460&u=8279555aeefd86b8fba6398f02f1dfa8fa51c5cf&v=4"
+			},
+			{
+				id: 2, 
+				name: "Bianca Pokhrel",
+				instagram: "@biancapokhrel",
+				facebook: "Bianca Pokhrel",
+				profilePicture: "https://avatars.githubusercontent.com/u/45080709?s=460&u=33064b15b5b579af2b9029b72779a4a5321b0e19&v=4"
+			},
+			{
+				id: 3, 
+				name: "Nicolas Ruiz",
+				instagram: "@nic_ruiz",
+				facebook: "Nicolas Ruiz",
+				profilePicture: "https://avatars.githubusercontent.com/u/24924293?s=460&v=4"
 			}
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
+		posts: [
+			{id: 0, title: "Progress Update", text: "Hey Guys! Just letting you know I just added some arbitrary post to the temp database. I still need to put it in another file though.", image:"", date: '2021-03-06', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},
+			{id: 1, title: "Progress Update 2", text: "Also changed up a few things to User Info component so make sure to pull!", image:"", date: '2021-03-07', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom"]},
+		],
 		club: false
 	},
     {
 		groupName: "UofT Puppies Club", 
 		description: "The puppies of UofT!",
-		banner: "banner.jpg", 
-		founder: "Some guy",
+		banner: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/various-dogs-horizontal-web-banner-susan-schmitz.jpg", 
+		founder: "Air Bud",
 		started: "2020/09/26",
 		url: "/uoftpuppiesclub", 
 
@@ -140,46 +157,66 @@ const clubsData = [
 				name: "Milo Jones",
 				instagram: "@milo_jones",
 				facebook: "Milo J",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+				profilePicture: "https://i.pinimg.com/originals/0d/8a/22/0d8a22def593c688f7d32dff3e65b74f.jpg"
 			}, 
 			{
 				id: 1, 
 				name: "Rocky Freleng",
 				instagram: "@rocky_frel",
 				facebook: "Rocky Freleng",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
-			}
+				profilePicture: "https://images.theconversation.com/files/319375/original/file-20200309-118956-1cqvm6j.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+			},
+			{
+				id: 2, 
+				name: "JJ Kanu",
+				instagram: "@jj_kanu",
+				facebook: "JJ Kanu",
+				profilePicture: "https://avatars.githubusercontent.com/u/62584273?s=460&u=8279555aeefd86b8fba6398f02f1dfa8fa51c5cf&v=4"
+			},
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
+		posts: [
+			{id: 0, title: "Puppy Post Friday", text: "Puppy Appreciation Post", image:"https://static.stacker.com/s3fs-public/styles/properly_sized_image/s3/2020-03/English%20Lab%20Puppy%20%281%29_0.png", date: '2021-03-06', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},
+			{id: 1, title: "Puppy Post Saturday", text: "Everyday is puppy appreciation lol.", image:"https://hips.hearstapps.com/countryliving.cdnds.net/17/47/1511194376-cavachon-puppy-christmas.jpg", date: '2021-03-07', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom"]},
+		],
 		club: true
 	},
     {
 		groupName: "Attack On Titan Fanclub", 
 		description: "Talk about some weeb stuff",
-		banner: "banner.jpg", 
-		founder: "Some guy",
+		banner: "https://i.pinimg.com/originals/87/71/7a/87717a0d118ae40f75467b8fbb452e04.jpg", 
+		founder: "Isayama",
 		started: "2020/09/28",
 		url: "/attackontitanfanclub", 
 
 		members: [
 			{
 				id: 0, 
-				name: "Eren Jones",
+				name: "Eren Yeager",
 				instagram: "@eren_titan",
-				facebook: "Eren Jones",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
+				facebook: "Eren Yeager",
+				profilePicture: "https://64.media.tumblr.com/77a21e91593418fbbba5897efd60d410/a7737d816595f58d-d8/s250x400/0072d174042906a318b36c24a7d246d24268e447.jpg"
 			}, 
 			{
 				id: 1, 
-				name: "Mikasa Freleng",
+				name: "Mikasa Ackermann",
 				instagram: "@mikasaaa",
-				facebook: "Mikasa Freleng",
-				profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"
-			}
+				facebook: "Mikasa Ackermann",
+				profilePicture: "https://pm1.narvii.com/6728/2cfefac17df8aa295e4a3088f41863d781122a82v2_hq.jpg"
+			},
+			{
+				id: 2, 
+				name: "JJ Kanu",
+				instagram: "@jj_kanu",
+				facebook: "JJ Kanu",
+				profilePicture: "https://avatars.githubusercontent.com/u/62584273?s=460&u=8279555aeefd86b8fba6398f02f1dfa8fa51c5cf&v=4"
+			},
 		],
 		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
+		posts: [
+			{id: 0, title: "This Weeks Episode", text: "I'm not even gonna put actual spoilers here, GO WATCH THE SHOW, IT'S AMAZING!", image:"", date: '2021-03-07', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom","Dick", "Larry"]},
+			{id: 1, title: "This Weeks Episode", text: "Crazy! Really great VA from Gabi and Kaya. What are your thoughts for next week's ep?", image:"https://otakukart.com/wp-content/uploads/2021/02/Attack-on-Titan-Season-4-Episode-12-Cover-1.jpg", date: '2021-02-28', comments: [{id: 0, msg: "hello this is a comment", date: "2020-01-12"}], likes: ["Tom"]},
+		],
 		club: false
 	},
 	{
