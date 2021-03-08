@@ -48,7 +48,7 @@ class SignIn extends React.Component{
         // REDIRECT FOR ACCOUNT TYPES
         if (signedIn) {
             if (userType == "user"){
-                return <Redirect to="/user" push={true} />
+                return <Redirect to="/user/feed" push={true} />
             } else if (userType == "admin"){
                 return <Redirect to="/admin" push={true} />
             } else if (userType == "superAdmin"){

@@ -56,10 +56,10 @@ const groupData = [
 ];
 
 const groupRequestData = [
-    {groupName: "UofT Full Grown Dogs Club", description: "For when your puppy stuff grows up", url: "/", club: true},
-    {groupName: "CSC309 Project Group 10", description: "This is a cooler group for the project", url: "/", club: false},
-    {groupName: "Anime Club", description: "The official anime club of UofT", url: "/", club: true},
-    {groupName: "FML300 Winter 2021 Study Group", description: "Study group for LEC001", url: "/", club: false},
+    {groupName: "UofT Full Grown Dogs Club", description: "For when your puppy stuff grows up", url: "/uoftfullgrowndogsclubs", club: true},
+    {groupName: "CSC309 Project Group 10", description: "This is a cooler group for the project", url: "/csc309projectgroup10", club: false},
+    {groupName: "Anime Club", description: "The official anime club of UofT", url: "/animeclub", club: true},
+    {groupName: "FML300 Winter 2021 Study Group", description: "Study group for LEC001", url: "/fml300winter2021studygroup", club: false},
 ];
 
 class CurGroups extends React.Component{

@@ -72,7 +72,7 @@ class Register extends React.Component{
 
         // Redirect Filled Form To Next Page. ADD URLS HERE WHEN MADE
         if (this.state.redirectFor == "User") {
-            return <Redirect to="/user" push={true} />
+            return <Redirect to="/user/feed" push={true} />
         }
         if (this.state.redirectFor == "Admin") {
             return <Redirect to="/admin" push={true} />
