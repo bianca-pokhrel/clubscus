@@ -20,7 +20,7 @@ class AdminMemberList extends React.Component {
         const members = this.props.members
         return (
             <div >
-                <div id="member_box">
+                <div id="admin_member_box">
                 <span id="members_title">Members</span>
                 {members.map(member => (
                     <div id="ind_member_container">
