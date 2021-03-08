@@ -31,3 +31,10 @@
 #signOutColor:hover {
   color: salmon;
 }
+
+#findGroupColor {
+  color: rgb(3, 180, 3);
+}
+#findGroupColor:hover {
+  color: lightgreen;
+}

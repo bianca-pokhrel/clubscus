@@ -111,6 +111,7 @@ class NavBar extends React.Component{
                         </SubMenu>
                         <SubMenu className="navBarOption" key="clubSubMenu" title="My Groups">
                             {getUserGroups()}
+                            <Menu.Item key="findGroup" id="findGroupColor"><Link to="/user"/>+ Find a Group</Menu.Item>
                         </SubMenu>
                     </Menu>
                 )
