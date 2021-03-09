@@ -18,7 +18,7 @@ class ClubCard extends React.Component {
                     <GroupCard img={
                         <img
                             src={this.state.oneClub.banner}
-                            height="150px"/>} eachClub={this.state.oneClub}
+                            height="150px" width="266.66px"/>} eachClub={this.state.oneClub}
                                signedIn={this.state.signedIn}
                                clubsOfUser={this.state.clubsOfUser}
                     />

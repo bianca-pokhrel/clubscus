@@ -25,7 +25,6 @@ class GroupSearch extends React.Component{
                 <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
             )
 
-        console.log(this.state.signedIn)
 
         return(
             <div id="pageBG">

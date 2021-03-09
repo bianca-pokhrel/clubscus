@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
 import { message, Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
+import { Skeleton, Switch, List, Avatar } from 'antd';
 
 
 const layout = {
