@@ -1,12 +1,14 @@
 import React from "react"
 import 'antd/dist/antd.css';
-import { Row, Col, Tabs, Typography, Divider, Button } from 'antd';
+import { Col } from 'antd';
 import GroupCard from "./GroupCard";
 
 class ClubCard extends React.Component {
 
     state = {
-        oneClub: this.props.eachClub
+        oneClub: this.props.eachClub,
+        signedIn: this.props.signedIn,
+        clubsOfUser: this.props.clubsOfUser
     }
     render() {
 
@@ -17,6 +19,8 @@ class ClubCard extends React.Component {
                         <img
                             src={this.state.oneClub.banner}
                             height="150px"/>} eachClub={this.state.oneClub}
+                               signedIn={this.state.signedIn}
+                               clubsOfUser={this.state.clubsOfUser}
                     />
                 </Col>
             </div>

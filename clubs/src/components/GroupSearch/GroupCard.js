@@ -8,7 +8,9 @@ const { Meta } = Card;
 class GroupCard extends React.Component{
 
     state = {
-        club : this.props.eachClub
+        club : this.props.eachClub,
+        signedIn : this.props.signedIn,
+        clubsOfUser: this.props.clubsOfUser
     }
 
     render (){
@@ -18,7 +20,7 @@ class GroupCard extends React.Component{
                     hoverable
                     className="card"
                 >
-                    <a href={"clubs" + this.state.club.url}>{this.props.img}</a>
+                    <a href={(this.state.signedIn && this.state.clubsOfUser.includes(this.state.club))? "clubs" + this.state.club.url: "clubs" + this.state.club.url + "/about"}>{this.props.img}</a>
                     <Meta title={this.state.club.groupName} description={this.state.club.description} />
                 </Card>
             </div>

@@ -17,7 +17,7 @@ const clubsData = [
 		//General Group Info
         groupName: "Math",
         description: "A club for math enthusiasts",
-        banner: "/math-club.png",
+        banner: "banner.jpg",
 		founder: "Some guy",
 		started: "2020/08/27",
 		url: "/math", 
@@ -45,7 +45,7 @@ const clubsData = [
     {
         groupName: "English",
         description: "A club for lit nerds",
-        banner: "/english-club.png",
+        banner: "banner.jpg",
 		founder: "Some guy",
 		started: "2020/09/23",
 		url: "/english", 
@@ -73,7 +73,7 @@ const clubsData = [
     {
         groupName: "French",
         description: "A club for those who want to dip their toes in the French language",
-        banner: "/french-club.png",
+        banner: "banner.jpg",
 		founder: "Some guy",
 		started: "2020/09/24",
 		url: "/french",
@@ -388,6 +388,21 @@ class App extends React.Component {
 
 	render() {
 
+
+		const clubsOfUser = () => {
+			let clubs = []
+			for (const club in clubsData) {
+				let thisClub = clubsData[club]
+				for (const member in thisClub.members) {
+					if (thisClub.members[member].name == "JJ Kanu") {
+						clubs.push(thisClub)
+					}
+				}
+			}
+			return clubs
+		}
+
+
 		const getUrls = () => {
 			let g = clubsData.map((group) => {
 				return (<Route exact path={`/clubs${group.url}/about`}>
@@ -403,6 +418,8 @@ class App extends React.Component {
 			return (g)
 		}
 
+		{console.log(clubsOfUser())}
+
 	    	return (
 				<div>
 					<Router>
@@ -416,7 +433,7 @@ class App extends React.Component {
 
 							{/* User Views */}
 							<Route exact path="/user">
-								<GroupSearch signedIn={true}/>
+								<GroupSearch signedIn={true} clubs={clubsData} clubsOfUser={clubsOfUser()}/>
 							</Route>
 							<Route exact path="/user/profile" component={ProfilePage}/>
 							<Route exact path="/user/feed" component={MainFeed}/>
