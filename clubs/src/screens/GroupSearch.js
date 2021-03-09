@@ -8,6 +8,7 @@ import NavBar from "../components/NavBar/NavBar";
 import GroupCard from "../components/GroupSearch/GroupCard";
 import SearchBar from "../components/GroupSearch/SearchBar";
 import SiteBanner from "../components/GroupSearch/SiteBanner";
+import ClubCard from "../components/GroupSearch/ClubCard";
 
 const { TabPane } = Tabs;
 const { Paragraph } = Typography;
@@ -16,11 +17,19 @@ class GroupSearch extends React.Component{
 
     state = {
         signedIn: this.props.signedIn,
+        clubsData: this.props.clubs
     }
+
 
 	render() {
 
-        const { signedIn } = this.state;
+
+        const { signedIn } = this.state.signedIn;
+
+
+        const eachClubCard = this.state.clubsData.map(club =>
+                <ClubCard eachClub={club} />
+            )
 
         return(
             <div id="pageBG">
@@ -29,31 +38,8 @@ class GroupSearch extends React.Component{
                     <SearchBar/>
                     <div className="category">
                         <Divider orientation="left">Category 1</Divider>
-                        <Row gutter={10}>
-                            <Col span={5}>
-                                <GroupCard img={
-                                    <img src="https://sneakernews.com/wp-content/uploads/2020/06/jordan-1-wmns-satin-snakeskin-CD0461-601-4.jpg" height="150px"/>} 
-                                    title="Temp" description="Description Description Description "
-                                />
-                            </Col>
-                            <Col span={5}>
-                                <GroupCard img={
-                                    <img src="https://sneakernews.com/wp-content/uploads/2020/06/jordan-1-wmns-satin-snakeskin-CD0461-601-4.jpg" height="150px"/>} 
-                                    title="Temp" description="Description Description Description "
-                                />
-                            </Col>
-                            <Col span={5}>
-                                <GroupCard img={
-                                    <img src="https://sneakernews.com/wp-content/uploads/2020/06/jordan-1-wmns-satin-snakeskin-CD0461-601-4.jpg" height="150px"/>} 
-                                    title="Temp" description="Description Description Description "
-                                />
-                            </Col>
-                            <Col span={5}>
-                                <GroupCard img={
-                                    <img src="https://sneakernews.com/wp-content/uploads/2020/06/jordan-1-wmns-satin-snakeskin-CD0461-601-4.jpg" height="150px"/>} 
-                                    title="Temp" description="Description Description Description "
-                                />
-                            </Col>
+                        <Row gutter={5} >
+                        {eachClubCard}
                         </Row>
                     </div>
                 </div>

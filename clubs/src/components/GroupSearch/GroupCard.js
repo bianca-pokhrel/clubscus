@@ -7,15 +7,19 @@ const { Meta } = Card;
 
 class GroupCard extends React.Component{
 
+    state = {
+        club : this.props.eachClub
+    }
+
     render (){
         return(
             <div>
                 <Card
                     hoverable
                     className="card"
-                    cover={this.props.img}
                 >
-                    <Meta title={this.props.title} description={this.props.description} />
+                    <a href={"clubs" + this.state.club.url}>{this.props.img}</a>
+                    <Meta title={this.state.club.groupName} description={this.state.club.description} />
                 </Card>
             </div>
         )

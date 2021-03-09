@@ -408,7 +408,7 @@ class App extends React.Component {
 					<Router>
 						<Switch>
 							<Route exact path="/">
-								<GroupSearch signedIn={false}/>
+								<GroupSearch signedIn={false} clubs={clubsData}/>
 							</Route>
 							{/* Log In/Register */}
 							<Route exact path="/signin" component={SignInPage}/>
