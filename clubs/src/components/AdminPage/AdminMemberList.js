@@ -7,8 +7,8 @@ import MemberModal from '../ClubPageComponents/MemberModal.js';
 import { Modal } from "antd";
 
 let requested_members = [
-    {id: 3 , name: "Harry Musk"},
-    {id: 4, name: "Alex Ramirez"}
+    {id: 3 , name: "Harry Musk", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"},
+    {id: 4, name: "Alex Ramirez", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"}
 ]
 
 
@@ -23,7 +23,7 @@ class AdminMemberList extends React.Component {
 	}
 
     acceptMember = (member) => {
-        this.props.members.push({id: member.id, name: member.name})
+        this.props.members.push({id: member.id, name: member.name, profilePicture: member.profilePicture})
         requested_members = requested_members.filter(item => item !== member)
         message.success('New Member Accepted');
         this.forceUpdate()
