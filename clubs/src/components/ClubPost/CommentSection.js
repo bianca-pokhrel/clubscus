@@ -51,11 +51,11 @@ class CommentSection extends React.Component{
 				let c = comments[i]
 				list.push(<div id="individual_comment_container">
 						<div>
-							<img id="comment_profile_pic" src="/profile-pic.png"/>
+							<img id="comment_profile_pic" src="https://avatars.githubusercontent.com/u/62584273?s=460&u=8279555aeefd86b8fba6398f02f1dfa8fa51c5cf&v=4"/>
 						</div>
 						<div id="comment_content">
 							<p> 
-								<span id="comment_profile_name">Clark Gable </span>
+								<span id="comment_profile_name">JJ Kanu </span>
 								<span>{c.msg}</span>
 							</p>
 							<p id="comment_date">{c.date}</p>

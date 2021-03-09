@@ -1,10 +1,16 @@
-#member_box {
-	border: 2px solid black;
-	margin: 5px;
-	padding: 5px;
+#about_us_text_container {
+	padding-left: 20px;
 }
-.member_text {
-	font-size: 50px;
-	text-decoration: none;
-	color: black;
+#join_button_container {
+	background-color: white;
+	padding-bottom: 10px;
+}
+#join_button {
+	margin-left: 20px;
+}
+#request_sent_text {
+	color: #002157;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left: 7px;
 }

@@ -35,15 +35,23 @@ class ClubPage extends React.Component{
 		const { current, signedIn, userType } = this.state;
         
         	const about_us = () => {
+        		let member = false
+        		
+        		if (signedIn) {
+				for (let i = 0; i < club.members.length; i++) {
+					if (club.members[i].id == 1) member = true
+				}
+        		}
+        		
         		return (
 		            <div class="club_container">
-		            	<About about={club.description}/>
+		            	<About about={club.description} member={member}/>
 		            </div>
 		        ) 
         	}
         
 		const clubPageView = () => {
-		    if (this.props.about == true) {
+		    if (this.props.about == true || !signedIn) {
 		        return about_us();
 		    } else if (userType == "user") {
 		        return(
