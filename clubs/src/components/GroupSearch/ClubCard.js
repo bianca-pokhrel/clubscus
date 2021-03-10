@@ -15,12 +15,11 @@ class ClubCard extends React.Component {
         return (
             <div>
                 <Col span={5}>
-                    <GroupCard img={
-                        <img
-                            src={this.state.oneClub.banner}
-                            height="150px" width="266.66px"/>} eachClub={this.state.oneClub}
-                               signedIn={this.state.signedIn}
-                               clubsOfUser={this.state.clubsOfUser}
+                    <GroupCard 
+                        img={<img src={this.state.oneClub.banner} height="150px" width="333px" margin/>} 
+                        eachClub={this.state.oneClub}
+                        signedIn={this.state.signedIn}
+                        clubsOfUser={this.state.clubsOfUser}
                     />
                 </Col>
             </div>
