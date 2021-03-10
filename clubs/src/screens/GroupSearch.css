@@ -2,7 +2,7 @@
     margin: auto;
     margin-top: 30px;
     width: 1850px;
-    height: 700px;
+    height: fit-content;
     /* border: 1px solid lightgray; */
     background-color: white;
     padding: 10px;

@@ -21,9 +21,12 @@ class GroupSearch extends React.Component{
 	render() {
 
 
-        const eachClubCard = this.state.clubsData.map(club =>
+        const eachClubCard1 = this.state.clubsData.slice(0,6).map(club =>
                 <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
             )
+        const eachClubCard2 = this.state.clubsData.slice(6,11).map(club =>
+            <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
+        )
 
 
         return(
@@ -32,9 +35,15 @@ class GroupSearch extends React.Component{
                 <div id="searchBody">
                     <SearchBar/>
                     <div className="category">
-                        <Divider orientation="left">Category 1</Divider>
+                        <Divider orientation="left">Popular Groups</Divider>
                         <Row gutter={5} >
-                        {eachClubCard}
+                        {eachClubCard1}
+                        </Row>
+                    </div>
+                    <div className="category">
+                        <Divider orientation="left">New Groups</Divider>
+                        <Row gutter={5} >
+                        {eachClubCard2}
                         </Row>
                     </div>
                 </div>
