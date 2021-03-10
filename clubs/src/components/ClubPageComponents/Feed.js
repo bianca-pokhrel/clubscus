@@ -60,9 +60,12 @@ class Feed extends React.Component{
 					let post = this.state.posts[i]
 					if (post.id == id) 
 						return(
-							<div id="feed_container">
-								{gen(post)}
+							<>
+								<img src="/back-arrow.png" id = "back_button" onClick={() => {this.changeFocus(-1)}}/>
+								<div id="feed_container">
+									{gen(post)}
 			    				</div>
+							</>
 						)
 				}
 			}
