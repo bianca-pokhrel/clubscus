@@ -1,4 +1,7 @@
 .ant-card.card {
-    width: 340px;
+    width: 335px;
     height: 250px;
+    border: 1px solid lightgrey;
+    margin-bottom: 10px;
+    justify-content: center;
 }
