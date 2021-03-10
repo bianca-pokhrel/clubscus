@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import {
     Menu,
     Layout,
@@ -13,6 +13,10 @@ import "./SuperAdminComponents.css";
 import ClubsList from "../components/ClubsList/ClubsList.js";
 import NavBar from "../components/NavBar/NavBar.js";
 import ApprovalRequest from "../components/ApprovalRequest/ApprovalRequest.js"
+import SearchBar from "../components/GroupSearch/SearchBar.js"
+import { Group } from "antd/lib/avatar";
+import GroupsList from "../components/GroupSearch/GroupsList";
+
 
 const { Text } = Typography;
 const { Content, Sider } = Layout;
@@ -61,9 +65,17 @@ let clubsRequests = [
 
 
 
-class SuperAdminScreen extends React.Component {
+const filterGroups = (groups, query) => {
+    if (!query) {
+        return groups;
+    }
+    return groups.filter((group) => {
+        const groupName = group.title.toLowerCase();
+        return groupName.includes(query)
+    })
+}
 
-    
+class SuperAdminScreen extends React.Component {
 
     render() {
         //const resultQuery = this.props.location.state.query;
@@ -71,51 +83,54 @@ class SuperAdminScreen extends React.Component {
 
         const amountOfResults = clubsData.length;
 
+        const { search } = window.location;
+        const query = new URLSearchParams(search).get('s');
+        const filteredGroups = filterGroups(clubsData, query);
+
         
-        //let clubsResults = this.props.location.state.data;
-    
+        return (
+            <div>
+                <Layout>
+                    <NavBar userType="superadmin"/>
 
-    return (
-        <div>
-            <Layout>
-                <NavBar userType="superadmin"/>
-                
-                {amountOfResults !=0 && (
+                    <SearchBar/>
+                    
+                    {amountOfResults !=0 && (
 
-                    <Layout className="background">
-                    <Row className="row" justify="space-between" align="middle">
-                        <Col>
-                            {amountOfResults == 1 ? (
-                                <Text>
-                                    Showing {amountOfResults} clubs 
-                                </Text>
-                            ) : (
-                                <Text>
-                                    Showing {amountOfResults} clubs
-                                </Text>
-                            )}
-                        </Col>
-                    </Row>
+                        <Layout className="background">
+                        <Row className="row" justify="space-between" align="middle">
+                            <Col>
+                                {amountOfResults == 1 ? (
+                                    <Text>
+                                        Showing {amountOfResults} clubs 
+                                    </Text>
+                                ) : (
+                                    <Text>
+                                        Showing {amountOfResults} clubs
+                                    </Text>
+                                )}
+                            </Col>
+                        </Row>
+                    </Layout>
+
+                    )}
+                    
                 </Layout>
-
-                )}
                 
-            </Layout>
-            
-            <Layout className="background">
-                <Sider>
-                    <Row justify="center" className="refresh">
-                        <Button>REFRESH REQUESTS</Button>
-                    </Row>
-                    <ApprovalRequest data={clubsRequests}/>
-                </Sider>
-                <Content className="clubscontainer background">
-                    <ClubsList clubs={clubsData}>
+                <Layout className="background">
+                    <Sider>
+                        <Row justify="center" className="refresh">
+                            <Button>REFRESH REQUESTS</Button>
+                        </Row>
+                        <ApprovalRequest data={clubsRequests}/>
+                    </Sider>
+                    <Content className="clubscontainer background">
+                        <ClubsList clubs={filteredGroups}>
 
-                    </ClubsList>
-                </Content>
-            </Layout>
-        </div>
+                        </ClubsList>
+                    </Content>
+                </Layout>
+            </div>
         )
     }
 }
