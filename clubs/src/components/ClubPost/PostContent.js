@@ -56,10 +56,10 @@ class PostContent extends React.Component{
 			if (this.props.main_feed == 0) return ("")
 			
 			return (<div id="post_top">
-					<img id="post_banner" src="/banner.jpg"/>
+					<img id="post_banner" src={post.clubBanner}/>
 					<p id="post_club_color">
 						<a href="/clubs/club0">
-							{post.club}
+							{post.clubName}
 						</a>
 					</p>
 				</div>
