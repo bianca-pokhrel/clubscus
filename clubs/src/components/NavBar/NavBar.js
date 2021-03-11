@@ -132,7 +132,6 @@ class NavBar extends React.Component{
                     // Super admin
                     <Menu className="menu" onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
                         <SubMenu className="navBarOption" key="accountSubMenu" title="Admin Account">
-                            <Menu.Item key="pendingOfficiates">Pending Officiate Requests</Menu.Item>
                             {signOutButton()}
                         </SubMenu>
                     </Menu>
