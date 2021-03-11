@@ -8,7 +8,7 @@ import { Modal } from "antd";
 
 let requested_members = [
     {id: 3 , name: "Harry Musk", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"},
-    {id: 4, name: "Alex Ramirez", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"}
+    {id: 4, name: "Alex Ramirez", profilePicture: "https://i.insider.com/5c5dd439dde867479d106cc2?width=1100&format=jpeg&auto=webp"}
 ]
 
 

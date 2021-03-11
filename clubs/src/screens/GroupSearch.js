@@ -33,7 +33,7 @@ class GroupSearch extends React.Component{
             <div id="pageBG">
                 {this.state.signedIn? <NavBar userType="user"/>: <SiteBanner/>}
                 <div id="searchBody">
-                    <SearchBar/>
+                    {/* <SearchBar/> */}
                     <div className="category">
                         <Divider orientation="left">Popular Groups</Divider>
                         <Row gutter={5} >
