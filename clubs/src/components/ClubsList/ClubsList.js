@@ -14,18 +14,19 @@ const { Text } = Typography;
 const generateCard = (club) => {
     return (
         <Card
+            id="club-title-card"
             hoverable
             //onClick={}
             cover={
                 <img 
                     id="cardImage"
                     alt="example"
-                    src={club["image"]}/>
+                    src={club["banner"]}/>
             }
         >
         
             <Meta>description={club["description"]}</Meta>
-            <Text > {club["title"]} </Text>
+            <Text > {club["groupName"]} </Text>
 
         </Card>
     );

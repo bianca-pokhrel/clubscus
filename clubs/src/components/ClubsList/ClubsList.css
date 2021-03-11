@@ -4,3 +4,7 @@
     height: 100px;
     object-fit:scale-down;
 }
+
+#club-title-card{
+    text-align: left;
+}

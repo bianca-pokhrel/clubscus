@@ -21,7 +21,7 @@ import GroupsList from "../components/GroupSearch/GroupsList";
 const { Text } = Typography;
 const { Content, Sider } = Layout;
 
-let clubsData = [
+let clubsDataTemp = [
     {
         "title": "Math",
         "description": "A club for math enthusiasts",
@@ -77,11 +77,17 @@ const filterGroups = (groups, query) => {
 
 class SuperAdminScreen extends React.Component {
 
+    state = {
+		clubsData: this.props.clubsData
+	};
+    
     render() {
         //const resultQuery = this.props.location.state.query;
         //const amountOfResults = this.props.location.state.data.length;
 
-        const amountOfResults = clubsData.length;
+        const { clubsData } = this.state;
+
+        const amountOfResults = this.state.clubsData.length;
 
         const { search } = window.location;
         const query = new URLSearchParams(search).get('s');
@@ -93,7 +99,7 @@ class SuperAdminScreen extends React.Component {
                 <Layout>
                     <NavBar userType="superadmin"/>
 
-                    <SearchBar/>
+                    <SearchBar className="search-bar-row"/>
                     
                     {amountOfResults !=0 && (
 
@@ -118,7 +124,7 @@ class SuperAdminScreen extends React.Component {
                 </Layout>
                 
                 <Layout className="background">
-                    <Sider>
+                    <Sider className="approval-requests-container">
                         <Row justify="center" className="refresh">
                             <Button>REFRESH REQUESTS</Button>
                         </Row>
