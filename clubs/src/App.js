@@ -69,7 +69,9 @@ class App extends React.Component {
 							<Route exact path="/user/feed" component={MainFeed}/>
 
 							{/* Admin Views */}
-							<Route exact path="/superadmin" component={SuperAdminScreen}/>
+							<Route exact path="/superadmin" component={SuperAdminScreen}>
+								<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
+							</Route>
 							<Route exact path="/admin">
 								<ClubPage club={clubsData[0]} userType="admin"/>
 							</Route>
