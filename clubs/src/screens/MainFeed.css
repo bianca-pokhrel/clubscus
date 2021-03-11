@@ -1,0 +1,26 @@
+#pageBG {
+    background-color: #F0F2F2;
+    min-height: 100vh;
+    height: fit-content;
+  }
+  
+  #feedBody {
+    margin: auto;
+    margin-top: 80px;
+    width: 1100px;
+    height: 700px;
+  }
+  
+  #postSide {
+    float: left;
+    width: 70%;
+    background-color: white;
+  }
+  
+  #groupContainer {
+    float: right;
+    width: 28%;
+    background-color: white;
+  }
+  
+  

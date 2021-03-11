@@ -1,0 +1,32 @@
+#member_box {
+	padding: 5px;
+	text-align: center;
+}
+#ind_member_container {
+	width: 100%;
+	float: left;
+	padding: 10px;
+}
+#members_title {
+	font-size: 50px;
+	font-weight: bold;
+	color: #002157;
+}
+#member_text {
+	margin-top: 5px;
+	margin-right: 10px;
+	font-size: 20px;
+	float: right;
+	text-decoration: none;
+	color: black;
+}
+#member_pic {
+	width: 70px;
+	height: 70px;
+	float: right;
+	border-radius: 50%;
+}
+#member_pic:hover {
+	cursor: pointer;
+}
+

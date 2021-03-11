@@ -1,0 +1,36 @@
+#link_box {
+    margin: 5px;
+    padding: 5px;
+}
+
+#link_container {
+    position: relative;
+    width: 100%;
+    float: left;
+    vertical-align: middle;
+    padding: 5px;
+}
+#link_text {
+    position: absolute;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+    margin-top: 5px;
+    float: left;
+}
+#links_image {
+    width: 50px;
+    height: 50px;
+    float: left;
+    border-radius: 50%;
+}
+a {
+    color: black;
+}
+
+#linkEditButton {
+    position: absolute;
+    top: 10px;
+    margin-left: 150px;
+}
