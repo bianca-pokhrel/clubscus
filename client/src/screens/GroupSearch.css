@@ -1,0 +1,15 @@
+#searchBody {
+    margin: auto;
+    margin-top: 30px;
+    width: 1850px;
+    height: fit-content;
+    /* border: 1px solid lightgray; */
+    background-color: white;
+    padding: 10px;
+}
+
+.category {
+    width: 1700px;
+    margin-top: 10px;
+    margin: auto;
+}

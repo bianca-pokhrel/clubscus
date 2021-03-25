@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9a5d0484.chunk.css",
+    "main.js": "/static/js/main.56ac6e3a.chunk.js",
+    "main.js.map": "/static/js/main.56ac6e3a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9950738a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9950738a.js.map",
+    "static/css/2.fc2db407.chunk.css": "/static/css/2.fc2db407.chunk.css",
+    "static/js/2.f8629ab0.chunk.js": "/static/js/2.f8629ab0.chunk.js",
+    "static/js/2.f8629ab0.chunk.js.map": "/static/js/2.f8629ab0.chunk.js.map",
+    "static/js/3.86c78bd6.chunk.js": "/static/js/3.86c78bd6.chunk.js",
+    "static/js/3.86c78bd6.chunk.js.map": "/static/js/3.86c78bd6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.fc2db407.chunk.css.map": "/static/css/2.fc2db407.chunk.css.map",
+    "static/css/main.9a5d0484.chunk.css.map": "/static/css/main.9a5d0484.chunk.css.map",
+    "static/js/2.f8629ab0.chunk.js.LICENSE.txt": "/static/js/2.f8629ab0.chunk.js.LICENSE.txt",
+    "static/media/RegisterPage.css": "/static/media/bluekingscollege.ae1baf7f.jpg",
+    "static/media/SiteBanner.css": "/static/media/bluekingscollegeshort.02ae307a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9950738a.js",
+    "static/css/2.fc2db407.chunk.css",
+    "static/js/2.f8629ab0.chunk.js",
+    "static/css/main.9a5d0484.chunk.css",
+    "static/js/main.56ac6e3a.chunk.js"
+  ]
+}

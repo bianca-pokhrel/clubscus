@@ -1,0 +1,40 @@
+.navBarContainer {
+  background-color: #00204e;
+}
+
+.header {
+  color: white;
+  margin-left: 20%;
+  margin-top: 5px;
+  width: fit-content;
+}
+
+.ant-menu.menu {
+  background-color: #00204e;
+  bottom: -10px;
+  border-bottom: none;
+}
+
+.navBarOption {
+  float: right;
+  color: white;
+}
+
+.navBarOption > Link > span {
+  float: right;
+  color: white;
+}
+
+#signOutColor {
+  color: red;
+}
+#signOutColor:hover {
+  color: salmon;
+}
+
+#findGroupColor {
+  color: rgb(3, 180, 3);
+}
+#findGroupColor:hover {
+  color: lightgreen;
+}

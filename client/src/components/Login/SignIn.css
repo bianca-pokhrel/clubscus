@@ -1,0 +1,36 @@
+#signInContainer {
+  width: 440px;
+  height: 380px;
+  margin: auto;
+  border: 3px solid #004099;
+  background-color: white;
+  border-radius: 3px;
+  padding-bottom: 10px;
+}
+
+#headerContainerS {
+  padding-top: 2px;
+  text-align: left;
+  height: 20%;
+}
+
+#headerContainerS > h1 {
+  padding-top: 8%;
+  text-align: center;
+}
+
+#inputContainer {
+  width: 380px;
+  padding-top: 30px;
+  margin: auto;
+}
+
+#LogIn {
+  width: 100%;
+}
+
+#register {
+  text-align: center;
+  padding-top: 40px;
+}
+

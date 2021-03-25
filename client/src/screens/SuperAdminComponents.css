@@ -1,0 +1,50 @@
+.ant-card-body {
+	padding-left: 10px;
+}
+
+.ant-card-bordered {
+	border: none;
+}
+
+.ant-typography {
+	color: black;
+  text-align: left;
+}
+
+.centered {
+    position: absolute;
+    left: 0;
+    right: 0; 
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  
+  .no-results {
+      height: 10vh;
+      width: 10vw;
+  }
+
+  .clubscontainer {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+.ant-layout-sider, .background {
+	background: white;
+}
+
+.row {
+	margin: 1.5em;
+}
+
+.approval-requests-container {
+  padding-left: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.search-bar-row {
+  background-color: white;
+}
