@@ -30,7 +30,7 @@ const PostSchema = new mongoose.Schema({
 
 const CommentSchema = new mongoose.Schema({
     user: {
-        type: [mongoose.Types.ObjectId]
+        type: mongoose.Types.ObjectId
     },
     content:{
         type: String,
