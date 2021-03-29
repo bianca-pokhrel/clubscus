@@ -9,6 +9,11 @@ const bcrypt = require('bcryptjs')
 // Making a Mongoose model a little differently: a Mongoose Schema
 // Allows us to add additional functionality.
 const PostSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        minlength: 1
+    },
 	content: {
 		type: String,
 		required: true,
@@ -17,6 +22,9 @@ const PostSchema = new mongoose.Schema({
     date: {
         type: String,
         required: true
+    },
+    likes: {
+        type: [UserSchema._id]
     },
     comments: [CommentSchema._id], 
 })

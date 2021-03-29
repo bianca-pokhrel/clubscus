@@ -7,9 +7,6 @@
 // To run in production mode, run in terminal: NODE_ENV=production node server.js
 const env = process.env.NODE_ENV // read the environment variable (will be 'production' in production mode)
 
-const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON // option to turn on the test user.
-const TEST_USER_ID = '5fb8b011b864666580b4efe3' // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
-const TEST_USER_EMAIL = 'test@user.com'
 //////
 
 const log = console.log;
@@ -28,8 +25,9 @@ const { mongoose } = require("./db/mongoose");
 mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 // import the mongoose models
-const { Student } = require("./models/student");
-const { User } = require("./models/user");
+const { User, SuperAdmin } = require("./models/user");
+const { Group } = require("./models/groups");
+const { Post, Comment } = require("./models/posts");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -102,20 +100,19 @@ app.use(
 );
 
 // A route to login and create a session
-app.post("/users/login", (req, res) => {
-    const email = req.body.email;
+app.post("/data/user/login", (req, res) => {
+    const id = req.body.id;
     const password = req.body.password;
 
     // log(email, password);
     // Use the static method on the User model to find a user
     // by their email and password
-    User.findByEmailPassword(email, password)
+    User.findUser(id, password)
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
-            req.session.email = user.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
-            res.send({ currentUser: user.email });
+            res.send({ currentUser: user.username });
         })
         .catch(error => {
             res.status(400).send()
@@ -123,7 +120,7 @@ app.post("/users/login", (req, res) => {
 });
 
 // A route to logout a user
-app.get("/users/logout", (req, res) => {
+app.get("/data/user/logout", (req, res) => {
     // Remove the session
     req.session.destroy(error => {
         if (error) {
@@ -135,16 +132,9 @@ app.get("/users/logout", (req, res) => {
 });
 
 // A route to check if a user is logged in on the session
-app.get("/users/check-session", (req, res) => {
-    if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-        req.session.user = TEST_USER_ID;
-        req.session.email = TEST_USER_EMAIL;
-        res.send({ currentUser: TEST_USER_EMAIL })
-        return;
-    }
-
+app.get("/data/user/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ currentUser: req.session.email });
+        res.send({ currentUser: req.session.id });
     } else {
         res.status(401).send();
     }
@@ -154,12 +144,12 @@ app.get("/users/check-session", (req, res) => {
 
 /*** API Routes below ************************************/
 // User API Route
-app.post('/api/users', mongoChecker, async (req, res) => {
+app.post('/data/user/users', mongoChecker, async (req, res) => {
     log(req.body)
 
     // Create a new user
     const user = new User({
-        email: req.body.email,
+        id: req.body.id,
         password: req.body.password
     })
 
@@ -172,56 +162,12 @@ app.post('/api/users', mongoChecker, async (req, res) => {
             res.status(500).send('Internal server error')
         } else {
             log(error)
-            res.status(400).send('Bad Request') // bad request for changing the student.
+            res.status(400).send('Bad Request')
         }
     }
 })
 
-/** Student resource routes **/
-// a POST route to *create* a student
-app.post('/api/students', mongoChecker, authenticate, async (req, res) => {
-    log(`Adding student ${req.body.name}, created by user ${req.user._id}`)
-
-    // Create a new student using the Student mongoose model
-    const student = new Student({
-        name: req.body.name,
-        year: req.body.year,
-        creator: req.user._id // creator id from the authenticate middleware
-    })
-
-
-    // Save student to the database
-    // async-await version:
-    try {
-        const result = await student.save() 
-        res.send(result)
-    } catch(error) {
-        log(error) // log server error to the console, not to the client.
-        if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
-            res.status(500).send('Internal server error')
-        } else {
-            res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
-        }
-    }
-})
-
-// a GET route to get all students
-app.get('/api/students', mongoChecker, authenticate, async (req, res) => {
-
-    // Get the students
-    try {
-        const students = await Student.find({creator: req.user._id})
-        // res.send(students) // just the array
-        res.send({ students }) // can wrap students in object if want to add more properties
-    } catch(error) {
-        log(error)
-        res.status(500).send("Internal Server Error")
-    }
-
-})
-
-// other student API routes can go here...
-// ...
+/*********************************************************/
 
 /*** Webpage routes below **********************************/
 // Serve the build
@@ -230,7 +176,7 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // All routes other than above will go to index.html
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
-    const goodPageRoutes = ["/", "/login", "/dashboard"];
+    const goodPageRoutes = ["/"];
     if (!goodPageRoutes.includes(req.url)) {
         // if url not in expected page routes, set status to 404.
         res.status(404);

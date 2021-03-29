@@ -19,6 +19,20 @@ const GroupSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    links: {
+        type: [String]
+    },
+    description: {
+        type: String
+    },
+    founder: {
+        type: UserSchema._id
+    },
+    aboutUs: {
+        type: String,
+        required: true,
+        minlength: 5
+    },
     officiated: {
         type: Boolean
     },
