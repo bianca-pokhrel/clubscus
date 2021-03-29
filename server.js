@@ -144,27 +144,108 @@ app.get("/data/user/check-session", (req, res) => {
 
 /*** API Routes below ************************************/
 // User API Route
-app.post('/data/user/users', mongoChecker, async (req, res) => {
-    log(req.body)
 
-    // Create a new user
-    const user = new User({
-        id: req.body.id,
-        password: req.body.password
-    })
+app.get('/data/user/users/', (req, res) => {
+	// check mongoose connection established.
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
 
-    try {
-        // Save the user
-        const newUser = await user.save()
-        res.send(newUser)
-    } catch (error) {
-        if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
-            res.status(500).send('Internal server error')
-        } else {
-            log(error)
-            res.status(400).send('Bad Request')
-        }
-    }
+	User.find().then((user) => {
+		res.send(user)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
+})
+
+app.get('/data/user/users/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(user)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/user/users/', (req, res) => {
+	// Create a new user
+
+    let user = new User({
+        username: req.body.username,
+        name: req.body.name,
+        password: req.body.password,
+        userType: req.body.userType,
+        userGroups: []
+     })
+    
+    user.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
+
+})
+
+app.put('/data/user/users/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		} else {
+            user.username = req.body.username,
+            user.name = req.body.name,
+            user.password = req.body.password,
+            user.userType = req.body.userType,
+            user.userGroups = req.body.userGroups
+            user.pic = req.body.pic
+
+            user.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
 })
 
 /*********************************************************/

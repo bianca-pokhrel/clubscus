@@ -1,9 +1,6 @@
 /* User model */
 'use strict';
 
-const { UserSchema }  = require('user.js')
-const { PostSchema } = require('posts.js')
-
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
@@ -26,7 +23,7 @@ const GroupSchema = new mongoose.Schema({
         type: String
     },
     founder: {
-        type: UserSchema._id
+        type: mongoose.Types.ObjectId
     },
     aboutUs: {
         type: String,
@@ -36,11 +33,11 @@ const GroupSchema = new mongoose.Schema({
     officiated: {
         type: Boolean
     },
-    members: [UserSchema._id], 
-    reqMembers: [UserSchema._id],
-	posts: [PostSchema._id],
+    members: [mongoose.Types.ObjectId], 
+    reqMembers: [mongoose.Types.ObjectId],
+	posts: [mongoose.Types.ObjectId],
 	admin: {
-		type: UserSchema._id,
+		type: mongoose.Types.ObjectId,
 		required: true,
 	},
 })

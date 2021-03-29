@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		minlength: 1,
 	},
-	userGroups: [groupSchema._id]
+	userGroups: [mongoose.Types.ObjectId]
 })
 
 const SuperAdminSchema = new mongoose.Schema({
@@ -49,7 +49,7 @@ const SuperAdminSchema = new mongoose.Schema({
 	},
 })
 
-const bindUser = (next) => {
+const bindUser = function(next) {
 	const user = this; // binds this to User document instance
 
 	// checks to ensure we don't hash password more than once
@@ -72,7 +72,20 @@ const bindUser = (next) => {
 UserSchema.pre('save', bindUser)
 SuperAdminSchema.pre('save', bindUser)
 
-const findUser = (id, password) => {
+const findById = function(id) {
+	const User = this // binds this to the User model
+
+	// First find the user by their email
+	return User.findOne({ _id: id }).then((user) => {
+		if (!user) {
+			return Promise.reject()  // a rejected promise
+		}
+		
+		return user
+	})
+}
+
+const findUserByIDPassword = function(id, password) {
 	const User = this // binds this to the User model
 
 	// First find the user by their email
@@ -96,8 +109,10 @@ const findUser = (id, password) => {
 // A static method on the document model.
 // Allows us to find a User document by comparing the hashed password
 //  to a given one, for example when logging in.
-UserSchema.statics.findByIDPassword = findUser
-SuperAdminSchema.statics.findByIDPassword = findUser
+UserSchema.statics.findById = findById
+SuperAdminSchema.statics.findById = findById
+UserSchema.statics.findByIDPassword = findUserByIDPassword
+SuperAdminSchema.statics.findByIDPassword = findUserByIDPassword
 
 // make a model using the User schema
 const User = mongoose.model('User', UserSchema)

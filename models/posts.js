@@ -1,10 +1,9 @@
 /* User model */
 'use strict';
 
-const { UserSchema } = require('user.js')
-
 const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { ObjectID } = require('bson');
 
 // Making a Mongoose model a little differently: a Mongoose Schema
 // Allows us to add additional functionality.
@@ -24,14 +23,14 @@ const PostSchema = new mongoose.Schema({
         required: true
     },
     likes: {
-        type: [UserSchema._id]
+        type: [mongoose.Types.ObjectId]
     },
-    comments: [CommentSchema._id], 
+    comments: [mongoose.Types.ObjectId], 
 })
 
 const CommentSchema = new mongoose.Schema({
     user: {
-        type: [UserSchema._id]
+        type: [mongoose.Types.ObjectId]
     },
     content:{
         type: String,
