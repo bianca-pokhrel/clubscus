@@ -403,6 +403,7 @@ app.post('/data/groups/', (req, res) => {
         description: req.body.description,
         founder: req.body.founder,
         aboutUs: req.body.about,
+		created_on: req.body.created_on,
         officiated: false,
         admin: req.body.admin,
         links: [],
@@ -445,6 +446,7 @@ app.put('/data/groups/:id', (req, res) => {
             if (req.body.name != null) group.name = req.body.name
             if (req.body.description != null) group.description = req.body.description
             if (req.body.founder != null) group.founder = req.body.founder
+			if (req.body.created_on != null) group.created_on = req.body.created_on
             if (req.body.about != null) group.aboutUs = req.body.about
             if (req.body.officiated != null) group.officiated = req.body.officiated
             if (req.body.admin != null) group.admin = req.body.admin
@@ -517,6 +519,7 @@ app.post('/data/posts/', (req, res) => {
         title: req.body.title,
         content: req.body.content,
         date: req.body.date,
+		image: null,
         likes: [],
         comments: []
      })
@@ -555,6 +558,7 @@ app.put('/data/posts/:id', (req, res) => {
             if (req.body.title != null) post.title = req.body.title
             if (req.body.content != null) post.content  = req.body.content
             if (req.body.date != null) post.date = req.body.date
+			if (req.body.image != null) post.image = req.body.image
             if (req.body.likes != null) post.likes = req.body.likes
             if (req.body.comments != null) post.comments = req.body.comments
 

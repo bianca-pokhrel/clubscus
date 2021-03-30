@@ -6,18 +6,44 @@ import { Button, Menu, Dropdown } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
 
 class Feed extends React.Component{
-	state = {
-		ascending: -1,
-		focus: -1,
-		main_feed: 0
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			ascending: -1,
+			focus: -1,
+			main_feed: 0,
+			posts: []
+		}
+		
+		props.posts.map((post) => {
+			const url = `/data/posts/${post}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get students");
+					}
+				}).then(p => {
+					this.setState({posts: this.state.posts.concat(p)})
+				})
+		})
 	}
+	
+
+	parseDate = date => {
+		let t = date
+		date = date.replace(" ", "T") + ":00"
+		return Date.parse(date)
+	}
+
 	handleClick = e => {
 		if (e.domEvent.target.innerHTML == "Ascending") {
 			this.setState({ascending: 1})
 		}else{
 			this.setState({ascending: -1})
 		}
-		console.log(this.state)
    	};
    	
    	changeFocus = (id) => {
@@ -25,7 +51,6 @@ class Feed extends React.Component{
    	}
    	
 	render() {
-		this.state.posts = this.props.posts
 		this.state.main_feed = this.props.main_feed
 		
 		const get_menu = () => {
@@ -42,12 +67,14 @@ class Feed extends React.Component{
 		}
 		
 		const gen = (post) => {
-			return <PostContent data post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
+			return <PostContent post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
 		}
 				
 		const gen_all = () => {
-			this.state.posts.sort((a,b) => (Date.parse(a.date) < Date.parse(b.date) ? -this.state.ascending : 				(Date.parse(a.date) > Date.parse(b.date) ? this.state.ascending : 0)))
+			this.state.posts.sort((a,b) => (this.parseDate(a.date) < this.parseDate(b.date) ? -this.state.ascending : (this.parseDate(a.date) > this.parseDate(b.date) ? this.state.ascending : 0)))
 			
+			console.log("after sort", this.state.posts)
+
 			return this.state.posts.map(p => {
 				return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
 			})
@@ -58,7 +85,7 @@ class Feed extends React.Component{
 				
 				for (let i = 0; i < this.state.posts.length; i++) {
 					let post = this.state.posts[i]
-					if (post.id == id) 
+					if (post._id == id) 
 						return(
 							<>
 								<img src="/back-arrow.png" id = "back_button" onClick={() => {this.changeFocus(-1)}}/>

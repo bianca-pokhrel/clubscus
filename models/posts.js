@@ -18,6 +18,7 @@ const PostSchema = new mongoose.Schema({
 		required: true,
 		minlength: 1
 	},
+    image: String,
     date: {
         type: String,
         required: true

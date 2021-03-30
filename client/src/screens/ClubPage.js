@@ -13,12 +13,31 @@ import {message, Button} from "antd";
 
 
 class ClubPage extends React.Component{
-	state = {
-		officiateRequestSent: false,
-		current: 'mail',
-        	signedIn: true,
-        	userType: this.props.userType,
-	};
+	constructor(props) {
+		super(props) 
+		
+		this.state = {
+			officiateRequestSent: false,
+			current: 'mail',
+			signedIn: true,
+			userType: props.userType,
+			founder: null,
+		};
+
+		const url = `/data/user/users/${props.club.founder}`;
+
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					alert("Could not get students");
+				}
+			}).then(user => {
+				this.setState({founder: user.name})
+			})
+	}
+	
 
 	success = () => {
 		message.success('Officiate Request Has Been Sent');
@@ -108,13 +127,13 @@ class ClubPage extends React.Component{
 		return(<div id="club_bg">
 			<div>
 				<NavBar userType={userType=="user"? "user": "admin"}/>
-				<img class="club_banner" src={club.banner}/>
+				<img class="club_banner" src={club.banner == null ? "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg" : club.banner}/>
 		 		<div id="club_name_header">
-		 			<span id="club_name_text">{club.groupName}</span>
+		 			<span id="club_name_text">{club.name}</span>
 					{officiateButton()}
 		 			<div id="club_name_right">
-		 				<p><span id="club_name_metadata_text">Founded by: </span>{club.founder}</p>
-		 				<p><span id="club_name_metadata_text">Started: </span>{club.started}</p>
+		 				<p><span id="club_name_metadata_text">Founded by: </span>{this.state.founder}</p>
+		 				<p><span id="club_name_metadata_text">Started: </span>{club.created_on}</p>
 		 			</div>
 		 		</div>
 

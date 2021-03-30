@@ -6,6 +6,13 @@ const bcrypt = require('bcryptjs')
 
 // Making a Mongoose model a little differently: a Mongoose Schema
 // Allows us to add additional functionality.
+
+
+const LinksSchema = new mongoose.Schema({
+    name: String,
+    url: String
+})
+
 const GroupSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -16,13 +23,16 @@ const GroupSchema = new mongoose.Schema({
         type: String,
     },
     links: {
-        type: [String]
+        type: [LinksSchema]
     },
     description: {
         type: String
     },
     founder: {
         type: mongoose.Types.ObjectId
+    },
+    created_on: {
+        type: String
     },
     aboutUs: {
         type: String,
@@ -57,5 +67,6 @@ const findGroup = (id) => {
 GroupSchema.statics.findByID = findGroup
 
 const Group = mongoose.model('Group', GroupSchema)
-module.exports = { Group }
+const Link = mongoose.model('Link', LinksSchema)
+module.exports = { Group, Link }
 

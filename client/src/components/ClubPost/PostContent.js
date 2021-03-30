@@ -17,7 +17,7 @@ class PostContent extends React.Component{
        	this.forceUpdate()
    	};
 	commentsClick = e => {		
-		this.props.changeFocus(this.props.post.id)
+		this.props.changeFocus(this.props.post._id)
    	};
 
 	render() {
@@ -45,7 +45,7 @@ class PostContent extends React.Component{
 		}
 		
 		const get_image = () => {
-			if (post.image == "") return ("")
+			if (post.image == null) return ("")
 		
 			return (
 				<img src={post.image} id="post_image"/>
@@ -78,7 +78,7 @@ class PostContent extends React.Component{
 			    		<p>{post.date}</p>
 			    	</div>
 			    	<h1 className="post_title">{post.title}</h1>
-			    	<p className="post_text">{post.text}</p>
+			    	<p className="post_text">{post.content}</p>
 			       {get_image()}
 			    	{expand_comments(expand)}
 		    	</div>
