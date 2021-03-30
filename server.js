@@ -404,10 +404,7 @@ app.post('/data/groups/', (req, res) => {
         founder: req.body.founder,
         aboutUs: req.body.about,
         officiated: false,
-        password: req.body.password,
-        userType: req.body.userType,
         admin: req.body.admin,
-        userGroups: [],
         links: [],
         members: [],
         reqMembers: [],
@@ -450,10 +447,7 @@ app.put('/data/groups/:id', (req, res) => {
             if (req.body.founder != null) group.founder = req.body.founder
             if (req.body.about != null) group.aboutUs = req.body.about
             if (req.body.officiated != null) group.officiated = req.body.officiated
-            if (req.body.password != null) group.password = req.body.password
-            if (req.body.userType != null) group.userType = req.body.userType
             if (req.body.admin != null) group.admin = req.body.admin
-            if (req.body.userGroups != null) group.userGroups = req.body.userGroups
             if (req.body.links != null) group.links = req.body.links
             if (req.body.members != null) group.members = req.body.members
             if (req.body.reqMembers != null) group.reqMembers = req.body.reqMembers

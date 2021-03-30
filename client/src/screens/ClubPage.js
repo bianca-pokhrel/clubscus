@@ -45,7 +45,7 @@ class ClubPage extends React.Component{
         		
         		return (
 		            <div class="club_container">
-		            	<About about={club.description} member={member}/>
+		            	<About about={club.aboutUs} member={member}/>
 		            </div>
 		        ) 
         	}

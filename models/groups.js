@@ -14,7 +14,6 @@ const GroupSchema = new mongoose.Schema({
 	},
     banner: {
         type: String,
-        required: true,
     },
     links: {
         type: [String]
