@@ -20,9 +20,11 @@ class MainFeed extends React.Component{
 
 	render() {
 
+        console.log(this.props.app)
+
         return(
             <div id="pageBG">
-                <NavBar userType="user"/>
+                <NavBar app={this.props.app} userType="user"/>
                 <div id="feedBody">
                     <div id="postSide">
                         <Feed posts={user_posts} main_feed={1} focus={-1}/>

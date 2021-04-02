@@ -80,10 +80,14 @@ class App extends React.Component {
 
 						{/* User Views */}
 						<Route exact path="/user">
-							<GroupSearch signedIn={true} clubs={clubsData}/>
+							<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
 						</Route>
-						<Route exact path="/user/profile" component={ProfilePage}/>
-						<Route exact path="/user/feed" component={MainFeed}/>
+						<Route exact path="/user/profile">
+							<ProfilePage app={this}/>
+						</Route>
+						<Route exact path="/user/feed">
+							<MainFeed app={this}/>
+						</Route>
 
 						{/* Admin Views */}
 						<Route exact path="/superadmin" component={SuperAdminScreen}>
