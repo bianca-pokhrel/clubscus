@@ -14,12 +14,31 @@ let requested_members = [
 
 class AdminMemberList extends React.Component {
 
-    state = {
-		modalVis: false,
-		modalName: "",
-		modalInsta: "",
-		modalFacebook: "",
-		modalProfilePic: "",
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			modalVis: false,
+			modalName: "",
+			modalInsta: "",
+			modalFacebook: "",
+			modalProfilePic: "",
+			members: []
+		}
+
+		props.members.map((member) => {
+			const url = `/data/user/users/${member}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get students");
+					}
+				}).then(m => {
+				this.setState({members: this.state.members.concat(m)})
+			})
+		})
 	}
 
     acceptMember = (member) => {
@@ -29,7 +48,7 @@ class AdminMemberList extends React.Component {
         this.forceUpdate()
     }
     render() {
-        const members = this.props.members
+		const members = this.state.members
 
         const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
         let modalView;
