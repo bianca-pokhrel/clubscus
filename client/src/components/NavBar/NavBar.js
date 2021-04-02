@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import { logout } from '../../actions/user'
 
 const { SubMenu } = Menu;
 
@@ -76,12 +77,18 @@ class NavBar extends React.Component{
         this.setState({ current: e.key });
     };
 
+    handleLogOut = () => {
+        console.log(this.props.app)
+        logout(this.props.app)
+        console.log(this.props.app)
+    }
+
     render (){
         const { current, userType } = this.state;
 
         const signOutButton = () => {
             return (
-                <Menu.Item key="signOut" id="signOutColor"><Link to="/"/>Sign Out</Menu.Item>
+                <Menu.Item key="signOut" id="signOutColor" onClick={this.handleLogOut}><Link to="/"/>Sign Out</Menu.Item>
             )
         }
 

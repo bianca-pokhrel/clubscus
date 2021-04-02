@@ -96,13 +96,12 @@ export const register = (username, password, app) => {
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
-    const url = `${API_HOST}/users/logout`;
+    const url = `${API_HOST}/data/user/logout`;
 
     fetch(url)
         .then(res => {
             app.setState({
                 currentUser: null,
-                message: { type: "", body: "" }
             });
         })
         .catch(error => {

@@ -31,7 +31,7 @@ class GroupSearch extends React.Component{
 
         return(
             <div id="pageBG">
-                {this.state.signedIn? <NavBar userType="user"/>: <SiteBanner/>}
+                {this.state.signedIn? <NavBar app={this.props.app} userType="user"/>: <SiteBanner/>}
                 <div id="searchBody">
                     {/* <SearchBar/> */}
                     <div className="category">

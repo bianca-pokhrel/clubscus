@@ -19,7 +19,13 @@ class SignIn extends React.Component{
         this.setState({ username: values.username})
         this.setState({ password: values.password})
         login(this.state.username, this.state.password, this.props.app)
-        this.checkUserType(this.props.app.state.currentUser.currentUser.userType)
+        if(this.props.app.state.currentUser) {
+            this.checkUserType(this.props.app.state.currentUser.currentUser.userType)
+        } else {
+            console.log('Non-valid user')
+            this.setState({signedIn:false})
+            message.error("User Does Not Exist")
+        }
     };
     
     onFinishFailed = (errorInfo) => {
@@ -27,25 +33,19 @@ class SignIn extends React.Component{
     };
 
     checkUserType = (userType) => {
-        if (userType){
-            this.setState({signedIn:true})
-            if (userType == "superadmin") {
-                console.log('superadmin signed in')
-                this.setState({userType:"superAdmin"})
-                message.success("Super Admin Logged In")
-            } else if (userType == "admin") {
-                console.log('admin signed in')
-                this.setState({userType:"admin"})
-                message.success("Group Admin Logged In")
-            } else if (userType == "user") {
-                console.log('user signed in')
-                this.setState({userType:"user"})
-                message.success("Logged In!")
-            }
-        } else {
-            console.log('non-valid user')
-            this.setState({signedIn:false})
-            message.error("No User Exists")
+        this.setState({signedIn:true})
+        if (userType == "superadmin") {
+            console.log('superadmin signed in')
+            this.setState({userType:"superAdmin"})
+            message.success("Super Admin Logged In")
+        } else if (userType == "admin") {
+            console.log('admin signed in')
+            this.setState({userType:"admin"})
+            message.success("Group Admin Logged In")
+        } else if (userType == "user") {
+            console.log('user signed in')
+            this.setState({userType:"user"})
+            message.success("Logged In!")
         }
     }
 
