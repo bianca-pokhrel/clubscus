@@ -3,41 +3,49 @@ import { Form, Input, Button, message } from 'antd';
 import './SignIn.css';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { login } from "../../actions/user"
 
 class SignIn extends React.Component{
 
     state = {
         signedIn: false,
-        userType: ""
+        userType: "",
+        username: null,
+        password: null,
     }
 
     onFinish = (values) => {
-        console.log('Success:', values);
-        this.checkInfo(values)
+        console.log('Fields Filled');
+        this.setState({ username: values.username})
+        this.setState({ password: values.password})
+        login(this.state.username, this.state.password, this.props.app)
+        this.checkUserType(this.props.app.state.currentUser.currentUser.userType)
     };
     
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    checkInfo = (values) => {
-        this.setState({signedIn:true})
-        if (values.username == "superadmin" && values.password == "superadmin") {
-            console.log('superadmin signed in')
-            this.setState({userType:"superAdmin"})
-            message.success("Super Admin Logged In")
-        } else if (values.username == "admin" && values.password == "admin") {
-            console.log('admin signed in')
-            this.setState({userType:"admin"})
-            message.success("Group Admin Logged In")
-        } else if (values.username == "user" && values.password == "user") {
-            console.log('user signed in')
-            this.setState({userType:"user"})
-            message.success("Logged In!")
+    checkUserType = (userType) => {
+        if (userType){
+            this.setState({signedIn:true})
+            if (userType == "superadmin") {
+                console.log('superadmin signed in')
+                this.setState({userType:"superAdmin"})
+                message.success("Super Admin Logged In")
+            } else if (userType == "admin") {
+                console.log('admin signed in')
+                this.setState({userType:"admin"})
+                message.success("Group Admin Logged In")
+            } else if (userType == "user") {
+                console.log('user signed in')
+                this.setState({userType:"user"})
+                message.success("Logged In!")
+            }
         } else {
             console.log('non-valid user')
             this.setState({signedIn:false})
-            message.error("Non Valid Information")
+            message.error("No User Exists")
         }
     }
 

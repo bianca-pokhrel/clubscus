@@ -10,16 +10,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RegisterPage from './screens/RegisterPage';
 import AdminFeed from "./components/AdminPage/AdminFeed";
 import { json } from 'body-parser';
+import { checkSession } from "./actions/user";
 
 
 //Club Data
 const clubsData = require('./clubsData.js');
 
 class App extends React.Component {
+
 	constructor() {
 		super()
 
 		this.state = {
+			currentUser: null,
+			signedIn: false,
+			userType: null,
 			group_urls: []
 		}
 	
@@ -52,7 +57,14 @@ class App extends React.Component {
 			})
 	}
 
+	componentDidMount() {
+        checkSession(this); // sees if a user is logged in
+    }
+
 	render() {
+
+		const { currentUser } = this.state;
+
 		return (
 			<div>
 				<Router>
@@ -61,7 +73,9 @@ class App extends React.Component {
 							<GroupSearch signedIn={false} clubs={clubsData}/>
 						</Route>
 						{/* Log In/Register */}
-						<Route exact path="/signin" component={SignInPage}/>
+						<Route exact path="/signin">
+							<SignInPage app={this} />
+						</Route>
 						<Route exact path="/register" component={RegisterPage}/>
 
 						{/* User Views */}

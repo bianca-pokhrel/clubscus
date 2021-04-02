@@ -80,6 +80,16 @@ const authenticate = (req, res, next) => {
     }
 }
 
+// Our own express middleware to check for 
+// an active user on the session cookie (indicating a logged in user.)
+const sessionChecker = (req, res, next) => {		
+	if (req.session.user) {
+		res.redirect('/user/feed'); // redirect to dashboard if logged in.
+	} else {
+		next(); // next() moves on to the route.
+	}    
+}
+
 
 /*** Session handling **************************************/
 // Create a session and session cookie
@@ -106,16 +116,15 @@ app.post("/data/user/login", (req, res) => {
 
     // log(email, password);
     // Use the static method on the User model to find a user
-    // by their email and password
-    User.findUser(id, password)
+    User.findUserByUsernamePassword(id, password)
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
-            res.send({ currentUser: user.username });
+            res.send({ currentUser: user });
         })
         .catch(error => {
-            res.status(400).send()
+            res.status(400).send("User does not exist")
         });
 });
 
