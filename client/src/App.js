@@ -76,7 +76,9 @@ class App extends React.Component {
 						<Route exact path="/signin">
 							<SignInPage app={this} />
 						</Route>
-						<Route exact path="/register" component={RegisterPage}/>
+						<Route exact path="/register">
+							<RegisterPage app={this} />
+						</Route>
 
 						{/* User Views */}
 						<Route exact path="/user">

@@ -63,14 +63,16 @@ export const login = (username, password, app) => {
 };
 
 // A function to send a POST request with the user to be registered
-export const register = (username, password, app) => {
+export const register = (username, password, userType, name, app) => {
     // Create our request constructor with all the parameters we need
-    const request = new Request(`${API_HOST}/data/user/login`, {
+    const request = new Request(`${API_HOST}/data/user/users/`, {
         method: "post",
-        body: {
-            "id": username,
-            "password": password,
-        },
+        body: JSON.stringify({
+            username: username,
+            name: name,
+            password: password,
+            userType: userType
+        }),
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
@@ -86,7 +88,7 @@ export const register = (username, password, app) => {
         })
         .then(json => {
             if (json.currentUser !== undefined) {
-                app.setState({ currentUser: json.currentUser });
+                app.setState({ currentUser: json });
             }
         })
         .catch(error => {
