@@ -5,27 +5,67 @@ import { Button } from 'antd'
 import CommentSection from './CommentSection'
 
 class PostContent extends React.Component{
-	likesClick = e => {
-		if (this.props.post.likes.includes("user")) {
-			this.props.post.likes = this.props.post.likes.filter(function(item) {
-    				return item !== "user"
-			})
-		}else{
-			this.props.post.likes.push("user")
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			post: props.post,
+			expand: props.expand,
+			changeFocus: props.changeFocus,
+			main_feed: props.main_feed,
+			user: props.user
 		}
-       	
-       	this.forceUpdate()
-   	};
+	}
+
+	update_likes = (new_likes) => {
+		const url = `/data/posts/${this.state.post._id}`;
+
+		const request = new Request(url, {
+			method: "put",
+			body: JSON.stringify({"likes" : new_likes}),
+			headers: {
+				Accept: "application/json, text/plain, */*",
+				"Content-Type": "application/json"
+			}
+		});
+
+		fetch(request)
+			.then(function (res) {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					alert("Could not like post");
+				}
+			}).then(post => {
+				this.setState({post: post})
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+
+	likesClick = e => {
+		let user = this.state.user
+
+		const index = this.state.post.likes.indexOf(user._id);
+		if (index > -1) {
+			this.state.post.likes.splice(index, 1)
+		}else{
+			this.state.post.likes.push(user._id)
+		}
+	
+		this.update_likes(this.state.post.likes)
+	};
 	commentsClick = e => {		
-		this.props.changeFocus(this.props.post._id)
+		this.state.changeFocus(this.state.post._id)
    	};
 
 	render() {
-		const post = this.props.post
-		const expand = this.props.expand
+		const post = this.state.post
+		const expand = this.state.expand
 		
 		const expand_comments = (expand) => {
-			if (expand) return (<CommentSection post = {this.props.post}/>)
+			if (expand) return (<CommentSection post = {post} user={this.state.user}/>)
 			else return (<div>
 		    			&nbsp;
 			    		<Button className="post_button" onClick={this.commentsClick}>
@@ -37,7 +77,8 @@ class PostContent extends React.Component{
 		}
 		
 		const get_liked = () => {
-			if (this.props.post.likes.includes("user")) {
+			let user = this.state.user
+			if (post.likes.includes(user._id)) {
 				return ("/heart_filled.png")
 			}else{
 				return ("/heart.png")
@@ -53,7 +94,7 @@ class PostContent extends React.Component{
 		}
 		
 		const get_club_name = () => {
-			if (this.props.main_feed == 0) return ("")
+			if (this.state.main_feed == 0) return ("")
 			
 			return (<div id="post_top">
 					<img id="post_banner" src={post.clubBanner}/>

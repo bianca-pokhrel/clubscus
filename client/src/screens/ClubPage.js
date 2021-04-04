@@ -18,20 +18,31 @@ class ClubPage extends React.Component{
 		
 		this.state = {
 			officiateRequestSent: false,
-			current: 'mail',
-			signedIn: true,
-			userType: props.userType,
+			user: null,
+			temp: "6068a4c4515ada276c294005",
 			founder: null,
 		};
 
-		const url = `/data/user/users/${props.club.founder}`;
+		let url = `/data/user/users/${this.state.temp}`;
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					alert("Could not get user");
+				}
+			}).then(user => {
+				this.setState({user: user})
+			})
+		
+		url = `/data/user/users/${props.club.founder}`;
 
 		fetch(url)
 			.then(res => {
 				if (res.status === 200) {
 					return res.json()
 				} else {
-					alert("Could not get students");
+					alert("Could not get founder");
 				}
 			}).then(user => {
 				this.setState({founder: user.name})
@@ -51,42 +62,38 @@ class ClubPage extends React.Component{
     
 	render() {
 		const club = this.props.club
-		const { current, signedIn, userType } = this.state;
-        
-        	const about_us = () => {
-        		let member = false
-        		
-        		if (signedIn) {
-				for (let i = 0; i < club.members.length; i++) {
-					if (club.members[i].id == 1) member = true
-				}
-        		}
-        		
-        		return (
-		            <div class="club_container">
-		            	<About about={club.aboutUs} member={member}/>
-		            </div>
-		        ) 
-        	}
+		const { user } = this.state;
+		const signedIn = user != null
         
 		const clubPageView = () => {
-		    if (this.props.about == true || !signedIn) {
-		        return about_us();
-		    } else if (userType == "user") {
+			let member = false
+			if (signedIn) {
+				for (let i = 0; i < club.members.length; i++) {
+					if (club.members[i] == user._id) member = true
+				}
+			}
+
+		    if (this.props.about == true || !member) {
+		        return (
+					<div class="club_container">
+						<About about={club.aboutUs} member={member}/>
+					</div>
+				) 
+		    } else if (user.userType == "user") {
 		        return(
 				<div>
 					<div class="side_bars">
 						<Links links={club.links}/>
 					</div>
 					<div id="club_feed">
-						<Feed posts={club.posts} main_feed={0} focus={-1}/>
+						<Feed posts={club.posts} main_feed={0} focus={-1} user={user}/>
 					</div>
 					<div class="side_bars">
 						<MemberList members={club.members}/>
 		        		</div>
 		        	</div>
 		        );
-		    } else if (userType == "admin") {
+		    } else if (user.userType == "admin") {
 				return(
 					<div>
 						<div class="side_bars">
@@ -100,7 +107,7 @@ class ClubPage extends React.Component{
 						</div>
 					</div>
 				);
-			} else if (userType == "superadmin") {
+			} else if (user.userType == "superadmin") {
 		    	return (
 		    		<div>
 					</div>
@@ -109,6 +116,7 @@ class ClubPage extends React.Component{
 		}
 
 		const officiateButton = () => {
+			let userType = user.userType
 			if (userType=="admin" && !(this.state.officiateRequestSent)){
 				return(
 					<div id="officiateButton">
@@ -126,11 +134,10 @@ class ClubPage extends React.Component{
 		
 		return(<div id="club_bg">
 			<div>
-				<NavBar userType={userType=="user"? "user": "admin"}/>
+				<NavBar userType={!signedIn ? "none" : user.userType}/>
 				<img class="club_banner" src={club.banner == null ? "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg" : club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.name}</span>
-					{officiateButton()}
 		 			<div id="club_name_right">
 		 				<p><span id="club_name_metadata_text">Founded by: </span>{this.state.founder}</p>
 		 				<p><span id="club_name_metadata_text">Started: </span>{club.created_on}</p>
