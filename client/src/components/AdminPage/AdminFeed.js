@@ -26,7 +26,8 @@ class AdminFeed extends React.Component{
             ascending: -1,
             focus: -1,
             main_feed: 0,
-            posts: []
+            posts: [],
+            club: this.props.club
         }
 
         props.posts.map((post) => {
@@ -66,10 +67,33 @@ class AdminFeed extends React.Component{
 
     addPost = (values) => {
         let time = new Date()
-        this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
-        console.log(this.props.posts)
-        message.success('New Post Has Been Made');
-        this.forceUpdate()
+        //this.props.posts.push({id: this.props.posts.length, title: values.user.title, text: values.user.post, likes: [], date: time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2), comments: [], image: ""})
+        //this.forceUpdate()
+        const url = `/data/posts/`;
+        const request = new Request(url, {
+            method: "post",
+            body: JSON.stringify({"title" : values.user.title,
+                "content": values.user.post,
+                "date": time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2),
+            }),
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            }
+        });
+
+        fetch(request)
+            .then(function (res) {
+                if (res.status === 200) {
+                    message.success('New Post Has Been Made');
+                    return res.json()
+                } else {
+                    alert("Could not accept requested members");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
 
 

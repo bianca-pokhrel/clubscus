@@ -9,13 +9,43 @@ const layout = {
 };
 
 class EditLinks extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            club: this.props.club
+        }
+    }
+
+
     editLinks = () => {
         this.props.changeStatusToFalse()
     }
+
     addLink = (values) => {
-        this.props.links.push({name: values.name, url: values.url})
-        this.props.changeStatusToFalse()
-        message.success('New Link Added');
+        //this.props.links.push({name: values.name, url: values.url})
+        const url = `/data/groups/${this.state.club._id}`;
+        const request = new Request(url, {
+            method: "put",
+            body: JSON.stringify({"links" : {"name": values.name, "url": values.url}}),
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            }
+        });
+
+        fetch(request)
+            .then(function (res) {
+                if (res.status === 200) {
+                    this.props.changeStatusToFalse()
+                    message.success('New Link Added');
+                    return res.json()
+                } else {
+                    alert("Could not accept requested members");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
     render() {
         return(

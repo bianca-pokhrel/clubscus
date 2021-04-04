@@ -6,11 +6,6 @@ import {message, Button} from "antd";
 import MemberModal from '../ClubPageComponents/MemberModal.js';
 import { Modal } from "antd";
 
-let requested_members = [
-    {id: 3 , name: "Harry Musk", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"},
-    {id: 4, name: "Alex Ramirez", profilePicture: "https://i.insider.com/5c5dd439dde867479d106cc2?width=1100&format=jpeg&auto=webp"}
-]
-
 
 class AdminMemberList extends React.Component {
 
@@ -23,7 +18,9 @@ class AdminMemberList extends React.Component {
 			modalInsta: "",
 			modalFacebook: "",
 			modalProfilePic: "",
-			members: []
+			members: this.props.club.members,
+			requested_members: this.props.club.reqMembers,
+			club: this.props.club,
 		}
 
 		props.members.map((member) => {
@@ -39,14 +36,38 @@ class AdminMemberList extends React.Component {
 				this.setState({members: this.state.members.concat(m)})
 			})
 		})
+
 	}
 
     acceptMember = (member) => {
-        this.props.members.push({id: member.id, name: member.name, profilePicture: member.profilePicture})
-        requested_members = requested_members.filter(item => item !== member)
-        message.success('New Member Accepted');
-        this.forceUpdate()
+		const url = `/data/groups/${this.state.club._id}`;
+		this.setState({requested_members: this.state.requested_members.filter(item => item !== member)})
+		this.setState({members: this.state.member.concat([{id: member.id, name: member.name, profilePicture: member.profilePicture}])})
+		const request = new Request(url, {
+			method: "put",
+			body: JSON.stringify({"members" : this.state.members,
+				"reqMembers": this.state.requested_members}),
+			headers: {
+				Accept: "application/json, text/plain, */*",
+				"Content-Type": "application/json"
+			}
+		});
+
+		fetch(request)
+			.then(function (res) {
+				if (res.status === 200) {
+					message.success('New Member Accepted');
+					return res.json()
+				} else {
+					alert("Could not accept requested members");
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+        //this.forceUpdate()
     }
+
     render() {
 		const members = this.state.members
 

@@ -21,7 +21,7 @@ class ClubPage extends React.Component{
 			current: 'mail',
 			signedIn: true,
 			userType: props.userType,
-			founder: null,
+			founder: null
 		};
 
 		const url = `/data/user/users/${props.club.founder}`;
@@ -90,13 +90,13 @@ class ClubPage extends React.Component{
 				return(
 					<div>
 						<div class="side_bars">
-							<AdminLinks links={club.links}/>
+							<AdminLinks links={club.links} club={club}/>
 						</div>
 						<div id="club_feed">
-							<AdminFeed posts={club.posts} main_feed={0} focus={-1}/>
+							<AdminFeed posts={club.posts} main_feed={0} focus={-1} club={club}/>
 						</div>
 						<div class="member_bars">
-							<AdminMemberList members={club.members}/>
+							<AdminMemberList members={club.members} club={club}/>
 						</div>
 					</div>
 				);
