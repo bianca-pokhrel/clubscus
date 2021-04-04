@@ -45,7 +45,7 @@ const GroupSchema = new mongoose.Schema({
 })
 
 
-const findGroupByID = (id) => {
+const findGroup = (id) => {
     const Group = this // binds this to the User model
 
     // First find the user by their email
@@ -58,7 +58,7 @@ const findGroupByID = (id) => {
     })
 }
 
-GroupSchema.statics.findByID = findGroupByID
+GroupSchema.statics.findByID = findGroup
 
 const Group = mongoose.model('Group', GroupSchema)
 //const Link = mongoose.model('Link', LinksSchema)

@@ -449,7 +449,7 @@ app.put('/data/groups/:id', (req, res) => {
 		return;
 	}
 
-	Group.findByName(id).then((group) => {
+	Group.findByID(id).then((group) => {
 		if (!group) {
 			res.status(404).send('Resource not found') 
 		} else {
