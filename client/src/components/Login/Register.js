@@ -3,6 +3,7 @@ import { Form, Input, Button, Select, message } from 'antd';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { register } from "../../actions/user";
 
 const { Option } = Select;
 
@@ -11,13 +12,18 @@ class Register extends React.Component{
     state = {
         isAdmin: false,
         passwordMatch: false,
-        redirectFor: ""
+        redirectFor: "",
+        username: "",
+        password: "",
+        name: "",
     }
 
     onFinish = (values) => {
-        console.log('Success:', values);
+        console.log('Fields Filled');
         this.checkPasswordMatch(values)
         if (this.state.passwordMatch){
+            register(this.state.username, this.state.password, this.state.isAdmin? "admin":"user", this.state.name, this.props.app)
+            console.log(this.props.app)
             if(this.state.isAdmin){
                 //GO TO ADMIN PAGE
                 message.success("New Group Created!");
@@ -27,8 +33,6 @@ class Register extends React.Component{
                 message.success("Account Created!");
                 this.setState({redirectFor:"User"});
             }
-        } else {
-            message.error('Your Passwords Do Not Match');
         }
     };
     
@@ -48,9 +52,18 @@ class Register extends React.Component{
     checkPasswordMatch = (values) => {
         if (values.password1 == values.password2) {
             console.log('Passwords match')
-            this.setState({passwordMatch:true})
+            if (values.password1.length < 7){
+                console.log('Password too short')
+                message.error('Passwords Should Be At Least 6 Characters');
+            } else {
+                this.setState({passwordMatch:true})
+                this.setState({username: values.username})
+                this.setState({name: values.name})
+                this.setState({password: values.password1})
+            }
         } else {
             console.log('Passwords do not match')
+            message.error('Your Passwords Do Not Match');
             this.setState({passwordMatch:false})
         }
     }
@@ -105,7 +118,13 @@ class Register extends React.Component{
                             name="username"
                             rules={[{ required: true, message: 'Please input your username!' }]}
                         >
-                            <Input placeholder="Username"/>
+                            <Input placeholder="Username (What You Use to Sign In)"/>
+                        </Form.Item>
+                        <Form.Item
+                            name="name"
+                            rules={[{ required: true, message: 'Please input your display name!' }]}
+                        >
+                            <Input placeholder="Display Name (What Other See)"/>
                         </Form.Item>
                         <Form.Item
                             name="password1"

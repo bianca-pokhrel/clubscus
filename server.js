@@ -378,6 +378,7 @@ app.get('/data/groups/', (req, res) => {
 
 })
 
+
 app.get('/data/groups/:id', (req, res) => {
 	const id = req.params.id
 
@@ -448,7 +449,7 @@ app.put('/data/groups/:id', (req, res) => {
 		return;
 	}
 
-	Group.findById(id).then((group) => {
+	Group.findByName(id).then((group) => {
 		if (!group) {
 			res.status(404).send('Resource not found') 
 		} else {

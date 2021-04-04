@@ -7,6 +7,21 @@ const { ObjectID } = require('bson');
 
 // Making a Mongoose model a little differently: a Mongoose Schema
 // Allows us to add additional functionality.
+
+const CommentSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Types.ObjectId
+    },
+    content:{
+        type: String,
+        required: true,
+        minlength: 1
+    },
+    date:{
+        type: String
+    }
+})
+
 const PostSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -26,21 +41,7 @@ const PostSchema = new mongoose.Schema({
     likes: {
         type: [mongoose.Types.ObjectId]
     },
-    comments: [mongoose.Types.ObjectId], 
-})
-
-const CommentSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Types.ObjectId
-    },
-    content:{
-        type: String,
-        required: true,
-        minlength: 1
-    },
-    date:{
-        type: String
-    }
+    comments: [CommentSchema], 
 })
 
 const findPost = (id) => {

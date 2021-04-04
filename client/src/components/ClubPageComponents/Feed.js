@@ -4,7 +4,10 @@ import 'antd/dist/antd.css';
 import PostContent from '../ClubPost/PostContent'
 import { Button, Menu, Dropdown } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
+import { sort } from "../../clubsData";
+import { parseDate } from "../../actions/DateParser";
 
+var key = 0
 class Feed extends React.Component{
 	constructor(props) {
 		super(props)
@@ -29,13 +32,6 @@ class Feed extends React.Component{
 					this.setState({posts: this.state.posts.concat(p)})
 				})
 		})
-	}
-	
-
-	parseDate = date => {
-		let t = date
-		date = date.replace(" ", "T") + ":00"
-		return Date.parse(date)
 	}
 
 	handleClick = e => {
@@ -67,16 +63,14 @@ class Feed extends React.Component{
 		}
 		
 		const gen = (post) => {
-			return <PostContent post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
+			return <PostContent post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus} user={this.props.user}/>
 		}
 				
 		const gen_all = () => {
-			this.state.posts.sort((a,b) => (this.parseDate(a.date) < this.parseDate(b.date) ? -this.state.ascending : (this.parseDate(a.date) > this.parseDate(b.date) ? this.state.ascending : 0)))
+			let sorted = this.state.posts.sort((a,b) => (parseDate(a.date) < parseDate(b.date) ? -this.state.ascending : (parseDate(a.date) > parseDate(b.date) ? this.state.ascending : 0)))
 			
-			console.log("after sort", this.state.posts)
-
-			return this.state.posts.map(p => {
-				return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
+			return sorted.map(p => {
+				return <PostContent key = {key++} post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus} user={this.props.user}/>
 			})
 		}
 		const check_url = () => {
@@ -106,7 +100,7 @@ class Feed extends React.Component{
 					</div>
 					<div id="feed_container">
 						{gen_all()}
-				    	</div>
+				    </div>
 			    	</div>
 			)
 		}

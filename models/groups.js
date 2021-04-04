@@ -8,11 +8,6 @@ const bcrypt = require('bcryptjs')
 // Allows us to add additional functionality.
 
 
-const LinksSchema = new mongoose.Schema({
-    name: String,
-    url: String
-})
-
 const GroupSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -22,9 +17,7 @@ const GroupSchema = new mongoose.Schema({
     banner: {
         type: String,
     },
-    links: {
-        type: [LinksSchema]
-    },
+    links: [mongoose.Types.ObjectId],
     description: {
         type: String
     },
@@ -51,22 +44,23 @@ const GroupSchema = new mongoose.Schema({
 	},
 })
 
-const findGroup = (id) => {
-	const Group = this // binds this to the User model
 
-	// First find the user by their email
-	return Group.findOne({ _id: id }).then((group) => {
-		if (!group) {
-			return Promise.reject()  // a rejected promise
-		}
-		// if the user exists, make sure their password is correct
-		return group;
-	})
+const findGroupByID = (id) => {
+    const Group = this // binds this to the User model
+
+    // First find the user by their email
+    return Group.findOne({ _id: id }).then((group) => {
+        if (!group) {
+            return Promise.reject()  // a rejected promise
+        }
+        // if the user exists, make sure their password is correct
+        return group;
+    })
 }
 
-GroupSchema.statics.findByID = findGroup
+GroupSchema.statics.findByID = findGroupByID
 
 const Group = mongoose.model('Group', GroupSchema)
-const Link = mongoose.model('Link', LinksSchema)
-module.exports = { Group, Link }
+//const Link = mongoose.model('Link', LinksSchema)
+module.exports = { Group }
 

@@ -77,9 +77,28 @@ const filterGroups = (groups, query) => {
 
 class SuperAdminScreen extends React.Component {
 
-    state = {
-		clubsData: this.props.clubsData
-	};
+    constructor(props) {
+		super(props) 
+		
+		this.state = {
+			clubsData: this.props.clubsData
+		};
+
+		const url = `/data/groups/`;
+
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					alert("Could not get groups");
+				}
+			}).then((groups) => {
+				this.setState({clubsData: groups})
+			})
+	}
+
+
     
     render() {
         //const resultQuery = this.props.location.state.query;
@@ -118,7 +137,6 @@ class SuperAdminScreen extends React.Component {
                             </Col>
                         </Row>
                     </Layout>
-
                     )}
                     
                 </Layout>

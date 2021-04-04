@@ -37,24 +37,28 @@ class App extends React.Component {
 					// return a promise that resolves with the JSON body
 					return res.json();
 				} else {
-					alert("Could not get students");
+					alert("Could not get groups");
 				}
 			}).then(json => {
 				let groups = json
-				let g = groups.map((group) => {
-					return (<Route exact path={`/clubs/${group._id}/about`}>
-						<ClubPage club={group} about={true} userType="user"/>
-						</Route>)
-				})
-
-				g = g.concat(groups.map((group) => {
-					return (<Route exact path={`/clubs/${group._id}`}>
-						<ClubPage club={group} userType="user"/>
-						</Route>)
-				}))
-
-				this.setState({group_urls: g})
+				this.setState({group_urls: groups})
 			})
+	}
+
+	assemble_routes = () => {
+		let g = this.state.group_urls.map((group) => {
+			return (<Route exact path={`/clubs/${group._id}/about`}>
+				<ClubPage club={group} about={true} user={this.state.currentUser}/>
+				</Route>)
+		})
+
+		g = g.concat(this.state.group_urls.map((group) => {
+			return (<Route exact path={`/clubs/${group._id}`}>
+				<ClubPage club={group} user={this.state.currentUser}/>
+				</Route>)
+		}))
+
+		return g
 	}
 
 	componentDidMount() {
@@ -76,7 +80,9 @@ class App extends React.Component {
 						<Route exact path="/signin">
 							<SignInPage app={this} />
 						</Route>
-						<Route exact path="/register" component={RegisterPage}/>
+						<Route exact path="/register">
+							<RegisterPage app={this} />
+						</Route>
 
 						{/* User Views */}
 						<Route exact path="/user">
@@ -98,7 +104,7 @@ class App extends React.Component {
 						</Route>
 						{/*<Route exact path="/admin" component={AdminFeed}>*/}
 						{/*}</Route>*/}
-						{this.state.group_urls}
+						{this.assemble_routes()}
 					</Switch>
 				</Router>
 			</div>
