@@ -3,6 +3,20 @@
     justify-content: center;
 }
 
+#pic {
+  opacity: 1;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 5px;
+}
+#pic:hover {
+  opacity: 0.3;
+  cursor: pointer;
+}
+
 .infoHeader {
     font-weight: bold; 
 }

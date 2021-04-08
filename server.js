@@ -34,8 +34,8 @@ const { ObjectID } = require("mongodb");
 
 // body-parser: middleware for parsing parts of the request into a usable object (onto req.body)
 const bodyParser = require('body-parser') 
-app.use(bodyParser.json()) // parsing JSON body
-app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form data (from form POST requests)
+app.use(bodyParser.json({ limit: '50mb' })) // parsing JSON body
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, })); // parsing URL-encoded form data (from form POST requests)
 
 
 // express-session for managing user sessions
