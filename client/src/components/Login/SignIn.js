@@ -19,13 +19,14 @@ class SignIn extends React.Component{
         this.setState({ username: values.username})
         this.setState({ password: values.password})
         login(this.state.username, this.state.password, this.props.app)
-        if(this.props.app.state.currentUser) {
-            this.checkUserType(this.props.app.state.currentUser.currentUser.userType)
-        } else {
-            console.log('Non-valid user')
-            this.setState({signedIn:false})
-            message.error("User Does Not Exist")
-        }
+        setTimeout(() => {
+            if(this.props.app.state.currentUser) {
+                this.checkUserType(this.props.app.state.currentUser.currentUser.userType)
+            } else {
+                console.log('Non-valid user')
+                this.setState({signedIn:false})
+                message.error("User Does Not Exist")
+            }}, 300)
     };
     
     onFinishFailed = (errorInfo) => {

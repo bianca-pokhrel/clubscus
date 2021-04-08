@@ -23,16 +23,17 @@ class Register extends React.Component{
         this.checkPasswordMatch(values)
         if (this.state.passwordMatch){
             register(this.state.username, this.state.password, this.state.isAdmin? "admin":"user", this.state.name, this.props.app)
-            console.log(this.props.app)
-            if(this.state.isAdmin){
-                //GO TO ADMIN PAGE
-                message.success("New Group Created!");
-                this.setState({redirectFor:"Admin"});
-            } else {
-                //Go TO USER MAIN PAGE
-                message.success("Account Created!");
-                this.setState({redirectFor:"User"});
-            }
+            setTimeout(()=>{
+                if(this.state.isAdmin){
+                    //GO TO ADMIN PAGE
+                    message.success("New Group Created!");
+                    this.setState({redirectFor:"Admin"});
+                } else {
+                    //Go TO USER MAIN PAGE
+                    message.success("Account Created!");
+                    this.setState({redirectFor:"User"});
+                }
+            }, 300)
         }
     };
     
