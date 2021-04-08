@@ -31,7 +31,7 @@ class MainFeed extends React.Component{
                     </div>
                     <Affix offsetTop={120}>
                         <div id="groupContainer">
-                            <CurGroups myGroups={true}/>
+                            <CurGroups app={this.props.app} myGroups={true}/>
                         </div>
                     </Affix>
                 </div>

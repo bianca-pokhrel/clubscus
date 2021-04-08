@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	pic: {
 		type: String,
+		default: "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"
 	},
 	userType: {
 		type: String,
@@ -32,6 +33,7 @@ const UserSchema = new mongoose.Schema({
 		minlength: 1,
 	},
 	userGroups: [mongoose.Types.ObjectId],
+	reqUserGroups: [mongoose.Types.ObjectId],
 	instagram: {
 		type: String,
 		required: false,

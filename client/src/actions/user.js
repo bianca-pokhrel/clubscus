@@ -36,7 +36,7 @@ export const login = (username, password, app) => {
     const request = new Request(`${API_HOST}/data/user/login`, {
         method: "post",
         body: JSON.stringify({
-            id: username,
+            username: username,
             password: password,
         }),
         headers: {

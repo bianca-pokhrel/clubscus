@@ -8,16 +8,6 @@ import { editUser, logout } from '../../actions/user'
 
 const { Paragraph } = Typography;
 
-// Temp User Info, Would be called from server
-let userData = {
-    username: "SirCartier",
-    name: "JJ Kanu",
-    instagram: "@jj_kanu",
-    facebook: "JJ Kanu",
-    profilePicture: "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"
-}
-
-
 class UserInfo extends React.Component{
 
     state = {
@@ -25,7 +15,7 @@ class UserInfo extends React.Component{
         instagram: this.props.app.state.currentUser.currentUser.instagram,
         facebook: this.props.app.state.currentUser.currentUser.facebook,
         linkedin: this.props.app.state.currentUser.currentUser.linkedin,
-        profilePicture: this.props.app.state.currentUser.currentUser.pic ? this.props.app.state.currentUser.currentUser.pic: "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"
+        profilePicture: this.props.app.state.currentUser.currentUser.pic
     };
 
     // From https://ant.design/components/upload/

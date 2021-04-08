@@ -85,7 +85,7 @@ class App extends React.Component {
 						</Route>
 
 						{/* User Views */}
-						<Route exact path="/user">
+						<Route exact path="/user/groupsearch">
 							<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
 						</Route>
 						<Route exact path="/user/profile">

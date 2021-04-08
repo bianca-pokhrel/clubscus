@@ -112,12 +112,12 @@ app.use(
 
 // A route to login and create a session
 app.post("/data/user/login", (req, res) => {
-    const id = req.body.id;
+    const username = req.body.username;
     const password = req.body.password;
 
     // log(email, password);
     // Use the static method on the User model to find a user
-    User.findUserByUsernamePassword(id, password)
+    User.findUserByUsernamePassword(username, password)
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
@@ -203,86 +203,9 @@ app.get('/data/user/users/:id', (req, res) => {
 
 })
 
-//Get one user's groups
-app.get('/data/user/users/:id/groups', (req, res) => {
-	const id = req.params.id
-
-	if (!ObjectID.isValid(id)) {
-		res.status(404).send()
-		return;
-	}
-
-	if (mongoose.connection.readyState != 1) {
-		log('Issue with mongoose connection')
-		res.status(500).send('Internal server error')
-		return;
-	}
-
-	User.findById(id).then((user) => {
-		if (!user) {
-			res.status(404).send('Resource not found') 
-		}
-		else {
-			// go through user groups
-			// const userGroupsInfo = user.userGroups.map(groupid => Group.findById(groupid).then(group => {return group}))
-			// res.send(userGroupsInfo)
-			// const userGroupsInfo = []
-			// for (let i = 0; i < user.userGroups.length; i++){
-			// 	Group.findById(user.userGroups[i]).then((group) => {
-			// 		userGroupsInfo.push(group)
-			// 	})
-			// }
-			// res.send(userGroupsInfo)
-			return user
-		}
-	}).then((user) => {
-		// Group.findById(user.userGroups).then((group) => {
-		// 	res.send(group)
-		// })
-
-		const getGroup = (id) =>{
-			Group.findById(id).then((group) => {
-				return group
-			})
-		}
-
-		const printAddress = async (id) => {
-			const a = await getGroup(id);
-			console.log(a);
-		}
-
-		let temp = printAddress(user.userGroups[0])
-		res.send(temp)
-		// let userGroupsInfo = []
-		// for (let i = 0; i < user.userGroups.length; i++){
-		// 	let oneGroup = getGroup(user.userGroups[i])
-		// 	let addGroup = async () => {
-		// 		const a = await oneGroup;
-		// 		userGroupsInfo[i] = a
-		// 	};
-		// 	addGroup();
-		// }
-		// res.send(userGroupsInfo)
-	}).catch((error) => {
-		log(error)
-		res.status(500).send('Internal Server Error')  
-	}) 
-
-	// for (let i = 0; i < tempUser.userGroups.length; i++){
-	// 	Group.findById(tempUser.userGroups[i]).then((group) => {
-	// 		userGroupsInfo.push(group)
-	// 	}).catch((error) => {
-	// 		log(error)
-	// 		res.status(500).send('Internal Server Error')  
-	// 	}) 
-	// }
-	// res.send(tempUser)
-
-})
-
 app.post('/data/user/users/', (req, res) => {
 
-    let user = new User({
+    let newUser = new User({
         username: req.body.username,
         name: req.body.name,
         password: req.body.password,
@@ -290,8 +213,13 @@ app.post('/data/user/users/', (req, res) => {
         userGroups: []
      })
     
-    user.save().then((result) => {
-		res.send(result)
+    newUser.save().then((user) => {
+		return user
+	}).then(user => {
+		// Add the user's id to the session.
+		// We can check later if this exists to ensure we are logged in.
+		req.session.user = user._id;
+		res.send({ currentUser: user });
 	}).catch((error) => {
 		log(error) 
 		if (isMongoError(error)) { 

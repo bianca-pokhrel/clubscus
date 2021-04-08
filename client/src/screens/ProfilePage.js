@@ -29,7 +29,7 @@ class ProfilePage extends React.Component{
                         }
                         key="1"
                     >
-                        <CurGroups myGroups={true}/>
+                        <CurGroups app={this.props.app} myGroups={true}/>
                     </TabPane>
                     <TabPane
                         tab={
@@ -40,7 +40,7 @@ class ProfilePage extends React.Component{
                         }
                         key="2"
                     >
-                        <CurGroups myGroups={false}/>
+                        <CurGroups app={this.props.app} myGroups={false}/>
                     </TabPane>
                 </Tabs>
             )
