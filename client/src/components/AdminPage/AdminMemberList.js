@@ -69,7 +69,7 @@ class AdminMemberList extends React.Component {
     }
 
     render() {
-		const members = this.state.members
+		const { members, requested_members } = this.state
 
         const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
         let modalView;

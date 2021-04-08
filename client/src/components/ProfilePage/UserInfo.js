@@ -2,6 +2,7 @@ import React from "react";
 import './UserInfo.css'
 import { Link } from 'react-router-dom';
 import { Typography, Divider, Button } from 'antd';
+import { editUser, logout } from '../../actions/user'
 
 const { Paragraph } = Typography;
 
@@ -18,48 +19,76 @@ let userData = {
 class UserInfo extends React.Component{
 
     state = {
-        username: userData.username,
-		name: userData.name,
-        instagram: userData.instagram,
-        facebook: userData.facebook,
+		name: this.props.app.state.currentUser.currentUser.name,
+        instagram: this.props.app.state.currentUser.currentUser.instagram,
+        facebook: this.props.app.state.currentUser.currentUser.facebook,
+        linkedin: this.props.app.state.currentUser.currentUser.linkedin,
         profilePicture: userData.profilePicture
     };
 
+    handlePictureChange = (changePic) => {
+        editUser({pic: changePic}, this.props.app)
+    }
     handleNameChange = (changeName) => {
-        this.setState({name:changeName})
+        this.setState({name: changeName})
+        editUser({name: changeName}, this.props.app)
+        console.log(this.props.app.state.currentUser.currentUser.name)
     }
     handleInstaChange = (changeInsta) => {
-        this.setState({instagram:changeInsta})
+        this.setState({instagram: changeInsta})
+        editUser({instagram: changeInsta}, this.props.app)
     }
     handleFaceBookChange = (changeFB) => {
-        this.setState({facebook:changeFB})
+        this.setState({facebook: changeFB})
+        editUser({facebook: changeFB}, this.props.app)
+    }
+    handleLinkedInChange = (changeLinked) => {
+        this.setState({linkedin: changeLinked})
+        editUser({linkedin: changeLinked}, this.props.app)
     }
 
     render (){
 
-        const { username, name, instagram, facebook, profilePicture } = this.state;
+        console.log(this.props.app)
+
+        const { name, instagram, facebook, linkedin, profilePicture } = this.state;
+        const { username } = this.props.app.state.currentUser.currentUser;
 
         return(
             <div id="profileInfoContainer">
                     <div id="imageContainer">
                         <input type="file" name="image" id="image" accept="image/*" />
-                        <img width="300px" height="300px" src={profilePicture} alt="Harold"/>
+                        <img width="300px" height="300px" src={this.state.profilePicture} alt="Harold"/>
                     </div>
                 <Divider />
                     <span className="infoHeader">Username:</span> <Paragraph className="infoLine">{username}</Paragraph>
                     <span className="infoHeader">Display Name:</span> <Paragraph className="infoLine" editable={{ onChange: this.handleNameChange }}>{name}</Paragraph>
                     <span className="infoHeader">Instagram:</span> 
+                    
                     <Paragraph className="infoLine" editable={{ onChange: this.handleInstaChange }}>
-                        <a href={`https://www.instagram.com/${instagram.substring(1)}`} target="_blank">{instagram}</a>
+                        {instagram ? 
+                            <a href={instagram.charAt(0) == "@"? `https://www.instagram.com/${instagram.substring(1)}`: `https://www.instagram.com/${instagram}`} target="_blank">{instagram}</a> 
+                            : <span>@</span> 
+                        }
                     </Paragraph>
                     <span className="infoHeader">FaceBook:</span> 
                     <Paragraph className="infoLine" editable={{ onChange: this.handleFaceBookChange }}>
-                        <a href={`https://www.facebook.com/${facebook.replace(/\s/g, '')}`} target="_blank">{facebook}</a>
+                        {facebook ? 
+                            <a href={`https://www.facebook.com/${facebook.replace(/\s/g, '')}`} target="_blank">{facebook}</a>
+                            : <span> </span> 
+                        }
+                    </Paragraph>
+                    <span className="infoHeader">LinkedIn:</span> 
+                    <Paragraph className="infoLine" editable={{ onChange: this.handleLinkedInChange }}>
+                        {linkedin ? 
+                            <a href={`https://www.linkedin.com/in/${linkedin.replace(/\s/g, '')}`} target="_blank">{linkedin}</a>
+                            : <span> </span> 
+                        }
                     </Paragraph>
                 <Divider />
                     <div id="logOutContainer">
                         <Link to="/">
-                            <Button id="LogOut">
+                            <Button id="LogOut" onClick={() => logout(this.props.app)}>
                                 Log Out
                             </Button>
                         </Link>

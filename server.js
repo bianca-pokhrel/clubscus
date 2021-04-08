@@ -40,7 +40,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form 
 
 // express-session for managing user sessions
 const session = require("express-session");
-const MongoStore = require('connect-mongo') // to store session information on the database in production
+const MongoStore = require('connect-mongo'); // to store session information on the database in production
+const { group } = require('console');
 
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -156,6 +157,7 @@ app.get("/data/user/check-session", (req, res) => {
 
 //--------------------------Users API Route------------------------------
 
+// Get all Users
 app.get('/data/user/users/', (req, res) => {
 	// check mongoose connection established.
 	if (mongoose.connection.readyState != 1) {
@@ -173,6 +175,7 @@ app.get('/data/user/users/', (req, res) => {
 
 })
 
+// Get one user
 app.get('/data/user/users/:id', (req, res) => {
 	const id = req.params.id
 
@@ -197,6 +200,83 @@ app.get('/data/user/users/:id', (req, res) => {
 		log(error)
 		res.status(500).send('Internal Server Error')  
 	}) 
+
+})
+
+//Get one user's groups
+app.get('/data/user/users/:id/groups', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		}
+		else {
+			// go through user groups
+			// const userGroupsInfo = user.userGroups.map(groupid => Group.findById(groupid).then(group => {return group}))
+			// res.send(userGroupsInfo)
+			// const userGroupsInfo = []
+			// for (let i = 0; i < user.userGroups.length; i++){
+			// 	Group.findById(user.userGroups[i]).then((group) => {
+			// 		userGroupsInfo.push(group)
+			// 	})
+			// }
+			// res.send(userGroupsInfo)
+			return user
+		}
+	}).then((user) => {
+		// Group.findById(user.userGroups).then((group) => {
+		// 	res.send(group)
+		// })
+
+		const getGroup = (id) =>{
+			Group.findById(id).then((group) => {
+				return group
+			})
+		}
+
+		const printAddress = async (id) => {
+			const a = await getGroup(id);
+			console.log(a);
+		}
+
+		let temp = printAddress(user.userGroups[0])
+		res.send(temp)
+		// let userGroupsInfo = []
+		// for (let i = 0; i < user.userGroups.length; i++){
+		// 	let oneGroup = getGroup(user.userGroups[i])
+		// 	let addGroup = async () => {
+		// 		const a = await oneGroup;
+		// 		userGroupsInfo[i] = a
+		// 	};
+		// 	addGroup();
+		// }
+		// res.send(userGroupsInfo)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+	// for (let i = 0; i < tempUser.userGroups.length; i++){
+	// 	Group.findById(tempUser.userGroups[i]).then((group) => {
+	// 		userGroupsInfo.push(group)
+	// 	}).catch((error) => {
+	// 		log(error)
+	// 		res.status(500).send('Internal Server Error')  
+	// 	}) 
+	// }
+	// res.send(tempUser)
 
 })
 
@@ -247,6 +327,9 @@ app.put('/data/user/users/:id', (req, res) => {
             if (req.body.userType != null) user.userType = req.body.userType
             if (req.body.userGroups != null) user.userGroups = req.body.userGroups
             if (req.body.pic != null) user.pic = req.body.pic
+			if (req.body.facebook != null) user.facebook = req.body.facebook
+			if (req.body.instagram != null) user.instagram = req.body.instagram
+			if (req.body.linkedin != null) user.linkedin = req.body.linkedin
 
             user.save().then((result) => {
                 res.send(result)
@@ -412,7 +495,7 @@ app.post('/data/groups/', (req, res) => {
         name: req.body.name,
         description: req.body.description,
         founder: req.body.founder,
-        aboutUs: req.body.about,
+        aboutUs: req.body.aboutUs,
 		created_on: req.body.created_on,
         officiated: false,
         admin: req.body.admin,

@@ -52,7 +52,7 @@ class ProfilePage extends React.Component{
                 <div id="profileBody">
                     <Row>
                         <Col span={6}>
-                            <UserInfo/>
+                            <UserInfo app={this.props.app}/>
                         </Col>
                         <Col span={18}>
                             <div id="groupTabsContainer">

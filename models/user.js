@@ -31,7 +31,19 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		minlength: 1,
 	},
-	userGroups: [mongoose.Types.ObjectId]
+	userGroups: [mongoose.Types.ObjectId],
+	instagram: {
+		type: String,
+		required: false,
+	},
+	facebook: {
+		type: String,
+		required: false,
+	},
+	linkedin: {
+		type: String,
+		required: false,
+	},
 })
 
 const SuperAdminSchema = new mongoose.Schema({

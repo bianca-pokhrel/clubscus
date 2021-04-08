@@ -96,6 +96,35 @@ export const register = (username, password, userType, name, app) => {
         });
 };
 
+// A function to send a PUT request to edit user info
+export const editUser = (body, app) => {
+    // Create our request constructor with all the parameters we need
+    const request = new Request(`${API_HOST}/data/user/users/${app.state.currentUser.currentUser._id}`, {
+        method: "put",
+        body: JSON.stringify(body),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    // Send the request with fetch()
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .then(json => {
+            if (json.currentUser !== undefined) {
+                app.setState({ currentUser: json });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
     const url = `${API_HOST}/data/user/logout`;

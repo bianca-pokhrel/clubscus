@@ -73,7 +73,7 @@ class NavBar extends React.Component{
       };
     
     handleClick = e => {
-        console.log('click ', e);
+        // console.log('click ', e);
         this.setState({ current: e.key });
     };
 
@@ -93,6 +93,8 @@ class NavBar extends React.Component{
         }
 
         const getUserGroups = () => {
+            console.log(this.props.app.state.currentUser.currentUser.userGroups)
+            // HAVE TO CHANGE THIS MAP BASED ON HOW GROUP DATA IS RETRIEVED
             let temp = userData.curGroups.map((group) => {
                 return (<Menu.Item>{group.groupName}<Link to={`/clubs${group.url}`}/></Menu.Item>)
             })
