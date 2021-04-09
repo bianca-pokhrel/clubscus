@@ -42,11 +42,11 @@ class MainFeed extends React.Component{
                     <div id="postSide">
                         <Feed posts={this.state.posts} main_feed={1} focus={-1} user={this.state.user}/>
                     </div>
-                    {/*<Affix offsetTop={120}>
+                    {<Affix offsetTop={120}>
                         <div id="groupContainer">
                             <CurGroups app={this.props.app} myGroups={true}/>
                         </div>
-                    </Affix>*/}
+                    </Affix>}
                 </div>
             </div>
         )
