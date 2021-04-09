@@ -116,7 +116,7 @@ class PostContent extends React.Component{
 			return (<div id="post_top">
 					<img id="post_banner" src={post_group.banner == null ? "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg" : post_group.banner}/>
 					<p id="post_club_color">
-						<a href={`clubs/${post_group._id}`}>
+						<a href={`/clubs/${post_group._id}`}>
 							{post_group.name}
 						</a>
 					</p>
