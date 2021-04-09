@@ -1,6 +1,8 @@
 /* User model */
 'use strict';
 
+import {Link} from "react-router-dom";
+
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 
@@ -17,7 +19,10 @@ const GroupSchema = new mongoose.Schema({
     banner: {
         type: String,
     },
-    links: [mongoose.Types.ObjectId],
+    links: [{
+	    name: String,
+        url: String,
+    }],
     description: {
         type: String
     },

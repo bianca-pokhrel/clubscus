@@ -24,11 +24,12 @@ class EditLinks extends React.Component {
 
     addLink = (values) => {
         //this.props.links.push({name: values.name, url: values.url})
-        this.setState({links: this.state.links.concat([{name: values.name, url: values.url}])})
+        const updated_links = this.state.links.concat([{name: values.name, url: values.url}])
+        this.setState({links: updated_links})
         const url = `/data/groups/${this.state.club._id}`;
         const request = new Request(url, {
             method: "put",
-            body: JSON.stringify({"links" : {"name": values.name, "url": values.url}}),
+            body: JSON.stringify({"links" : updated_links}),
             headers: {
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json"
@@ -42,7 +43,7 @@ class EditLinks extends React.Component {
                     message.success('New Link Added');
                     return res.json()
                 } else {
-                    alert("Could not accept requested members");
+                    alert("Could not add a new link");
                 }
             })
             .catch(error => {

@@ -43,10 +43,12 @@ class AdminMemberList extends React.Component {
 		const url = `/data/groups/${this.state.club._id}`;
 		this.setState({requested_members: this.state.requested_members.filter(item => item !== member)})
 		this.setState({members: this.state.member.concat([{id: member.id, name: member.name, profilePicture: member.profilePicture}])})
+		const members_ids = this.state.members.map(member => member._id)
+		const requested_members_ids = this.state.requested_members.map(member => member._id)
 		const request = new Request(url, {
-			method: "post",
-			body: JSON.stringify({"members" : this.state.members,
-				"reqMembers": this.state.requested_members}),
+			method: "put",
+			body: JSON.stringify({"members" : members_ids,
+				"reqMembers": requested_members_ids}),
 			headers: {
 				Accept: "application/json, text/plain, */*",
 				"Content-Type": "application/json"
