@@ -13,35 +13,24 @@ class NavBar extends React.Component{
 		super(props)
 
 		this.state = {
-			current: 'mail',
-            userType: "user",
+			user: this.props.user,
+            userType: this.props.user.userType,
             userGroups: []
 		}
-
-        waitForElement = () => {
-            if(this.props.app !== "undefined"){
-                //variable exists, do what you want
-                this.setState({userType: this.props.app.state.currentUser.currentUser.userType})
-                this.props.app.state.currentUser.currentUser.userGroups.map((group) => {
-                    const url = `/data/groups/${group}`;
-                    fetch(url)
-                        .then(res => {
-                            if (res.status === 200) {
-                                return res.json()
-                            } else {
-                                alert("Could not get group");
-                            }
-                        }).then(p => {
-                            this.setState({userGroups: this.state.userGroups.concat(p)})
-                        })
-                })
-            }
-            else{
-                setTimeout(waitForElement, 250);
-            }
-        }
-
-        waitForElement()
+		
+		this.state.user.userGroups.map((group) => {
+			const url = `/data/groups/${group}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get group");
+					}
+				}).then(p => {
+					this.setState({userGroups: this.state.userGroups.concat(p)})
+				})
+		})
 	}
 
     
