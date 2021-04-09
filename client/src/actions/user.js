@@ -18,9 +18,26 @@ export const checkSession = (app) => {
         })
         .then(json => {
             if (json && json.currentUser) {
-                app.setState({ currentUser: json.currentUser });
+                return json.currentUser
+            }else {
+                return null
             }
-        })
+        }).then(user_id => {
+            if (user_id == null) {
+                app.setState({ currentUser: null });
+            }else{
+                fetch(`/data/user/users/${user_id}`)
+                .then(res => {
+                    if (res.status === 200) {
+                        return res.json()
+                    } else {
+                        alert("Could not get user");
+                    }
+                }).then(user => {
+                    app.setState({currentUser: user})
+                })
+            }
+        }) 
         .catch(error => {
             console.log(error);
         });

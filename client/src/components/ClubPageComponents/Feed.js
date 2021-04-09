@@ -26,7 +26,7 @@ class Feed extends React.Component{
 					if (res.status === 200) {
 						return res.json()
 					} else {
-						alert("Could not get students");
+						alert("Could not get students1");
 					}
 				}).then(p => {
 					this.setState({posts: this.state.posts.concat(p)})

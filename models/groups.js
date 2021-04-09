@@ -1,8 +1,6 @@
 /* User model */
 'use strict';
 
-import {Link} from "react-router-dom";
-
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 

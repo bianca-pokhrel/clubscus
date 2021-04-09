@@ -20,8 +20,7 @@ class MainFeed extends React.Component{
 
 	render() {
 
-        console.log(this.props.app)
-
+        return ("")
         return(
             <div id="pageBG">
                 <NavBar app={this.props.app} userType="user"/>

@@ -111,7 +111,7 @@ app.post("/data/user/login", (req, res) => {
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
-            req.session.user = user;
+            req.session.user = user._id;
 			// req.session.user.save()
             res.send({ currentUser: user });
         })
@@ -454,7 +454,7 @@ app.put('/data/groups/:id', (req, res) => {
 		return;
 	}
 
-	Group.findByID(id).then((group) => {
+	Group.findById(id).then((group) => {
 		if (!group) {
 			res.status(404).send('Resource not found') 
 		} else {

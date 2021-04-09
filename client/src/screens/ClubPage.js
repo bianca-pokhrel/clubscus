@@ -17,28 +17,12 @@ class ClubPage extends React.Component{
 		super(props) 
 		
 		this.state = {
-			officiateRequestSent: false,
-			current: 'mail',
 			signedIn: true,
-			userType: props.userType,
 			founder: null,
-			user: null,
-			temp: "6068a4c4515ada276c294005",
+			user: props.user,
 		};
-
-		let url = `/data/user/users/${this.state.temp}`;
-		fetch(url)
-			.then(res => {
-				if (res.status === 200) {
-					return res.json()
-				} else {
-					alert("Could not get user");
-				}
-			}).then(user => {
-				this.setState({user: user})
-			})
 		
-		url = `/data/user/users/${props.club.founder}`;
+		let url = `/data/user/users/${props.club.founder}`;
 
 		fetch(url)
 			.then(res => {
@@ -68,18 +52,23 @@ class ClubPage extends React.Component{
 		const { user } = this.state;
 		const signedIn = user != null
         
+		const get_navbar = () => {
+			return ("")
+			return (<NavBar userType={!signedIn ? "none" : user.userType} app={this.props.app}/>)
+		}
+
 		const clubPageView = () => {
 			let member = false
 			if (signedIn) {
-				for (let i = 0; i < club.members.length; i++) {
-					if (club.members[i] == user._id) member = true
+				for (let i = 0; i < user.userGroups.length; i++) {
+					if (user.userGroups[i] == club._id) member = true
 				}
 			}
 
 		    if (this.props.about == true || !member) {
 		        return (
 					<div class="club_container">
-						<About about={club.aboutUs} member={member}/>
+						<About club={club} user={user}/>
 					</div>
 				) 
 		    } else if (user.userType == "user") {
@@ -137,7 +126,7 @@ class ClubPage extends React.Component{
 		
 		return(<div id="club_bg">
 			<div>
-				<NavBar userType={!signedIn ? "none" : user.userType}/>
+				{get_navbar()}
 				<img class="club_banner" src={club.banner == null ? "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg" : club.banner}/>
 		 		<div id="club_name_header">
 		 			<span id="club_name_text">{club.name}</span>

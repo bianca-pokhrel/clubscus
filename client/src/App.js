@@ -13,6 +13,7 @@ import { json } from 'body-parser';
 import { checkSession } from "./actions/user";
 
 
+var INVALID_USER = -1
 //Club Data
 const clubsData = require('./clubsData.js');
 
@@ -22,10 +23,10 @@ class App extends React.Component {
 		super()
 
 		this.state = {
-			currentUser: null,
+			currentUser: INVALID_USER,
 			signedIn: false,
 			userType: null,
-			group_urls: []
+			group_urls: null
 		}
 	
 		const url = `/data/groups`;
@@ -46,15 +47,17 @@ class App extends React.Component {
 	}
 
 	assemble_routes = () => {
+		if (this.state.currentUser == INVALID_USER || this.state.group_urls == null) return ("")
+
 		let g = this.state.group_urls.map((group) => {
 			return (<Route exact path={`/clubs/${group._id}/about`}>
-				<ClubPage club={group} about={true} user={this.state.currentUser}/>
+				<ClubPage club={group} about={true} user={this.state.currentUser} app={this}/>
 				</Route>)
 		})
 
 		g = g.concat(this.state.group_urls.map((group) => {
 			return (<Route exact path={`/clubs/${group._id}`}>
-				<ClubPage club={group} user={this.state.currentUser}/>
+				<ClubPage club={group} user={this.state.currentUser} app={this} />
 				</Route>)
 		}))
 
@@ -66,7 +69,6 @@ class App extends React.Component {
     }
 
 	render() {
-
 		const { currentUser } = this.state;
 
 		return (
