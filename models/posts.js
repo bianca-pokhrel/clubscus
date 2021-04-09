@@ -23,6 +23,10 @@ const CommentSchema = new mongoose.Schema({
 })
 
 const PostSchema = new mongoose.Schema({
+    group: {
+        required: true,
+        type: mongoose.Types.ObjectId
+    },
     title: {
         type: String,
         required: true,

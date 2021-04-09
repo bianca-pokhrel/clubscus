@@ -531,6 +531,7 @@ app.get('/data/posts/:id', (req, res) => {
 app.post('/data/posts/', (req, res) => {
 
     let post = new Post({
+		group: req.body.group,
         title: req.body.title,
         content: req.body.content,
         date: req.body.date,
@@ -570,6 +571,7 @@ app.put('/data/posts/:id', (req, res) => {
 		if (!post) {
 			res.status(404).send('Resource not found') 
 		} else {
+			if (req.body.group != null) post.group = req.body.group
             if (req.body.title != null) post.title = req.body.title
             if (req.body.content != null) post.content  = req.body.content
             if (req.body.date != null) post.date = req.body.date
