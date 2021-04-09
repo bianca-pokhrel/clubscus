@@ -74,21 +74,11 @@ const authenticate = (req, res, next) => {
                 next()
             }
         }).catch((error) => {
-            res.status(401).send("Unauthorized")
+            res.status(401).send("Unauthorized from here 1")
         })
     } else {
-        res.status(401).send("Unauthorized")
+        res.status(401).send("Unauthorized from here 2")
     }
-}
-
-// Our own express middleware to check for 
-// an active user on the session cookie (indicating a logged in user.)
-const sessionChecker = (req, res, next) => {		
-	if (req.session.user) {
-		res.redirect('/user/feed'); // redirect to dashboard if logged in.
-	} else {
-		next(); // next() moves on to the route.
-	}    
 }
 
 
@@ -121,7 +111,8 @@ app.post("/data/user/login", (req, res) => {
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
-            req.session.user = user._id;
+            req.session.user = user;
+			// req.session.user.save()
             res.send({ currentUser: user });
         })
         .catch(error => {
@@ -144,9 +135,10 @@ app.get("/data/user/logout", (req, res) => {
 // A route to check if a user is logged in on the session
 app.get("/data/user/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ currentUser: req.session.id });
+		// res.status(200).send("Ran check session");
+        res.send({ currentUser: req.session.user});
     } else {
-        res.status(401).send();
+        res.status(401).send("Unauthorized: No session");
     }
 });
 
@@ -210,7 +202,8 @@ app.post('/data/user/users/', (req, res) => {
         name: req.body.name,
         password: req.body.password,
         userType: req.body.userType,
-        userGroups: []
+        userGroups: [],
+		reqUserGroups: [],
      })
     
     newUser.save().then((user) => {
@@ -254,6 +247,7 @@ app.put('/data/user/users/:id', (req, res) => {
             if (req.body.password != null) user.password = req.body.password
             if (req.body.userType != null) user.userType = req.body.userType
             if (req.body.userGroups != null) user.userGroups = req.body.userGroups
+			if (req.body.reqUserGroups != null) user.reqUserGroups = req.body.reqUserGroups
             if (req.body.pic != null) user.pic = req.body.pic
 			if (req.body.facebook != null) user.facebook = req.body.facebook
 			if (req.body.instagram != null) user.instagram = req.body.instagram
