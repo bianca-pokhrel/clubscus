@@ -13,8 +13,25 @@ class PostContent extends React.Component{
 			expand: props.expand,
 			changeFocus: props.changeFocus,
 			main_feed: props.main_feed,
-			user: props.user
+			user: props.user,
+			post_group: null
 		}
+
+		const url = `/data/groups/${this.state.post.group}`;
+
+		// Since this is a GET request, simply call fetch on the URL
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					// return a promise that resolves with the JSON body
+					return res.json();
+				} else {
+					alert("Could not get group");
+				}
+			}).then(json => {
+				let groups = json
+				this.setState({post_group: json})
+			})
 	}
 
 	update_likes = (new_likes) => {
@@ -61,8 +78,8 @@ class PostContent extends React.Component{
    	};
 
 	render() {
-		const post = this.state.post
-		const expand = this.state.expand
+		if (this.state.post_group == null) return ("")
+		const { post, expand, post_group} = this.state
 		
 		const expand_comments = (expand) => {
 			if (expand) return (<CommentSection post = {post} user={this.state.user}/>)
@@ -97,10 +114,10 @@ class PostContent extends React.Component{
 			if (this.state.main_feed == 0) return ("")
 			
 			return (<div id="post_top">
-					<img id="post_banner" src={post.clubBanner}/>
+					<img id="post_banner" src={post_group.banner == null ? "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg" : post_group.banner}/>
 					<p id="post_club_color">
-						<a href="/clubs/club0">
-							{post.clubName}
+						<a href={`/clubs/${post_group._id}`}>
+							{post_group.name}
 						</a>
 					</p>
 				</div>

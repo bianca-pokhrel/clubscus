@@ -16,6 +16,7 @@ const GroupSchema = new mongoose.Schema({
 	},
     banner: {
         type: String,
+        default: "https://undark.org/wp-content/uploads/2020/01/GettyImages-154932300.jpg"
     },
     links: [{
 	    name: String,

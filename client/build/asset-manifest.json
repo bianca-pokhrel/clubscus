@@ -1,27 +1,50 @@
 {
   "files": {
+<<<<<<< HEAD
+    "main.css": "/static/css/main.5a1ecf27.chunk.css",
+    "main.js": "/static/js/main.f79694df.chunk.js",
+    "main.js.map": "/static/js/main.f79694df.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1860b9c1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1860b9c1.js.map",
+    "static/css/2.fc2db407.chunk.css": "/static/css/2.fc2db407.chunk.css",
+    "static/js/2.303ad957.chunk.js": "/static/js/2.303ad957.chunk.js",
+    "static/js/2.303ad957.chunk.js.map": "/static/js/2.303ad957.chunk.js.map",
+    "static/js/3.8096dea8.chunk.js": "/static/js/3.8096dea8.chunk.js",
+    "static/js/3.8096dea8.chunk.js.map": "/static/js/3.8096dea8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.fc2db407.chunk.css.map": "/static/css/2.fc2db407.chunk.css.map",
+    "static/css/main.5a1ecf27.chunk.css.map": "/static/css/main.5a1ecf27.chunk.css.map",
+    "static/js/2.303ad957.chunk.js.LICENSE.txt": "/static/js/2.303ad957.chunk.js.LICENSE.txt",
+=======
     "main.css": "/static/css/main.9af86018.chunk.css",
-    "main.js": "/static/js/main.a169295d.chunk.js",
-    "main.js.map": "/static/js/main.a169295d.chunk.js.map",
+    "main.js": "/static/js/main.957df1df.chunk.js",
+    "main.js.map": "/static/js/main.957df1df.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.839fdeb9.js",
     "runtime-main.js.map": "/static/js/runtime-main.839fdeb9.js.map",
     "static/css/2.fc2db407.chunk.css": "/static/css/2.fc2db407.chunk.css",
-    "static/js/2.decd1ffd.chunk.js": "/static/js/2.decd1ffd.chunk.js",
-    "static/js/2.decd1ffd.chunk.js.map": "/static/js/2.decd1ffd.chunk.js.map",
+    "static/js/2.cc1d7ba9.chunk.js": "/static/js/2.cc1d7ba9.chunk.js",
+    "static/js/2.cc1d7ba9.chunk.js.map": "/static/js/2.cc1d7ba9.chunk.js.map",
     "static/js/3.4da9793e.chunk.js": "/static/js/3.4da9793e.chunk.js",
     "static/js/3.4da9793e.chunk.js.map": "/static/js/3.4da9793e.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.fc2db407.chunk.css.map": "/static/css/2.fc2db407.chunk.css.map",
     "static/css/main.9af86018.chunk.css.map": "/static/css/main.9af86018.chunk.css.map",
-    "static/js/2.decd1ffd.chunk.js.LICENSE.txt": "/static/js/2.decd1ffd.chunk.js.LICENSE.txt",
+    "static/js/2.cc1d7ba9.chunk.js.LICENSE.txt": "/static/js/2.cc1d7ba9.chunk.js.LICENSE.txt",
+>>>>>>> 77c984b937bc019bf8ca09aee5f551d8979ccaa4
     "static/media/RegisterPage.css": "/static/media/bluekingscollege.ae1baf7f.jpg",
     "static/media/SiteBanner.css": "/static/media/bluekingscollegeshort.02ae307a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.839fdeb9.js",
     "static/css/2.fc2db407.chunk.css",
-    "static/js/2.decd1ffd.chunk.js",
+<<<<<<< HEAD
+    "static/js/2.303ad957.chunk.js",
+    "static/css/main.5a1ecf27.chunk.css",
+    "static/js/main.f79694df.chunk.js"
+=======
+    "static/js/2.cc1d7ba9.chunk.js",
     "static/css/main.9af86018.chunk.css",
-    "static/js/main.a169295d.chunk.js"
+    "static/js/main.957df1df.chunk.js"
+>>>>>>> 77c984b937bc019bf8ca09aee5f551d8979ccaa4
   ]
 }

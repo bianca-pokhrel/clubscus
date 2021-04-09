@@ -100,7 +100,7 @@ class App extends React.Component {
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							<GroupSearch signedIn={false} clubs={clubsData}/>
+							{currentUser == INVALID_USER ? <GroupSearch signedIn={false} clubs={clubsData}/>: <GroupSearch signedIn={true} clubs={clubsData}/>}
 						</Route>
 						{/* Log In/Register */}
 						<Route exact path="/signin">

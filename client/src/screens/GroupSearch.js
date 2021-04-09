@@ -7,15 +7,32 @@ import NavBar from "../components/NavBar/NavBar";
 import SearchBar from "../components/GroupSearch/SearchBar";
 import SiteBanner from "../components/GroupSearch/SiteBanner";
 import ClubCard from "../components/GroupSearch/ClubCard";
+import clubsData from "../clubsData";
 
 
 class GroupSearch extends React.Component{
 
-    state = {
-        signedIn: this.props.signedIn,
-        clubsData: this.props.clubs,
-        clubsOfUser: this.props.clubsOfUser
-    }
+    constructor(props) {
+		super(props)
+
+		this.state = {
+            signedIn: this.props.signedIn,
+            clubsData: [],
+		}
+		
+        const url = `/data/groups`;
+            fetch(url)
+                .then(res => {
+                    if (res.status === 200) {
+                        return res.json()
+                    } else {
+                        alert("Could not get groups");
+                    }
+                }).then(p => {
+                    this.setState({clubsData: this.state.clubsData.concat(p)})
+                    console.log(this.state.clubsData)
+                })
+	}
 
 
 	render() {
