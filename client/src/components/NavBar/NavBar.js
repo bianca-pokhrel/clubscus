@@ -6,9 +6,6 @@ import { Row, Col, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { logout } from '../../actions/user'
 
-import ENV from '../../config'
-const API_HOST = ENV.api_host
-
 const { SubMenu } = Menu;
 
 class NavBar extends React.Component{
@@ -17,25 +14,36 @@ class NavBar extends React.Component{
 
 		this.state = {
 			current: 'mail',
-            userType: this.props.app.state.currentUser.currentUser.userType,
+            userType: "user",
             userGroups: []
 		}
-		
-		this.props.app.state.currentUser.currentUser.userGroups.map((group) => {
-            // API HOST AND ENV Stuff here to call localhost:5000
-			const url = `${API_HOST}/data/groups/${group}`;
-			fetch(url)
-				.then(res => {
-					if (res.status === 200) {
-						return res.json()
-					} else {
-						alert("Could not get group");
-					}
-				}).then(p => {
-					this.setState({userGroups: this.state.userGroups.concat(p)})
-				})
-		})
+
+        waitForElement = () => {
+            if(this.props.app !== "undefined"){
+                //variable exists, do what you want
+                this.setState({userType: this.props.app.state.currentUser.currentUser.userType})
+                this.props.app.state.currentUser.currentUser.userGroups.map((group) => {
+                    const url = `/data/groups/${group}`;
+                    fetch(url)
+                        .then(res => {
+                            if (res.status === 200) {
+                                return res.json()
+                            } else {
+                                alert("Could not get group");
+                            }
+                        }).then(p => {
+                            this.setState({userGroups: this.state.userGroups.concat(p)})
+                        })
+                })
+            }
+            else{
+                setTimeout(waitForElement, 250);
+            }
+        }
+
+        waitForElement()
 	}
+
     
     // state = {
     //     current: 'mail',
@@ -49,13 +57,13 @@ class NavBar extends React.Component{
     };
 
     handleLogOut = () => {
+
         message.success("Logged Out!")
         logout(this.props.app)
     }
 
     render (){
         const { current, userType } = this.state;
-
         const signOutButton = () => {
             return (
                 <Menu.Item key="signOut" id="signOutColor" onClick={this.handleLogOut}><Link to="/"/>Sign Out</Menu.Item>
