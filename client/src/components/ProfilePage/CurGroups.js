@@ -54,25 +54,26 @@ class CurGroups extends React.Component{
         const { myGroups, userGroups, reqUserGroups } = this.state;
 
 		const noGroups = () =>{
-				console.log("fucntion ran")
 				return(
-					<Empty
-						image="https://static.thenounproject.com/png/1298324-200.png"
-						imageStyle={{
-						height: 60,
-						}}
-						description={
-						<span>
-							{myGroups? "Oh No! You're not in any Groups!": "You do not have any pending requests."}
-						</span>
-						}
-					>
-						<Link to="/user/groupsearch">
-                            <Button>
-                                Search For a Group!
-                            </Button>
-                        </Link>
-					</Empty>
+					<div  id="curGroupsContainer">
+						<Empty
+							image="https://static.thenounproject.com/png/1298324-200.png"
+							imageStyle={{
+							height: 60,
+							}}
+							description={
+							<span>
+								{myGroups? "Oh No! You're not in any Groups!": "You do not have any pending requests."}
+							</span>
+							}
+						>
+							<Link to="/user/groupsearch">
+								<Button>
+									Search For a Group!
+								</Button>
+							</Link>
+						</Empty>
+					</div>
 				)
 		}
 
@@ -95,7 +96,7 @@ class CurGroups extends React.Component{
 		}
 
         return(
-			<div id="curGroupsContainer">
+			<div>
 				{((myGroups && userGroups.length == 0) || (!myGroups && reqUserGroups.length == 0))? noGroups(): groupList(myGroups)}
 			</div>
         )

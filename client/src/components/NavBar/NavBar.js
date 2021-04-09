@@ -2,7 +2,7 @@ import React from "react";
 import './NavBar.css'
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
-import { Row, Col } from 'antd';
+import { Row, Col, message } from 'antd';
 import { Link } from 'react-router-dom';
 import { logout } from '../../actions/user'
 
@@ -49,9 +49,8 @@ class NavBar extends React.Component{
     };
 
     handleLogOut = () => {
-        console.log(this.props.app)
+        message.success("Logged Out!")
         logout(this.props.app)
-        console.log(this.props.app)
     }
 
     render (){

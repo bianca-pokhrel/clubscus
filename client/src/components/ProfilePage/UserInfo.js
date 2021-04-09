@@ -76,6 +76,10 @@ class UserInfo extends React.Component{
         this.setState({linkedin: changeLinked})
         editUser({linkedin: changeLinked}, this.props.app)
     }
+    handleLogout = (app) => {
+        message.success("Logged Out!")
+        logout(app)
+    }
 
     render (){
 
@@ -120,7 +124,7 @@ class UserInfo extends React.Component{
                 <Divider />
                     <div id="logOutContainer">
                         <Link to="/">
-                            <Button id="LogOut" onClick={() => logout(this.props.app)}>
+                            <Button id="LogOut" onClick={() => this.handleLogout(this.props.app)}>
                                 Log Out
                             </Button>
                         </Link>
