@@ -76,7 +76,7 @@ class App extends React.Component {
 				<ProfilePage app={this} user={this.state.currentUser}/>
 			</Route>,
 			<Route exact path="/user/feed">
-				<MainFeed app={this}/>
+				<MainFeed app={this} user={this.state.currentUser}/>
 			</Route>,
 			<Route exact path="/superadmin" component={SuperAdminScreen}>
 				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>

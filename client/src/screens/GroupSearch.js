@@ -37,12 +37,12 @@ class GroupSearch extends React.Component{
 
 	render() {
 
-
+        console.log(this.props.app)
         const eachClubCard1 = this.state.clubsData.slice(0,6).map(club =>
-                <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
+                <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.props.app ? this.props.app.state.currentUser.userGroups: null}/>
             )
         const eachClubCard2 = this.state.clubsData.slice(6,11).map(club =>
-            <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
+            <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.props.app ? this.props.app.state.currentUser.userGroups: null}/>
         )
 
 

@@ -19,7 +19,7 @@ class GroupCard extends React.Component{
     render (){
         return(
             <div>
-                <Link to={(this.state.signedIn && this.state.clubsOfUser.includes(this.state.club))? "clubs/" + this.state.club._id: "clubs/" + this.state.club._id + "/about"}>
+                <Link to={(this.state.signedIn && this.state.clubsOfUser.includes(this.state.club._id))? "/clubs/" + this.state.club._id: "/clubs/" + this.state.club._id + "/about"}>
                     <Card
                         hoverable
                         className="card"
