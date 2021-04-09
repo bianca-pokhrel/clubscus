@@ -73,7 +73,7 @@ class App extends React.Component {
 				<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
 			</Route>,
 			<Route exact path="/user/profile">
-				<ProfilePage app={this} user={this.state.currentUser.currentUser}/>
+				<ProfilePage app={this} user={this.state.currentUser}/>
 			</Route>,
 			<Route exact path="/user/feed">
 				<MainFeed app={this}/>
