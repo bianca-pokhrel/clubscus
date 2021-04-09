@@ -76,7 +76,7 @@ class App extends React.Component {
 				<ProfilePage app={this} user={this.state.currentUser}/>
 			</Route>,
 			<Route exact path="/user/feed">
-				<MainFeed app={this} user={this.state.currentUser}/>
+				<MainFeed app={this}/>
 			</Route>,
 			<Route exact path="/superadmin" component={SuperAdminScreen}>
 				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
@@ -100,7 +100,7 @@ class App extends React.Component {
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							<GroupSearch signedIn={false} clubs={clubsData}/>
+							{currentUser == INVALID_USER ? <GroupSearch signedIn={false} clubs={clubsData}/>: <GroupSearch signedIn={true} clubs={clubsData}/>}
 						</Route>
 						{/* Log In/Register */}
 						<Route exact path="/signin">

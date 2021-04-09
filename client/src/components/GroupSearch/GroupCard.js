@@ -19,7 +19,7 @@ class GroupCard extends React.Component{
     render (){
         return(
             <div>
-                <Link to={(this.state.signedIn && this.state.clubsOfUser.includes(this.state.club))? "clubs" + this.state.club.url: "clubs" + this.state.club.url + "/about"}>
+                <Link to={(this.state.signedIn && this.state.clubsOfUser.includes(this.state.club))? "clubs/" + this.state.club._id: "clubs/" + this.state.club._id + "/about"}>
                     <Card
                         hoverable
                         className="card"
@@ -27,7 +27,7 @@ class GroupCard extends React.Component{
                         <div id="imgContainer">{this.props.img}</div>
                         <Meta 
                             avatar={this.state.club.club ? <Tooltip title="Official Club"><CheckCircleTwoTone /></Tooltip>: <Tooltip title="Student Group"><UserAddOutlined /></Tooltip>}
-                            title={this.state.club.groupName} 
+                            title={this.state.club.name} 
                             description={this.state.club.description} 
                         />
                     </Card>
