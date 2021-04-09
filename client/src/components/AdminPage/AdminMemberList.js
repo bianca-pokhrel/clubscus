@@ -6,30 +6,72 @@ import {message, Button} from "antd";
 import MemberModal from '../ClubPageComponents/MemberModal.js';
 import { Modal } from "antd";
 
-let requested_members = [
-    {id: 3 , name: "Harry Musk", profilePicture: "https://hungarytoday.hu/wp-content/uploads/2018/02/18ps27.jpg"},
-    {id: 4, name: "Alex Ramirez", profilePicture: "https://i.insider.com/5c5dd439dde867479d106cc2?width=1100&format=jpeg&auto=webp"}
-]
-
 
 class AdminMemberList extends React.Component {
 
-    state = {
-		modalVis: false,
-		modalName: "",
-		modalInsta: "",
-		modalFacebook: "",
-		modalProfilePic: "",
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			modalVis: false,
+			modalName: "",
+			modalInsta: "",
+			modalFacebook: "",
+			modalProfilePic: "",
+			members: this.props.club.members,
+			requested_members: this.props.club.reqMembers,
+			club: this.props.club,
+		}
+
+		props.members.map((member) => {
+			const url = `/data/user/users/${member._id}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get students");
+					}
+				}).then(m => {
+				this.setState({members: this.state.members.concat(m.name)})
+			})
+		})
+
 	}
 
     acceptMember = (member) => {
-        this.props.members.push({id: member.id, name: member.name, profilePicture: member.profilePicture})
-        requested_members = requested_members.filter(item => item !== member)
-        message.success('New Member Accepted');
-        this.forceUpdate()
+		const url = `/data/groups/${this.state.club._id}`;
+		this.setState({requested_members: this.state.requested_members.filter(item => item !== member)})
+		this.setState({members: this.state.member.concat([{id: member.id, name: member.name, profilePicture: member.profilePicture}])})
+		const members_ids = this.state.members.map(member => member._id)
+		const requested_members_ids = this.state.requested_members.map(member => member._id)
+		const request = new Request(url, {
+			method: "put",
+			body: JSON.stringify({"members" : members_ids,
+				"reqMembers": requested_members_ids}),
+			headers: {
+				Accept: "application/json, text/plain, */*",
+				"Content-Type": "application/json"
+			}
+		});
+
+		fetch(request)
+			.then(function (res) {
+				if (res.status === 200) {
+					message.success('New Member Accepted');
+					return res.json()
+				} else {
+					alert("Could not accept requested members");
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+        //this.forceUpdate()
     }
+
     render() {
-        const members = this.props.members
+		const { members, requested_members } = this.state
 
         const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
         let modalView;

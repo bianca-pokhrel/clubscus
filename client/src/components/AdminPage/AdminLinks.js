@@ -6,8 +6,13 @@ import NotEditLinks from "./NotEditLinks";
 import EditLinks from "./EditLinks";
 
 class AdminLinks extends React.Component {
-   state = {
-            openEditLink: false
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            openEditLink: false,
+            club: this.props.club
+        }
     }
 
     editStatusToTrue = () => {
@@ -27,7 +32,7 @@ class AdminLinks extends React.Component {
         if ( !this.state.openEditLink) {
             link_cover = <NotEditLinks links={this.props.links} changeStatusToTrue={() => {this.editStatusToTrue()}}/>
         } else {
-            link_cover = <EditLinks links={this.props.links} changeStatusToFalse={() => {this.editStatusToFalse()}}/>
+            link_cover = <EditLinks links={this.props.links} club={this.props.club} changeStatusToFalse={() => {this.editStatusToFalse()}}/>
             console.log("here go")
         }
         return (

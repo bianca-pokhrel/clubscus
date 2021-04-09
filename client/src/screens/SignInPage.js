@@ -12,13 +12,16 @@ class SignInPage extends React.Component{
 	};
     
 	render() {
+
+		const { app } = this.props
+
 		return(
 		    <div id="page_container">
 				<div id="title">
 					<h1>Clubcus</h1>
 					<h3>Meet Like-Minded Students. Make Some New Friends.</h3>
 				</div>
-		        <SignIn/>
+		        <SignIn app={app} />
 		    </div>
         	)
     	}

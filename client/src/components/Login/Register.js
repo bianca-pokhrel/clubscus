@@ -3,6 +3,10 @@ import { Form, Input, Button, Select, message } from 'antd';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { register } from "../../actions/user";
+
+import ENV from '../../config'
+const API_HOST = ENV.api_host
 
 const { Option } = Select;
 
@@ -11,24 +15,54 @@ class Register extends React.Component{
     state = {
         isAdmin: false,
         passwordMatch: false,
-        redirectFor: ""
+        redirectFor: "",
+        username: "",
+        password: "",
+        name: "",
     }
 
     onFinish = (values) => {
-        console.log('Success:', values);
+        console.log('Fields Filled');
         this.checkPasswordMatch(values)
         if (this.state.passwordMatch){
-            if(this.state.isAdmin){
-                //GO TO ADMIN PAGE
-                message.success("New Group Created!");
-                this.setState({redirectFor:"Admin"});
-            } else {
-                //Go TO USER MAIN PAGE
-                message.success("Account Created!");
-                this.setState({redirectFor:"User"});
-            }
-        } else {
-            message.error('Your Passwords Do Not Match');
+            register(this.state.username, this.state.password, this.state.isAdmin? "admin":"user", this.state.name, this.props.app)
+            setTimeout(()=>{
+                if(this.state.isAdmin){
+                    //MAKE NEW GROUP && GO TO ADMIN PAGE
+                    // API HOST AND ENV Stuff here to call localhost:5000
+                    const url = new Request(`${API_HOST}/data/groups/`, {
+                        method: "post",
+                        body: JSON.stringify({
+                            name: values.groupName,
+                            aboutUs: `This is the group known as ${values.groupName}`,
+                            founder: this.props.app.state.currentUser.currentUser.name,
+                            admin: this.props.app.state.currentUser.currentUser.name
+                        }),
+                        headers: {
+                            Accept: "application/json, text/plain, */*",
+                            "Content-Type": "application/json"
+                        }
+                    });
+                    fetch(url)
+                        .then(res => {
+                            if (res.status === 200) {
+                                return res.json()
+                            } else {
+                                alert("Could not get group");
+                            }
+                        })
+                        // .then(p => {
+                        //     this.setState({userGroups: this.state.userGroups.concat(p)})
+                        // })
+
+                    message.success("New Group Created!");
+                    this.setState({redirectFor:"Admin"});
+                } else {
+                    //Go TO USER MAIN PAGE
+                    message.success("Account Created!");
+                    this.setState({redirectFor:"User"});
+                }
+            }, 300)
         }
     };
     
@@ -48,9 +82,18 @@ class Register extends React.Component{
     checkPasswordMatch = (values) => {
         if (values.password1 == values.password2) {
             console.log('Passwords match')
-            this.setState({passwordMatch:true})
+            if (values.password1.length < 7){
+                console.log('Password too short')
+                message.error('Passwords Should Be At Least 6 Characters');
+            } else {
+                this.setState({passwordMatch:true})
+                this.setState({username: values.username})
+                this.setState({name: values.name})
+                this.setState({password: values.password1})
+            }
         } else {
             console.log('Passwords do not match')
+            message.error('Your Passwords Do Not Match');
             this.setState({passwordMatch:false})
         }
     }
@@ -105,7 +148,13 @@ class Register extends React.Component{
                             name="username"
                             rules={[{ required: true, message: 'Please input your username!' }]}
                         >
-                            <Input placeholder="Username"/>
+                            <Input placeholder="Username (What You Use to Sign In)"/>
+                        </Form.Item>
+                        <Form.Item
+                            name="name"
+                            rules={[{ required: true, message: 'Please input your display name!' }]}
+                        >
+                            <Input placeholder="Display Name (What Other See)"/>
                         </Form.Item>
                         <Form.Item
                             name="password1"

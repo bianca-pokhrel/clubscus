@@ -7,9 +7,6 @@
 // To run in production mode, run in terminal: NODE_ENV=production node server.js
 const env = process.env.NODE_ENV // read the environment variable (will be 'production' in production mode)
 
-const USE_TEST_USER = env !== 'production' && process.env.TEST_USER_ON // option to turn on the test user.
-const TEST_USER_ID = '5fb8b011b864666580b4efe3' // the id of our test user (you will have to replace it with a test user that you made). can also put this into a separate configutation file
-const TEST_USER_EMAIL = 'test@user.com'
 //////
 
 const log = console.log;
@@ -28,21 +25,23 @@ const { mongoose } = require("./db/mongoose");
 mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 // import the mongoose models
-const { Student } = require("./models/student");
-const { User } = require("./models/user");
+const { User, SuperAdmin } = require("./models/user");
+const { Group } = require("./models/groups");
+const { Post, Comment } = require("./models/posts");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
 
 // body-parser: middleware for parsing parts of the request into a usable object (onto req.body)
 const bodyParser = require('body-parser') 
-app.use(bodyParser.json()) // parsing JSON body
-app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form data (from form POST requests)
+app.use(bodyParser.json({ limit: '50mb' })) // parsing JSON body
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, })); // parsing URL-encoded form data (from form POST requests)
 
 
 // express-session for managing user sessions
 const session = require("express-session");
-const MongoStore = require('connect-mongo') // to store session information on the database in production
+const MongoStore = require('connect-mongo'); // to store session information on the database in production
+const { group } = require('console');
 
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -75,10 +74,10 @@ const authenticate = (req, res, next) => {
                 next()
             }
         }).catch((error) => {
-            res.status(401).send("Unauthorized")
+            res.status(401).send("Unauthorized from here 1")
         })
     } else {
-        res.status(401).send("Unauthorized")
+        res.status(401).send("Unauthorized from here 2")
     }
 }
 
@@ -102,28 +101,27 @@ app.use(
 );
 
 // A route to login and create a session
-app.post("/users/login", (req, res) => {
-    const email = req.body.email;
+app.post("/data/user/login", (req, res) => {
+    const username = req.body.username;
     const password = req.body.password;
 
     // log(email, password);
     // Use the static method on the User model to find a user
-    // by their email and password
-    User.findByEmailPassword(email, password)
+    User.findUserByUsernamePassword(username, password)
         .then(user => {
             // Add the user's id to the session.
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
-            req.session.email = user.email; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
-            res.send({ currentUser: user.email });
+			// req.session.user.save()
+            res.send({ currentUser: user });
         })
         .catch(error => {
-            res.status(400).send()
+            res.status(400).send("User does not exist")
         });
 });
 
 // A route to logout a user
-app.get("/users/logout", (req, res) => {
+app.get("/data/user/logout", (req, res) => {
     // Remove the session
     req.session.destroy(error => {
         if (error) {
@@ -135,93 +133,564 @@ app.get("/users/logout", (req, res) => {
 });
 
 // A route to check if a user is logged in on the session
-app.get("/users/check-session", (req, res) => {
-    if (env !== 'production' && USE_TEST_USER) { // test user on development environment.
-        req.session.user = TEST_USER_ID;
-        req.session.email = TEST_USER_EMAIL;
-        res.send({ currentUser: TEST_USER_EMAIL })
-        return;
-    }
-
+app.get("/data/user/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ currentUser: req.session.email });
+		// res.status(200).send("Ran check session");
+        res.send({ currentUser: req.session.user});
     } else {
-        res.status(401).send();
+        res.status(401).send("Unauthorized: No session");
     }
 });
 
 /*********************************************************/
 
 /*** API Routes below ************************************/
-// User API Route
-app.post('/api/users', mongoChecker, async (req, res) => {
-    log(req.body)
 
-    // Create a new user
-    const user = new User({
-        email: req.body.email,
-        password: req.body.password
-    })
 
-    try {
-        // Save the user
-        const newUser = await user.save()
-        res.send(newUser)
-    } catch (error) {
-        if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
-            res.status(500).send('Internal server error')
-        } else {
-            log(error)
-            res.status(400).send('Bad Request') // bad request for changing the student.
-        }
-    }
+//--------------------------Users API Route------------------------------
+
+// Get all Users
+app.get('/data/user/users/', (req, res) => {
+	// check mongoose connection established.
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	User.find().then((user) => {
+		res.send(user)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
 })
 
-/** Student resource routes **/
-// a POST route to *create* a student
-app.post('/api/students', mongoChecker, authenticate, async (req, res) => {
-    log(`Adding student ${req.body.name}, created by user ${req.user._id}`)
+// Get one user
+app.get('/data/user/users/:id', (req, res) => {
+	const id = req.params.id
 
-    // Create a new student using the Student mongoose model
-    const student = new Student({
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(user)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/user/users/', (req, res) => {
+
+    let newUser = new User({
+        username: req.body.username,
         name: req.body.name,
-        year: req.body.year,
-        creator: req.user._id // creator id from the authenticate middleware
+        password: req.body.password,
+        userType: req.body.userType,
+        userGroups: [],
+		reqUserGroups: [],
+     })
+    
+    newUser.save().then((user) => {
+		return user
+	}).then(user => {
+		// Add the user's id to the session.
+		// We can check later if this exists to ensure we are logged in.
+		req.session.user = user._id;
+		res.send({ currentUser: user });
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
+
+})
+
+app.put('/data/user/users/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		} else {
+            if (req.body.username != null) user.username = req.body.username
+            if (req.body.name != null) user.name = req.body.name
+            if (req.body.password != null) user.password = req.body.password
+            if (req.body.userType != null) user.userType = req.body.userType
+            if (req.body.userGroups != null) user.userGroups = req.body.userGroups
+			if (req.body.reqUserGroups != null) user.reqUserGroups = req.body.reqUserGroups
+            if (req.body.pic != null) user.pic = req.body.pic
+			if (req.body.facebook != null) user.facebook = req.body.facebook
+			if (req.body.instagram != null) user.instagram = req.body.instagram
+			if (req.body.linkedin != null) user.linkedin = req.body.linkedin
+
+            user.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
+})
+
+//-----------------------------------------------------------------------
+
+//--------------------------SuperAdmin API Route------------------------------
+
+app.get('/data/user/superadmins/', (req, res) => {
+
+    if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	SuperAdmin.find().then((superadmin) => {
+		res.send(superadmin)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
+})
+
+app.get('/data/user/superadmins/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	SuperAdmin.findById(id).then((superadmin) => {
+		if (!superadmin) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(superadmin)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/user/superadmins/', (req, res) => {
+
+    let superadmin = new SuperAdmin({
+        username: req.body.username,
+        password: req.body.password,
+     })
+    
+     superadmin.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
+
+})
+
+app.put('/data/user/superadmins/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	SuperAdmin.findById(id).then((superadmin) => {
+		if (!superadmin) {
+			res.status(404).send('Resource not found') 
+		} else {
+            if (req.body.username != null) superadmin.username = req.body.username
+            if (req.body.password != null) superadmin.password = req.body.password
+
+            superadmin.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
+})
+
+//-----------------------------------------------------------------------
+
+//--------------------------Groups API Route------------------------------
+
+app.get('/data/groups/', (req, res) => {
+
+    if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Group.find().then((group) => {
+		res.send(group)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
+})
+
+
+app.get('/data/groups/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Group.findById(id).then((group) => {
+		if (!group) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(group)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/groups/', (req, res) => {
+
+    let group = new Group({
+        name: req.body.name,
+        description: req.body.description,
+        founder: req.body.founder,
+        aboutUs: req.body.aboutUs,
+		created_on: req.body.created_on,
+        officiated: false,
+        admin: req.body.admin,
+        links: [],
+        members: [],
+        reqMembers: [],
+        posts: []
+     })
+    
+    group.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
+
+})
+
+app.put('/data/groups/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Group.findById(id).then((group) => {
+		if (!group) {
+			res.status(404).send('Resource not found') 
+		} else {
+            if (req.body.name != null) group.name = req.body.name
+            if (req.body.description != null) group.description = req.body.description
+            if (req.body.founder != null) group.founder = req.body.founder
+			if (req.body.created_on != null) group.created_on = req.body.created_on
+            if (req.body.about != null) group.aboutUs = req.body.about
+            if (req.body.officiated != null) group.officiated = req.body.officiated
+            if (req.body.admin != null) group.admin = req.body.admin
+            if (req.body.links != null) group.links = req.body.links
+            if (req.body.members != null) group.members = req.body.members
+            if (req.body.reqMembers != null) group.reqMembers = req.body.reqMembers
+            if (req.body.posts != null) group.posts = req.body.posts
+
+            group.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
+})
+
+//-----------------------------------------------------------------------
+
+//--------------------------Posts API Route------------------------------
+
+app.get('/data/posts', (req, res) => {
+
+    if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Post.find().then((post) => {
+		res.send(post)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
+})
+
+app.get('/data/posts/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Post.findById(id).then((post) => {
+		if (!post) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(post)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/posts/', (req, res) => {
+
+    let post = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        date: req.body.date,
+		image: null,
+        likes: [],
+        comments: []
+     })
+    
+    post.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
+
+})
+
+app.put('/data/posts/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Post.findById(id).then((post) => {
+		if (!post) {
+			res.status(404).send('Resource not found') 
+		} else {
+            if (req.body.title != null) post.title = req.body.title
+            if (req.body.content != null) post.content  = req.body.content
+            if (req.body.date != null) post.date = req.body.date
+			if (req.body.image != null) post.image = req.body.image
+            if (req.body.likes != null) post.likes = req.body.likes
+            if (req.body.comments != null) post.comments = req.body.comments
+
+            post.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
+})
+
+//-----------------------------------------------------------------------
+
+//--------------------------Comments API Route------------------------------
+
+app.get('/data/comments', (req, res) => {
+
+    if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Comment.find().then((comment) => {
+		res.send(comment)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	}) 
+
+})
+
+app.get('/data/comments/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Comment.findById(id).then((comment) => {
+		if (!comment) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send(comment)
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	}) 
+
+})
+
+app.post('/data/comments/', (req, res) => {
+
+    let comment = new Comment({
+        user: req.body.user,
+        content: req.body.content,
+        date: req.body.date,
     })
-
-
-    // Save student to the database
-    // async-await version:
-    try {
-        const result = await student.save() 
-        res.send(result)
-    } catch(error) {
-        log(error) // log server error to the console, not to the client.
-        if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
-            res.status(500).send('Internal server error')
-        } else {
-            res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
-        }
-    }
-})
-
-// a GET route to get all students
-app.get('/api/students', mongoChecker, authenticate, async (req, res) => {
-
-    // Get the students
-    try {
-        const students = await Student.find({creator: req.user._id})
-        // res.send(students) // just the array
-        res.send({ students }) // can wrap students in object if want to add more properties
-    } catch(error) {
-        log(error)
-        res.status(500).send("Internal Server Error")
-    }
+    
+    comment.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) 
+		if (isMongoError(error)) { 
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') 
+		}
+	})
 
 })
 
-// other student API routes can go here...
-// ...
+app.put('/data/comments/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Comment.findById(id).then((comment) => {
+		if (!comment) {
+			res.status(404).send('Resource not found') 
+		} else {
+            if (req.body.user != null) comment.user = req.body.user
+            if (req.body.content != null) comment.content  = req.body.content
+            if (req.body.date != null) comment.date = req.body.date
+
+            comment.save().then((result) => {
+                res.send(result)
+            })
+		}
+	}).catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  
+	})
+})
+
+//-----------------------------------------------------------------------
+
+/*********************************************************/
 
 /*** Webpage routes below **********************************/
 // Serve the build
@@ -230,7 +699,7 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // All routes other than above will go to index.html
 app.get("*", (req, res) => {
     // check for page routes that we expect in the frontend to provide correct status code.
-    const goodPageRoutes = ["/", "/login", "/dashboard"];
+    const goodPageRoutes = ["/"];
     if (!goodPageRoutes.includes(req.url)) {
         // if url not in expected page routes, set status to 404.
         res.status(404);

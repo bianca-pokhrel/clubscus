@@ -20,16 +20,17 @@ class MainFeed extends React.Component{
 
 	render() {
 
+        return ("")
         return(
             <div id="pageBG">
-                <NavBar userType="user"/>
+                <NavBar app={this.props.app} userType="user"/>
                 <div id="feedBody">
                     <div id="postSide">
                         <Feed posts={user_posts} main_feed={1} focus={-1}/>
                     </div>
                     <Affix offsetTop={120}>
                         <div id="groupContainer">
-                            <CurGroups myGroups={true}/>
+                            <CurGroups app={this.props.app} myGroups={true}/>
                         </div>
                     </Affix>
                 </div>

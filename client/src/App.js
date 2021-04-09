@@ -9,79 +9,108 @@ import SuperAdminScreen from './screens/SuperAdminScreen';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RegisterPage from './screens/RegisterPage';
 import AdminFeed from "./components/AdminPage/AdminFeed";
+import { json } from 'body-parser';
+import { checkSession } from "./actions/user";
 
 
+var INVALID_USER = -1
 //Club Data
 const clubsData = require('./clubsData.js');
 
 class App extends React.Component {
 
-	render() {
+	constructor() {
+		super()
 
+		this.state = {
+			currentUser: INVALID_USER,
+			signedIn: false,
+			userType: null,
+			group_urls: null
+		}
+	
+		const url = `/data/groups`;
 
-		const clubsOfUser = () => {
-			let clubs = []
-			for (const club in clubsData) {
-				let thisClub = clubsData[club]
-				for (const member in thisClub.members) {
-					if (thisClub.members[member].name == "JJ Kanu") {
-						clubs.push(thisClub)
-					}
+		// Since this is a GET request, simply call fetch on the URL
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					// return a promise that resolves with the JSON body
+					return res.json();
+				} else {
+					alert("Could not get groups");
 				}
-			}
-			return clubs
-		}
-
-
-		const getUrls = () => {
-			let g = clubsData.map((group) => {
-				return (<Route exact path={`/clubs${group.url}/about`}>
-					<ClubPage club={group} about={true} userType="user"/>
-					</Route>)
+			}).then(json => {
+				let groups = json
+				this.setState({group_urls: groups})
 			})
-			
-			g = g.concat(clubsData.map((group) => {
-				return (<Route exact path={`/clubs${group.url}`}>
-					<ClubPage club={group} userType="user"/>
-					</Route>)
-			}))
-			return (g)
-		}
+	}
 
-		{console.log(clubsOfUser())}
+	assemble_routes = () => {
+		if (this.state.currentUser == INVALID_USER || this.state.group_urls == null) return ("")
 
-	    	return (
-				<div>
-					<Router>
-						<Switch>
-							<Route exact path="/">
-								<GroupSearch signedIn={false} clubs={clubsData}/>
-							</Route>
-							{/* Log In/Register */}
-							<Route exact path="/signin" component={SignInPage}/>
-							<Route exact path="/register" component={RegisterPage}/>
+		let g = this.state.group_urls.map((group) => {
+			return (<Route exact path={`/clubs/${group._id}/about`}>
+				<ClubPage club={group} about={true} user={this.state.currentUser} app={this}/>
+				</Route>)
+		})
 
-							{/* User Views */}
-							<Route exact path="/user">
-								<GroupSearch signedIn={true} clubs={clubsData} clubsOfUser={clubsOfUser()}/>
-							</Route>
-							<Route exact path="/user/profile" component={ProfilePage}/>
-							<Route exact path="/user/feed" component={MainFeed}/>
+		g = g.concat(this.state.group_urls.map((group) => {
+			return (<Route exact path={`/clubs/${group._id}`}>
+				<ClubPage club={group} user={this.state.currentUser} app={this} />
+				</Route>)
+		}))
 
-							{/* Admin Views */}
-							<Route exact path="/superadmin" component={SuperAdminScreen}>
-								<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
-							</Route>
-							<Route exact path="/admin">
-								<ClubPage club={clubsData[0]} userType="admin"/>
-							</Route>
-							{/*<Route exact path="/admin" component={AdminFeed}>*/}
-							{/*}</Route>*/}
-							{getUrls()}
-						</Switch>
-					</Router>
-				</div>
-	    	);  
+		return g
+	}
+
+	componentDidMount() {
+        checkSession(this); // sees if a user is logged in
+    }
+
+	render() {
+		const { currentUser } = this.state;
+
+		return (
+			<div>
+				<Router>
+					<Switch>
+						<Route exact path="/">
+							<GroupSearch signedIn={false} clubs={clubsData}/>
+						</Route>
+						{/* Log In/Register */}
+						<Route exact path="/signin">
+							<SignInPage app={this} />
+						</Route>
+						<Route exact path="/register">
+							<RegisterPage app={this} />
+						</Route>
+
+						{/* User Views */}
+						<Route exact path="/user/groupsearch">
+							<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
+						</Route>
+						<Route exact path="/user/profile">
+							<ProfilePage app={this}/>
+						</Route>
+						<Route exact path="/user/feed">
+							<MainFeed app={this}/>
+						</Route>
+
+						{/* Admin Views */}
+						<Route exact path="/superadmin" component={SuperAdminScreen}>
+							<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
+						</Route>
+						<Route exact path="/admin">
+							<ClubPage club={clubsData[0]} userType="admin"/>
+						</Route>
+						{/*<Route exact path="/admin" component={AdminFeed}>*/}
+						{/*}</Route>*/}
+						{this.assemble_routes()}
+					</Switch>
+				</Router>
+			</div>
+		);  
     }
 }
 

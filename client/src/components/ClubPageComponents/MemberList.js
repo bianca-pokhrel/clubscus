@@ -6,14 +6,33 @@ import MemberModal from './MemberModal.js';
 import { Modal } from "antd";
 
 class MemberLinks extends React.Component {
+	constructor(props) {
+		super(props)
 
-	state = {
-		modalVis: false,
-		modalName: "",
-		modalInsta: "",
-		modalFacebook: "",
-		modalProfilePic: "",
+		this.state = {
+			modalVis: false,
+			modalName: "",
+			modalInsta: "",
+			modalFacebook: "",
+			modalProfilePic: "",
+			members: []
+		}
+
+		props.members.map((member) => {
+			const url = `/data/user/users/${member}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get students");
+					}
+				}).then(m => {
+					this.setState({members: this.state.members.concat(m)})
+				})
+		})
 	}
+	
 
 	render() {
 
@@ -49,7 +68,7 @@ class MemberLinks extends React.Component {
 			)
 		}
 
-		const members = this.props.members
+		const members = this.state.members
     		return (
     			<div id="member_box">
     				<span id="members_title">Members</span>

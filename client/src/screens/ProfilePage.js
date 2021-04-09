@@ -29,7 +29,7 @@ class ProfilePage extends React.Component{
                         }
                         key="1"
                     >
-                        <CurGroups myGroups={true}/>
+                        <CurGroups app={this.props.app} myGroups={true}/>
                     </TabPane>
                     <TabPane
                         tab={
@@ -40,7 +40,7 @@ class ProfilePage extends React.Component{
                         }
                         key="2"
                     >
-                        <CurGroups myGroups={false}/>
+                        <CurGroups app={this.props.app} myGroups={false}/>
                     </TabPane>
                 </Tabs>
             )
@@ -48,11 +48,11 @@ class ProfilePage extends React.Component{
 
         return(
             <div id="pageBG">
-                <NavBar userType="user"/>
+                <NavBar app={this.props.app} userType="user"/>
                 <div id="profileBody">
                     <Row>
                         <Col span={6}>
-                            <UserInfo/>
+                            <UserInfo app={this.props.app}/>
                         </Col>
                         <Col span={18}>
                             <div id="groupTabsContainer">

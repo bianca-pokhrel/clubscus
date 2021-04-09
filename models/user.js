@@ -2,34 +2,68 @@
 'use strict';
 
 const mongoose = require('mongoose')
-const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 // Making a Mongoose model a little differently: a Mongoose Schema
 // Allows us to add additional functionality.
 const UserSchema = new mongoose.Schema({
-	email: {
+	username: {
 		type: String,
 		required: true,
 		minlength: 1,
 		trim: true,
 		unique: true,
-		validate: {
-			validator: validator.isEmail,   // custom validator
-			message: 'Not valid email'
-		}
 	}, 
 	password: {
 		type: String,
 		required: true,
 		minlength: 6
-	}
+	},
+	pic: {
+		type: String,
+		default: "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"
+	},
+	userType: {
+		type: String,
+		required: true,
+	},
+	name: {
+		type: String,
+		required: true,
+		minlength: 1,
+	},
+	userGroups: [mongoose.Types.ObjectId],
+	reqUserGroups: [mongoose.Types.ObjectId],
+	instagram: {
+		type: String,
+		required: false,
+	},
+	facebook: {
+		type: String,
+		required: false,
+	},
+	linkedin: {
+		type: String,
+		required: false,
+	},
 })
 
-// An example of Mongoose middleware.
-// This function will run immediately prior to saving the document
-// in the database.
-UserSchema.pre('save', function(next) {
+const SuperAdminSchema = new mongoose.Schema({
+	username: {
+		type: String,
+		required: true,
+		minlength: 1,
+		trim: true,
+		unique: true,
+	}, 
+	password: {
+		type: String,
+		required: true,
+		minlength: 6
+	},
+})
+
+const bindUser = function(next) {
 	const user = this; // binds this to User document instance
 
 	// checks to ensure we don't hash password more than once
@@ -44,16 +78,32 @@ UserSchema.pre('save', function(next) {
 	} else {
 		next()
 	}
-})
+}
 
-// A static method on the document model.
-// Allows us to find a User document by comparing the hashed password
-//  to a given one, for example when logging in.
-UserSchema.statics.findByEmailPassword = function(email, password) {
+// An example of Mongoose middleware.
+// This function will run immediately prior to saving the document
+// in the database.
+UserSchema.pre('save', bindUser)
+SuperAdminSchema.pre('save', bindUser)
+
+const findById = function(id) {
 	const User = this // binds this to the User model
 
 	// First find the user by their email
-	return User.findOne({ email: email }).then((user) => {
+	return User.findOne({ _id: id }).then((user) => {
+		if (!user) {
+			return Promise.reject()  // a rejected promise
+		}
+		
+		return user
+	})
+}
+
+const findUserByIDPassword = function(id, password) {
+	const User = this // binds this to the User model
+
+	// First find the user by their email
+	return User.findOne({ _id: id }).then((user) => {
 		if (!user) {
 			return Promise.reject()  // a rejected promise
 		}
@@ -70,7 +120,38 @@ UserSchema.statics.findByEmailPassword = function(email, password) {
 	})
 }
 
+const findUserByUsernamePassword = function(username, password) {
+	const User = this // binds this to the User model
+
+	// First find the user by their email
+	return User.findOne({ username: username }).then((user) => {
+		if (!user) {
+			return Promise.reject()  // a rejected promise
+		}
+		// if the user exists, make sure their password is correct
+		return new Promise((resolve, reject) => {
+			bcrypt.compare(password, user.password, (err, result) => {
+				if (result) {
+					resolve(user)
+				} else {
+					reject()
+				}
+			})
+		})
+	})
+}
+
+// A static method on the document model.
+// Allows us to find a User document by comparing the hashed password
+//  to a given one, for example when logging in.
+UserSchema.statics.findById = findById
+SuperAdminSchema.statics.findById = findById
+UserSchema.statics.findByIDPassword = findUserByIDPassword
+SuperAdminSchema.statics.findByIDPassword = findUserByIDPassword
+UserSchema.statics.findUserByUsernamePassword = findUserByUsernamePassword
+
 // make a model using the User schema
 const User = mongoose.model('User', UserSchema)
-module.exports = { User }
+const SuperAdmin = mongoose.model('SuperAdmin', SuperAdminSchema)
+module.exports = { User, SuperAdmin }
 

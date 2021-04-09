@@ -1,91 +1,104 @@
 import React from "react";
 import './CurGroups.css'
-
-import { List, Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
+import { List, Tooltip, Empty, Button } from 'antd';
 import { CheckCircleTwoTone, UserAddOutlined } from '@ant-design/icons';
 
-const groupData = [
-    {	
-		groupName: "CSC309 Project Group", 
-		description: "This is a group for the project",
-		banner: "banner.jpg", 
-		founder: "Some guy",
-		started: "2020/09/25",
-		url: "/csc309projectgroup", 
+// Image from https://static.thenounproject.com/png/1298324-200.png
 
-		members: [
-			{id: 0, first_name: "Suguru", last_name: "Jones"}, 
-			{id: 1, first_name: "JJ", last_name: "Freleng"}
-		],
-		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
-		club: false
-	},
-    {
-		groupName: "UofT Puppies Club", 
-		description: "The puppies of UofT!",
-		banner: "banner.jpg", 
-		founder: "Some guy",
-		started: "2020/09/26",
-		url: "/uoftpuppiesclub", 
-
-		members: [
-			{id: 0, first_name: "Milo", last_name: "Jones"}, 
-			{id: 1, first_name: "Rocky", last_name: "Freleng"}
-		],
-		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
-		club: true
-	},
-    {
-		groupName: "Attack On Titan Fanclub", 
-		description: "Talk about some weeb stuff",
-		banner: "banner.jpg", 
-		founder: "Some guy",
-		started: "2020/09/28",
-		url: "/attackontitanfanclub", 
-
-		members: [
-			{id: 0, first_name: "Eren", last_name: "Jones"}, 
-			{id: 1, first_name: "Mikasa", last_name: "Freleng"}
-		],
-		links: [{name: "Test", url: "test"}, {name: "About Us", url: "about"}],
-		posts: [],
-		club: false
-	},
-];
-
-const groupRequestData = [
-    {groupName: "UofT Full Grown Dogs Club", description: "For when your puppy stuff grows up", url: "/uoftfullgrowndogsclubs/about", club: true},
-    {groupName: "CSC309 Project Group 10", description: "This is a cooler group for the project", url: "/csc309projectgroup10/about", club: false},
-    {groupName: "Anime Club", description: "The official anime club of UofT", url: "/animeclub/about", club: true},
-    {groupName: "FML300 Winter 2021 Study Group", description: "Study group for LEC001", url: "/fml300winter2021studygroup/about", club: false},
-];
+import ENV from '../../config'
+const API_HOST = ENV.api_host
 
 class CurGroups extends React.Component{
-    
-    state = {
-        myGroups: this.props.myGroups
-    }
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			myGroups: this.props.myGroups,
+			userGroups: [],
+			reqUserGroups: []
+		}
+		
+		this.props.app.state.currentUser.currentUser.userGroups.map((group) => {
+            // API HOST AND ENV Stuff here to call localhost:5000
+			const url = `${API_HOST}/data/groups/${group}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get group");
+					}
+				}).then(p => {
+					this.setState({userGroups: this.state.userGroups.concat(p)})
+				})
+		})
+		this.props.app.state.currentUser.currentUser.reqUserGroups.map((group) => {
+            // API HOST AND ENV Stuff here to call localhost:5000
+			const url = `${API_HOST}/data/groups/${group}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get group");
+					}
+				}).then(p => {
+					this.setState({reqUserGroups: this.state.reqUserGroups.concat(p)})
+				})
+		})
+	}
 
     render (){
 
-        const { myGroups } = this.state;
+        const { myGroups, userGroups, reqUserGroups } = this.state;
+
+		const noGroups = () =>{
+				return(
+					<div  id="curGroupsContainer">
+						<Empty
+							image="https://static.thenounproject.com/png/1298324-200.png"
+							imageStyle={{
+							height: 60,
+							}}
+							description={
+							<span>
+								{myGroups? "Oh No! You're not in any Groups!": "You do not have any pending requests."}
+							</span>
+							}
+						>
+							<Link to="/user/groupsearch">
+								<Button>
+									Search For a Group!
+								</Button>
+							</Link>
+						</Empty>
+					</div>
+				)
+		}
+
+		const groupList = (myGroups) => {
+			return(
+				<List
+					bordered
+					dataSource={myGroups ? userGroups: reqUserGroups}
+					renderItem={group => (
+					<List.Item>
+						<List.Item.Meta
+						avatar={group.officiated ? <Tooltip title="Official Club"><CheckCircleTwoTone /></Tooltip>: <Tooltip title="Student Group"><UserAddOutlined /></Tooltip>}
+						title={<a href={`/clubs/${group._id}`}>{group.name}</a>}
+						description={group.description}
+						/>
+					</List.Item>
+					)}
+				/>
+			)
+		}
 
         return(
-        <List
-            bordered
-            dataSource={myGroups ? groupData: groupRequestData}
-            renderItem={group => (
-            <List.Item>
-                <List.Item.Meta
-                avatar={group.club ? <Tooltip title="Official Club"><CheckCircleTwoTone /></Tooltip>: <Tooltip title="Student Group"><UserAddOutlined /></Tooltip>}
-                title={<a href={`/clubs${group.url}`}>{group.groupName}</a>}
-                description={group.description}
-                />
-            </List.Item>
-            )}
-        />
+			<div>
+				{((myGroups && userGroups.length == 0) || (!myGroups && reqUserGroups.length == 0))? noGroups(): groupList(myGroups)}
+			</div>
         )
     }
 }
