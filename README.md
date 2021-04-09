@@ -1,3 +1,28 @@
+# Clubcus: Meet Like-Minded Students. Make Some New Friends.
+
+
+Clubscus is an app that allows users to create groups for others to join, make announcements to members, and manage member listing. Official clubs recognized by the University of Toronto are also able to create their own pages, with added verification to distinguish their registered status. This will provide any university student the ease to find like-minded friends.
+
+On the main page, all users are able to see the main homescreen. There are options to sign in, make an account, and peruse existing groups to learn more information about them.
+
+INCLUDE SCREENSHOT OF MAIN SCREEN
+
+## Registration Page
+
+If you are not a user but would like to become one, you have the option of creating either a Student account or a Group Admin account depending on your need. Simply click on the "New User" button to be redirected to the Registration Page. From there, you can choose what account you would like to create and register as a new user.
+
+
+## Users
+
+There are three types of users that can have accounts on Clubscus: Students, Admin, and Super Admin. See below for more detail on each of the 3 users.
+
+### Students
+
+### Group Admin
+
+### Super Admin
+
+
 # React Express Auth
 
 This example demonstrates how to:
