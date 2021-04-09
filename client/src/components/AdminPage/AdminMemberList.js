@@ -24,7 +24,7 @@ class AdminMemberList extends React.Component {
 		}
 
 		props.members.map((member) => {
-			const url = `/data/user/users/${member}`;
+			const url = `/data/user/users/${member._id}`;
 			fetch(url)
 				.then(res => {
 					if (res.status === 200) {
@@ -33,7 +33,7 @@ class AdminMemberList extends React.Component {
 						alert("Could not get students");
 					}
 				}).then(m => {
-				this.setState({members: this.state.members.concat(m)})
+				this.setState({members: this.state.members.concat(m.name)})
 			})
 		})
 
@@ -44,7 +44,7 @@ class AdminMemberList extends React.Component {
 		this.setState({requested_members: this.state.requested_members.filter(item => item !== member)})
 		this.setState({members: this.state.member.concat([{id: member.id, name: member.name, profilePicture: member.profilePicture}])})
 		const request = new Request(url, {
-			method: "put",
+			method: "post",
 			body: JSON.stringify({"members" : this.state.members,
 				"reqMembers": this.state.requested_members}),
 			headers: {
