@@ -63,6 +63,30 @@ class App extends React.Component {
 
 		return g
 	}
+	//Makes User signed in routes
+	assemble_user_admin_routes = () => {
+
+		if (this.state.currentUser == INVALID_USER) return ("")
+
+		return(
+			[<Route exact path="/user/groupsearch">
+				<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
+			</Route>,
+			<Route exact path="/user/profile">
+				<ProfilePage app={this} user={this.state.currentUser}/>
+			</Route>,
+			<Route exact path="/user/feed">
+				<MainFeed app={this}/>
+			</Route>,
+			<Route exact path="/superadmin" component={SuperAdminScreen}>
+				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
+			</Route>,
+			<Route exact path="/admin">
+				<ClubPage club={clubsData[0]} userType="admin"/>
+			</Route>
+			]
+		)
+	}
 
 	componentDidMount() {
         checkSession(this); // sees if a user is logged in
@@ -86,26 +110,7 @@ class App extends React.Component {
 							<RegisterPage app={this} />
 						</Route>
 
-						{/* User Views */}
-						<Route exact path="/user/groupsearch">
-							<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
-						</Route>
-						<Route exact path="/user/profile">
-							<ProfilePage app={this}/>
-						</Route>
-						<Route exact path="/user/feed">
-							<MainFeed app={this}/>
-						</Route>
-
-						{/* Admin Views */}
-						<Route exact path="/superadmin" component={SuperAdminScreen}>
-							<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
-						</Route>
-						<Route exact path="/admin">
-							<ClubPage club={clubsData[0]} userType="admin"/>
-						</Route>
-						{/*<Route exact path="/admin" component={AdminFeed}>*/}
-						{/*}</Route>*/}
+						{this.assemble_user_admin_routes()}
 						{this.assemble_routes()}
 					</Switch>
 				</Router>
