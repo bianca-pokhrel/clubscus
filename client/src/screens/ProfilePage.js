@@ -14,7 +14,24 @@ const { Paragraph } = Typography;
 
 class ProfilePage extends React.Component{
 
+    constructor(props) {
+		super(props) 
+		
+		this.state = {
+			signedIn: true,
+			user: props.user,
+		};
+	}
+
 	render() {
+
+        const { user } = this.state;
+		const signedIn = user != null
+
+        const get_navbar = () => {
+			return (<NavBar user={user}/>)
+		}
+        console.log(this.props.app)
 
         // Group Tabs Section
         const groupTabs = () => {
@@ -48,7 +65,7 @@ class ProfilePage extends React.Component{
 
         return(
             <div id="pageBG">
-                <NavBar app={this.props.app} userType="user"/>
+                {get_navbar()}
                 <div id="profileBody">
                     <Row>
                         <Col span={6}>

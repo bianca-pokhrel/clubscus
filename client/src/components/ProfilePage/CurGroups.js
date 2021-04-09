@@ -19,7 +19,7 @@ class CurGroups extends React.Component{
 			reqUserGroups: []
 		}
 		
-		this.props.app.state.currentUser.currentUser.userGroups.map((group) => {
+		this.props.app.state.currentUser.userGroups.map((group) => {
             // API HOST AND ENV Stuff here to call localhost:5000
 			const url = `${API_HOST}/data/groups/${group}`;
 			fetch(url)
@@ -33,7 +33,7 @@ class CurGroups extends React.Component{
 					this.setState({userGroups: this.state.userGroups.concat(p)})
 				})
 		})
-		this.props.app.state.currentUser.currentUser.reqUserGroups.map((group) => {
+		this.props.app.state.currentUser.reqUserGroups.map((group) => {
             // API HOST AND ENV Stuff here to call localhost:5000
 			const url = `${API_HOST}/data/groups/${group}`;
 			fetch(url)

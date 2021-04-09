@@ -11,11 +11,11 @@ const { Paragraph } = Typography;
 class UserInfo extends React.Component{
 
     state = {
-		name: this.props.app.state.currentUser.currentUser.name,
-        instagram: this.props.app.state.currentUser.currentUser.instagram,
-        facebook: this.props.app.state.currentUser.currentUser.facebook,
-        linkedin: this.props.app.state.currentUser.currentUser.linkedin,
-        profilePicture: this.props.app.state.currentUser.currentUser.pic
+		name: this.props.app.state.currentUser.name,
+        instagram: this.props.app.state.currentUser.instagram,
+        facebook: this.props.app.state.currentUser.facebook,
+        linkedin: this.props.app.state.currentUser.linkedin,
+        profilePicture: this.props.app.state.currentUser.pic
     };
 
     // From https://ant.design/components/upload/
@@ -62,7 +62,7 @@ class UserInfo extends React.Component{
     handleNameChange = (changeName) => {
         this.setState({name: changeName})
         editUser({name: changeName}, this.props.app)
-        console.log(this.props.app.state.currentUser.currentUser.name)
+        console.log(this.props.app.state.currentUser.name)
     }
     handleInstaChange = (changeInsta) => {
         this.setState({instagram: changeInsta})
@@ -86,7 +86,7 @@ class UserInfo extends React.Component{
         console.log(this.props.app)
 
         const { name, instagram, facebook, linkedin, profilePicture } = this.state;
-        const { username } = this.props.app.state.currentUser.currentUser;
+        const { username } = this.props.app.state.currentUser;
 
         return(
             <div id="profileInfoContainer">
