@@ -53,8 +53,7 @@ class ClubPage extends React.Component{
 		const signedIn = user != null
         
 		const get_navbar = () => {
-			return ("")
-			return (<NavBar userType={!signedIn ? "none" : user.userType} app={this.props.app}/>)
+			return (<NavBar user={user}/>)
 		}
 
 		const clubPageView = () => {

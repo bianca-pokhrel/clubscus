@@ -14,23 +14,24 @@ class NavBar extends React.Component{
 
 		this.state = {
 			user: this.props.user,
-            userType: this.props.user.userType,
             userGroups: []
 		}
 		
-		this.state.user.userGroups.map((group) => {
+		if (this.state.user != null) {
+            this.state.user.userGroups.map((group) => {
 			const url = `/data/groups/${group}`;
-			fetch(url)
-				.then(res => {
-					if (res.status === 200) {
-						return res.json()
-					} else {
-						alert("Could not get group");
-					}
-				}).then(p => {
-					this.setState({userGroups: this.state.userGroups.concat(p)})
-				})
-		})
+                fetch(url)
+                    .then(res => {
+                        if (res.status === 200) {
+                            return res.json()
+                        } else {
+                            alert("Could not get group");
+                        }
+                    }).then(p => {
+                        this.setState({userGroups: this.state.userGroups.concat(p)})
+                    })
+            })
+        }
 	}
 
     
@@ -52,7 +53,8 @@ class NavBar extends React.Component{
     }
 
     render (){
-        const { current, userType } = this.state;
+        const { current } = this.state;
+        let userType = this.state.user == null ? "none" : this.state.user.userType
         const signOutButton = () => {
             return (
                 <Menu.Item key="signOut" id="signOutColor" onClick={this.handleLogOut}><Link to="/"/>Sign Out</Menu.Item>
