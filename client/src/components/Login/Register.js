@@ -35,8 +35,8 @@ class Register extends React.Component{
                         body: JSON.stringify({
                             name: values.groupName,
                             aboutUs: `This is the group known as ${values.groupName}`,
-                            founder: this.props.app.state.currentUser.currentUser.name,
-                            admin: this.props.app.state.currentUser.currentUser.name
+                            founder: this.props.app.state.currentUser.name,
+                            admin: this.props.app.state.currentUser._id
                         }),
                         headers: {
                             Accept: "application/json, text/plain, */*",
@@ -62,7 +62,7 @@ class Register extends React.Component{
                     message.success("Account Created!");
                     this.setState({redirectFor:"User"});
                 }
-            }, 300)
+            }, 700)
         }
     };
     
@@ -115,10 +115,10 @@ class Register extends React.Component{
 
         // Redirect Filled Form To Next Page. ADD URLS HERE WHEN MADE
         if (this.state.redirectFor == "User") {
-            return <Redirect to="/user/feed" push={true} />
+            window.location.href = "/user/feed"
         }
         if (this.state.redirectFor == "Admin") {
-            return <Redirect to="/admin" push={true} />
+            window.location.href = "/admin"
         }
 
         return(

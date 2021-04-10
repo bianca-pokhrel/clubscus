@@ -26,7 +26,7 @@ class SignIn extends React.Component{
                 console.log('Non-valid user')
                 this.setState({signedIn:false})
                 message.error("User Does Not Exist")
-            }}, 300)
+            }}, 600)
     };
     
     onFinishFailed = (errorInfo) => {
