@@ -82,9 +82,9 @@ class Register extends React.Component{
     checkPasswordMatch = (values) => {
         if (values.password1 == values.password2) {
             console.log('Passwords match')
-            if (values.password1.length < 7){
+            if (values.password1.length < 4){
                 console.log('Password too short')
-                message.error('Passwords Should Be At Least 6 Characters');
+                message.error('Passwords Should Be At Least 4 Characters');
             } else {
                 this.setState({passwordMatch:true})
                 this.setState({username: values.username})

@@ -110,6 +110,8 @@ class App extends React.Component {
 	render() {
 		const { currentUser } = this.state;
 
+		console.log(currentUser)
+
 		return (
 			<div>
 				<Router>
@@ -127,6 +129,9 @@ class App extends React.Component {
 
 						{this.assemble_user_admin_routes()}
 						{this.assemble_routes()}
+
+						{ /* 404 if URL isn't expected. */}
+                    	<Route render={() => <div>404 Not found</div>} />
 					</Switch>
 				</Router>
 			</div>

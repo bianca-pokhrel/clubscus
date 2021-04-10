@@ -19,7 +19,7 @@ class ClubPage extends React.Component{
 		this.state = {
 			signedIn: true,
 			founder: null,
-			user: props.user,
+			user: this.props.user,
 		};
 		
 		let url = `/data/user/users/${props.club.founder}`;
@@ -49,7 +49,7 @@ class ClubPage extends React.Component{
     
 	render() {
 		const club = this.props.club
-		const { user } = this.state;
+		const { user } = this.state.user;
 		const signedIn = user != null
         
 		const get_navbar = () => {
