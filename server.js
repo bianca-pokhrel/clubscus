@@ -383,6 +383,23 @@ app.get('/data/groups/', (req, res) => {
 
 })
 
+app.get('/data/groups/admin', (req, res) => {
+
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}
+
+	Group.findOne().then((group) => {
+		res.send(group)
+	}).catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	})
+
+})
+
 
 app.get('/data/groups/:id', (req, res) => {
 	const id = req.params.id
