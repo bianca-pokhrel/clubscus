@@ -69,11 +69,13 @@ class AdminFeed extends React.Component{
         const formatted_date = time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2)
         this.setState({posts: this.state.posts.concat([{id: this.props.posts.length, title: values.user.title, text: values.user.post,
             likes: [], date: formatted_date, comments: [], image: ""}])})
-        //this.forceUpdate()
+        this.forceUpdate()
         const url = `/data/posts`;
         const request = new Request(url, {
             method: "post",
-            body: JSON.stringify({"title" : values.user.title,
+            body: JSON.stringify({
+                "group": this.props.club._id,
+                "title" : values.user.title,
                 "content": values.user.post,
                 "date": formatted_date,
             }),

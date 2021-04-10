@@ -97,7 +97,7 @@ class App extends React.Component {
 				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
 			</Route>,
 			<Route exact path="/admin">
-				<ClubPage club={this.state.admin_data} userType="admin"/>
+				<ClubPage club={this.state.admin_data} userType="admin" />
 			</Route>
 			]
 		)

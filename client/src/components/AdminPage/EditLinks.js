@@ -23,9 +23,9 @@ class EditLinks extends React.Component {
     }
 
     addLink = (values) => {
-        //this.props.links.push({name: values.name, url: values.url})
         const updated_links = this.state.links.concat([{name: values.name, url: values.url}])
         this.setState({links: updated_links})
+        //this.props.links.push({name: values.name, url: values.url})
         const url = `/data/groups/${this.state.club._id}`;
         const request = new Request(url, {
             method: "put",
