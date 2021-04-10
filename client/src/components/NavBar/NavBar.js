@@ -17,7 +17,7 @@ class NavBar extends React.Component{
             userGroups: []
 		}
 		
-		if (this.state.user != null) {
+		if (this.state.user != null && this.state.user.userType=="user") {
             this.state.user.userGroups.map((group) => {
 			const url = `/data/groups/${group}`;
                 fetch(url)

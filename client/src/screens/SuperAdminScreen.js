@@ -116,7 +116,7 @@ class SuperAdminScreen extends React.Component {
         return (
             <div>
                 <Layout>
-                    <NavBar userType="superadmin"/>
+                    <NavBar user={{"userType": "superadmin"}}/>
 
                     <SearchBar className="search-bar-row"/>
                     

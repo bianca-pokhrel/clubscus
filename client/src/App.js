@@ -85,7 +85,7 @@ class App extends React.Component {
 
 		return(
 			[<Route exact path="/user/groupsearch">
-				<GroupSearch app={this} user={this.state.currentUser} signedIn={true} clubs={clubsData}/>
+				<GroupSearch app={this} user={this.state.currentUser} signedIn={true}/>
 			</Route>,
 			<Route exact path="/user/profile">
 				<ProfilePage app={this} user={this.state.currentUser}/>
@@ -97,7 +97,7 @@ class App extends React.Component {
 				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
 			</Route>,
 			<Route exact path="/admin">
-				<ClubPage club={this.state.admin_data} userType="admin"/>
+				<ClubPage club={this.state.admin_data} user={this.state.currentUser} userType="admin"/>
 			</Route>
 			]
 		)
@@ -117,7 +117,7 @@ class App extends React.Component {
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							{currentUser == INVALID_USER ? <GroupSearch signedIn={false} clubs={clubsData}/>: <GroupSearch signedIn={true} user={this.state.currentUser} clubs={clubsData}/>}
+							{currentUser == INVALID_USER ? <GroupSearch signedIn={false}/>: <GroupSearch signedIn={true} user={this.state.currentUser}/>}
 						</Route>
 						{/* Log In/Register */}
 						<Route exact path="/signin">
