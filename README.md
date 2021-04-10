@@ -1,142 +1,82 @@
-# React Express Auth
+# Clubcus
 
-This example demonstrates how to:
+## Description 
+Clubcus is web app that allows users to create groups for others to join, make announcements to members, and manage member listing. Official clubs recognized by the University are also able to create their own pages, with added verification to distinguish their registered status. This will provide any university student the ease to find like-minded friends.
 
--   connect your React frontend to Express backend and MongoDB
--   create user sessions and send session cookies
--   check the authentication status of the client
+## Key Features
+* Login and Signup
+  - Users can create user accounts to join groups or create an admin account to make a new group.
+* Profile Page
+  * Users can edit the information displayed to other group members and manage their club memberships.
+* Group Search
+  * Users can search for other groups and official clubs and apply for membership.
+* Commenting
+  * Users can comment and like group posts.
+* Club Management
+  * Group admins can create new posts, manage group members, and link external group resources.
 
-## Setup
-Start your local Mongo database.  For example, in a separate terminal window:
+## Instructions
 
-```
-# create and run local Mongo database in the root directory of the repo
-mkdir mongo-data
-mongod --dbpath mongo-data
-```
+Deployed Link: http://aqueous-tor-27793.herokuapp.com
 
-Then, in the root directory of the repo, run:
-```
-# install server dependencies in the root directory
-npm install
+1. Once you click the link to Clubcus, you will come to the 'home' page for unregistered users. Here, you can browse some clubs and read what they are about but functionality is limited until the user is logged in.
+2. Click on Sign In or New User in the banner to be taken to a form to fill out.
+* To log into a user account: user, user
+* To log into an admin account: admin, admin
+* To log into a super admin account: superadmin, superadmin
 
-# install frontend dependencies in the client directory
-cd client
-npm install
-```
+### User Account
+* Signed in users will be taken to their Main Feed. Here they can view all the recent posts from their groups.
 
-Alternatively, you can run `npm run setup` in the root directory which runs a script to execute all the above commands (not including starting the mongo database, since it should be run in a separate window). This is a shortcut command defined in [package.json](package.json).
+* Group Page:
+  * Using the group list box in the main feed, or navigating through the NavBar, you can go to the respective group pages to view posts.
+  * Here, you can view posts created by the admin, comment on posts for other members to see, and browse links for members' social media accounts, and external sites that the group also communicates through.
+* User Account Page:
+  * Using the NavBar to press Account Info will take you to the user's profile page.
+  * Here, you can change your personal information that is displayed to other members, and manage your current club memberships, will also viewing your pending memberships.
+  * You can also sign out from this page or use the associated button in the NavBar.
+* Group Search Page:
+  * Clicking the Find a New Group option in the My Groups submenu of the NavBar will take you to the group search page.
+  * Here, you can view other groups like an unregistered user, but you will now have the option to request to join.     
+  * The verified check distinguishes between user-created groups and clubs officially recognized by UofT.
 
-## Development
+### Admin Account
+* Signed in Admins will be taken to their respective club pages, for our purposes, it is the math club.
+* Admins can create posts, and accept members requesting to join.
+* They can also edit the external links diaplyed on their group's page.
 
-During development, run the following commands to build your React app and start the Express server.  You should re-run these commands for your app to reflect any changes in the code. Make sure mongo is still running on a separate terminal.
+### Super Admin
+* Super Admins will be taken to a page where they can view all current clubs.
+* Here, they can view  can officiate groups wanting verification as a recognized official club of UofT on the platform. 
 
-```
-# build the React app
-cd client
-npm run build
-
-# go back to the root directory
-cd ..
-
-# run the server
-node server.js
-```
-
-Alternatively, you can run `npm run build-run` in the root directory which runs a script to execute all the above commands. This is a shortcut command defined in [package.json](package.json).
-
-## Creating a User
-
-There is no frontend form to create a user on the app, so before you login send a `POST` request to `/api/users` with something like:
-```
-{
-    "email": "bob@gmail.com",
-    "password": "123456"
-}
-```
-Then proceed to `http://localhost:5000` in your browser and login with your credentials.
-
-## Directory Structure
-
-```
-react-express-auth
-├── db
-│   └── mongoose.js
-├── models
-│   ├── user.js
-│   └── student.js
-├── package.json
-├── server.js
-└── client
-    ├── public
-    │   ├── index.html
-    │   └── ...
-    ├── tests
-    │   └── ...
-    └── src
-        ├── actions
-        │   ├── student.js
-        │   └── user.js
-        ├── react-components
-        │   ├── Dashboard
-        │   │   └── index.js
-        │   ├── StudentForm
-        │   │   ├── index.js
-        │   │   └── styles.css
-        │   ├── Student
-        │   │   ├── index.js
-        │   │   └── styles.css
-        │   └── ...
-        ├── index.js
-        ├── index.css
-        ├── App.js
-        ├── App.css
-        ├── package.json
-        └── serviceWorker.js
-```
-
-## React Components
-
-Each React component lives in a separate directory with its own `index.js` and `styles.css`. Import them from parent components as needed.
-
-### Styles
-
-Unique styles associated with each React component are kept separate. If the same styles are shared between multiple React components, keep them in a top-level, shared CSS file (i.e. App.css) to avoid repeated styles.
-
-### Material UI
-
-The following Material UI components are used in this app:
-
--   Button
--   TextField
--   Grid
--   Table
--   Table Body
--   Table Row
--   Table Cell
-
-You can find more components [here](https://material-ui.com/).
-
-Note that you can override the default styles of these components by increasing CSS selector specificity.
-
-### Actions
-
-To keep your `index.js` files clean and simple, import required methods from an associated action file. Following this structure can help organize your code and keep it manageable.
-
-## Deployment
-
-The `start` and `heroku-postbuild` scripts included in [package.json](package.json) will tell Heroku how to run your app.  You can deploy to Heroku easily:
-
-```
-# create a new empty Heroku app in the root directory (only need to be done once)
-heroku create
-
-# deploy the latest committed version of your code to Heroku
-git push heroku master
-```
-
-Don't forget to set the `MONGODB_URI` environmental variable to use a cloud Mongo database (like Atlas).
-
-
-
-
+## Created Express Routes
+### Session Routes
+* POST - "/data/user/login": Takes in username and password in body to sign in user, sets session.user to current user.
+* GET - "/data/user/logout": Logs out user, destroys session.
+* GET - "/data/user/check-session": Checks current session user, returns user._id.
+### User Routes
+* GET - "/data/user/users/": Returns all users.
+* GET - "/data/user/users/:id": Returns user matching id.
+* POST - "/data/user/users/": Expects username, name, password, and userType to create new account.
+* PUT = "/data/user/users/:id": Expects any parameter defined in user schema to update user with given id.
+### SuperAdmin Routes
+* GET - "/data/user/superadmins/": Returns all superadmins.
+* GET - "/data/user/superadmins/:id": Returns specific superadmin info.
+* POST - "/data/user/superadmins/": Creates a new superadmin
+* PUT = "/data/user/superadmins/:id": Edits information about specific superadmin.
+### Group Routes
+* GET - "/data/groups/": Returns all groups.
+* GET - "/data/groups/admin": Returns all group admins.
+* GET - "/data/groups/:id": Returns specific group matching id.
+* POST - "/data/groups/": Creates a new group. Expects name(str), description(str), founder(_id), aboutUs(str), created_on(str formatted into date), and admin(_id).
+* PUT - "/data/groups/:id": Edits information about specific group. Expects any parameter defined in group schema.
+### Posts Routes
+* GET - "/data/posts/": Returns all posts.
+* GET - "/data/posts/:id": Returns specific post matching id.
+* POST - "/data/posts/": Creates a new post. Expects group(_id), title(str), content(str), date(str).
+* PUT - "/data/posts/:id": Edits information about specific post. Expects any parameter defined in post schema.
+### Comment Routes
+* GET - "/data/comments/": Returns all comments.
+* GET - "/data/comments/:id": Returns specific comment matching id.
+* POST - "/data/comments/": Creates a new post. Expects user(_id), title(str), content(str), date(str).
+* PUT - "/data/comments/:id": Edits information about specific comment. Expects any parameter defined in comment schema.

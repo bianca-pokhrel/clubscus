@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { register } from "../../actions/user";
 
-import ENV from '../../config'
-const API_HOST = ENV.api_host
 
 const { Option } = Select;
 
@@ -28,32 +26,27 @@ class Register extends React.Component{
             register(this.state.username, this.state.password, this.state.isAdmin? "admin":"user", this.state.name, this.props.app)
             setTimeout(()=>{
                 if(this.state.isAdmin){
-                    //MAKE NEW GROUP && GO TO ADMIN PAGE
-                    // API HOST AND ENV Stuff here to call localhost:5000
-                    const url = new Request(`${API_HOST}/data/groups/`, {
-                        method: "post",
-                        body: JSON.stringify({
-                            name: values.groupName,
-                            aboutUs: `This is the group known as ${values.groupName}`,
-                            founder: this.props.app.state.currentUser.name,
-                            admin: this.props.app.state.currentUser._id
-                        }),
-                        headers: {
-                            Accept: "application/json, text/plain, */*",
-                            "Content-Type": "application/json"
-                        }
-                    });
-                    fetch(url)
-                        .then(res => {
-                            if (res.status === 200) {
-                                return res.json()
-                            } else {
-                                alert("Could not get group");
-                            }
-                        })
-                        // .then(p => {
-                        //     this.setState({userGroups: this.state.userGroups.concat(p)})
-                        // })
+                    // const url = new Request(`/data/groups/`, {
+                    //     method: "post",
+                    //     body: JSON.stringify({
+                    //         name: values.groupName,
+                    //         aboutUs: `This is the group known as ${values.groupName}`,
+                    //         founder: this.props.app.state.currentUser._id,
+                    //         admin: this.props.app.state.currentUser._id
+                    //     }),
+                    //     headers: {
+                    //         Accept: "application/json, text/plain, */*",
+                    //         "Content-Type": "application/json"
+                    //     }
+                    // });
+                    // fetch(url)
+                    //     .then(res => {
+                    //         if (res.status === 200) {
+                    //             return res.json()
+                    //         } else {
+                    //             alert("Could not get group");
+                    //         }
+                    //     })
 
                     message.success("New Group Created!");
                     this.setState({redirectFor:"Admin"});
