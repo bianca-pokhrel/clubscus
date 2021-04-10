@@ -48,7 +48,7 @@ class MemberLinks extends React.Component {
 			this.setState({modalName:member.name});
 			this.setState({modalInsta:member.instagram});
 			this.setState({modalFacebook:member.facebook});
-			this.setState({modalProfilePic:member.profilePicture});
+			this.setState({modalProfilePic:member.pic});
 		}
 
 		const handleCancel = () => {
@@ -74,7 +74,7 @@ class MemberLinks extends React.Component {
     				<span id="members_title">Members</span>
       				{members.map(member => (
       					<div id="ind_member_container">
-						<img id="member_pic" src={member.profilePicture} onClick={(e) => passMemberInfo(member, e)}/>
+						<img id="member_pic" src={member.pic} onClick={(e) => passMemberInfo(member, e)}/>
 						<a id="member_text" onClick={(e) => passMemberInfo(member, e)}>{member.name}</a>
 						{modalView}
 					</div>
