@@ -13,11 +13,12 @@ class MemberModal extends React.Component {
         return (
             <div id="modalBody">
                  <div id="imageContainer">
-                        <img width="300px" height="300px" src={this.props.profilePicture} alt="profilePic"/>
+                        <img width="300px" height="300px" src={this.props.pic} alt="profilePic"/>
                     </div>
                 <Divider />
                     <span className="infoHeader">Instagram:</span> <Paragraph><a href={`https://www.instagram.com/${this.props.instagram.substring(1)}`} target="_blank">{this.props.instagram}</a></Paragraph>
                     <span className="infoHeader">FaceBook:</span> <Paragraph><a href={`https://www.facebook.com/${this.props.facebook.replace(/\s/g, '')}`} target="_blank">{this.props.facebook}</a></Paragraph>
+                    <span className="infoHeader">LinkedIn:</span> <Paragraph><a href={`https://www.linkedin.com/in/${this.props.linkedin.replace(/\s/g, '')}`} target="_blank">{this.props.facebook}</a></Paragraph>
             </div>
         )
   	}
