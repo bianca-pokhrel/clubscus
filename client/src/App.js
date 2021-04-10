@@ -26,10 +26,11 @@ class App extends React.Component {
 			currentUser: INVALID_USER,
 			signedIn: false,
 			userType: null,
-			group_urls: null
+			group_urls: null,
+			admin_data: null,
 		}
 	
-		const url = `/data/groups`;
+		let url = `/data/groups`;
 
 		// Since this is a GET request, simply call fetch on the URL
 		fetch(url)
@@ -44,6 +45,20 @@ class App extends React.Component {
 				let groups = json
 				this.setState({group_urls: groups})
 			})
+
+		url = '/data/groups/admin'
+		fetch(url)
+			.then(res => {
+				if (res.status === 200) {
+					// return a promise that resolves with the JSON body
+					return res.json();
+				} else {
+					alert("Could not get groups");
+				}
+			}).then(json => {
+			let data = json
+			this.setState({admin_data: data})
+		})
 	}
 
 	assemble_routes = () => {
@@ -82,7 +97,7 @@ class App extends React.Component {
 				<SuperAdminScreen clubsData={clubsData}></SuperAdminScreen>
 			</Route>,
 			<Route exact path="/admin">
-				<ClubPage club={clubsData[0]} userType="admin"/>
+				<ClubPage club={this.state.admin_data} userType="admin"/>
 			</Route>
 			]
 		)
