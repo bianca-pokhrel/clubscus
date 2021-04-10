@@ -15,6 +15,7 @@ class MemberLinks extends React.Component {
 			modalInsta: "",
 			modalFacebook: "",
 			modalProfilePic: "",
+			modalLinkedin: "",
 			members: []
 		}
 
@@ -36,7 +37,7 @@ class MemberLinks extends React.Component {
 
 	render() {
 
-		const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
+		const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic, modalLinkedin } = this.state;
 
 		let modalView;
 
@@ -63,7 +64,7 @@ class MemberLinks extends React.Component {
 					onCancel={handleCancel} 
 					footer={null}
 				>
-					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook}/>
+					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook} linkedin={modalLinkedin}/>
 				</Modal>
 			)
 		}

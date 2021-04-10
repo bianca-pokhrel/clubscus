@@ -79,6 +79,7 @@ class UserInfo extends React.Component{
     handleLogout = (app) => {
         message.success("Logged Out!")
         logout(app)
+        window.location.href = "/"
     }
 
     render (){

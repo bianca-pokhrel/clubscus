@@ -50,6 +50,7 @@ class NavBar extends React.Component{
 
         message.success("Logged Out!")
         logout(this.props.app)
+        window.location.href = "/"
     }
 
     render (){

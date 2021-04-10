@@ -85,7 +85,7 @@ class App extends React.Component {
 
 		return(
 			[<Route exact path="/user/groupsearch">
-				<GroupSearch app={this} signedIn={true} clubs={clubsData}/>
+				<GroupSearch app={this} user={this.state.currentUser} signedIn={true} clubs={clubsData}/>
 			</Route>,
 			<Route exact path="/user/profile">
 				<ProfilePage app={this} user={this.state.currentUser}/>
@@ -110,12 +110,14 @@ class App extends React.Component {
 	render() {
 		const { currentUser } = this.state;
 
+		console.log(currentUser)
+
 		return (
 			<div>
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							{currentUser == INVALID_USER ? <GroupSearch signedIn={false} clubs={clubsData}/>: <GroupSearch signedIn={true} clubs={clubsData}/>}
+							{currentUser == INVALID_USER ? <GroupSearch signedIn={false} clubs={clubsData}/>: <GroupSearch signedIn={true} user={this.state.currentUser} clubs={clubsData}/>}
 						</Route>
 						{/* Log In/Register */}
 						<Route exact path="/signin">
@@ -127,6 +129,9 @@ class App extends React.Component {
 
 						{this.assemble_user_admin_routes()}
 						{this.assemble_routes()}
+
+						{ /* 404 if URL isn't expected. */}
+                    	<Route render={() => <div>404 Not found</div>} />
 					</Switch>
 				</Router>
 			</div>
