@@ -18,6 +18,7 @@ class GroupSearch extends React.Component{
 		this.state = {
             signedIn: this.props.signedIn,
             clubsData: [],
+            user: props.user,
 		}
 		
         const url = `/data/groups`;
@@ -37,18 +38,20 @@ class GroupSearch extends React.Component{
 
 	render() {
 
+        const { user } = this.state;
 
+        console.log(this.props.app)
         const eachClubCard1 = this.state.clubsData.slice(0,6).map(club =>
-                <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
+                <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.props.app ? this.props.app.state.currentUser.userGroups: null}/>
             )
         const eachClubCard2 = this.state.clubsData.slice(6,11).map(club =>
-            <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.state.clubsOfUser}/>
+            <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.props.app ? this.props.app.state.currentUser.userGroups: null}/>
         )
 
 
         return(
             <div id="pageBG">
-                {this.state.signedIn? <NavBar app={this.props.app} userType="user"/>: <SiteBanner/>}
+                {this.state.signedIn? <NavBar user={user}/>: <SiteBanner/>}
                 <div id="searchBody">
                     {/* <SearchBar/> */}
                     <div className="category">

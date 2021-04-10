@@ -15,6 +15,7 @@ class MemberLinks extends React.Component {
 			modalInsta: "",
 			modalFacebook: "",
 			modalProfilePic: "",
+			modalLinkedin: "",
 			members: []
 		}
 
@@ -36,7 +37,7 @@ class MemberLinks extends React.Component {
 
 	render() {
 
-		const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
+		const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic, modalLinkedin } = this.state;
 
 		let modalView;
 
@@ -48,7 +49,7 @@ class MemberLinks extends React.Component {
 			this.setState({modalName:member.name});
 			this.setState({modalInsta:member.instagram});
 			this.setState({modalFacebook:member.facebook});
-			this.setState({modalProfilePic:member.profilePicture});
+			this.setState({modalProfilePic:member.pic});
 		}
 
 		const handleCancel = () => {
@@ -63,7 +64,7 @@ class MemberLinks extends React.Component {
 					onCancel={handleCancel} 
 					footer={null}
 				>
-					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook}/>
+					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook} linkedin={modalLinkedin}/>
 				</Modal>
 			)
 		}
@@ -74,7 +75,7 @@ class MemberLinks extends React.Component {
     				<span id="members_title">Members</span>
       				{members.map(member => (
       					<div id="ind_member_container">
-						<img id="member_pic" src={member.profilePicture} onClick={(e) => passMemberInfo(member, e)}/>
+						<img id="member_pic" src={member.pic} onClick={(e) => passMemberInfo(member, e)}/>
 						<a id="member_text" onClick={(e) => passMemberInfo(member, e)}>{member.name}</a>
 						{modalView}
 					</div>
