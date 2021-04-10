@@ -40,7 +40,6 @@ class GroupSearch extends React.Component{
 
         const { user } = this.state;
 
-        console.log(this.props.app)
         const eachClubCard1 = this.state.clubsData.slice(0,6).map(club =>
                 <ClubCard eachClub={club} signedIn={this.state.signedIn} clubsOfUser={this.props.app ? this.props.app.state.currentUser.userGroups: null}/>
             )
