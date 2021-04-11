@@ -477,6 +477,7 @@ app.put('/data/groups/:id', (req, res) => {
 		} else {
             if (req.body.name != null) group.name = req.body.name
             if (req.body.description != null) group.description = req.body.description
+			if (req.body.banner != null) group.banner = req.body.banner
             if (req.body.founder != null) group.founder = req.body.founder
 			if (req.body.created_on != null) group.created_on = req.body.created_on
             if (req.body.about != null) group.aboutUs = req.body.about

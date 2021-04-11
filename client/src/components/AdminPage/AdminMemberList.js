@@ -18,13 +18,14 @@ class AdminMemberList extends React.Component {
 			modalInsta: "",
 			modalFacebook: "",
 			modalProfilePic: "",
+			modalLinkedin: "",
 			members: this.props.club.members,
 			requested_members: this.props.club.reqMembers,
 			club: this.props.club,
 		}
 
 		props.members.map((member) => {
-			const url = `/data/user/users/${member._id}`;
+			const url = `/data/user/users/${member}`;
 			fetch(url)
 				.then(res => {
 					if (res.status === 200) {
@@ -33,7 +34,21 @@ class AdminMemberList extends React.Component {
 						alert("Could not get students");
 					}
 				}).then(m => {
-				this.setState({members: this.state.members.concat(m.name)})
+				this.setState({members: this.state.members.concat(m)})
+			})
+		})
+
+		props.reqMembers.map((reqmember) => {
+			const url = `/data/user/users/${reqmember}`;
+			fetch(url)
+				.then(res => {
+					if (res.status === 200) {
+						return res.json()
+					} else {
+						alert("Could not get students");
+					}
+				}).then(m => {
+				this.setState({requested_members: this.state.requested_members.concat(m)})
 			})
 		})
 
@@ -73,7 +88,7 @@ class AdminMemberList extends React.Component {
     render() {
 		const { members, requested_members } = this.state
 
-        const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic } = this.state;
+        const { modalVis, modalName, modalInsta, modalFacebook, modalProfilePic, modalLinkedin } = this.state;
         let modalView;
 
 		const passMemberInfo = (member) => {
@@ -82,7 +97,8 @@ class AdminMemberList extends React.Component {
 			this.setState({modalName:member.name});
 			this.setState({modalInsta:member.instagram});
 			this.setState({modalFacebook:member.facebook});
-			this.setState({modalProfilePic:member.profilePicture});
+			this.setState({modalProfilePic:member.pic});
+			this.setState({modalProfilePic:member.linkedin});
 		}
 
 		const handleCancel = () => {
@@ -97,7 +113,7 @@ class AdminMemberList extends React.Component {
 					onCancel={handleCancel} 
 					footer={null}
 				>
-					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook}/>
+					<MemberModal profilePicture={modalProfilePic} instagram={modalInsta} facebook={modalFacebook} linkedin={modalLinkedin}/>
 				</Modal>
 			)
 		}
@@ -108,7 +124,7 @@ class AdminMemberList extends React.Component {
                 <span id="members_title">Members</span>
                 {members.map(member => (
                     <div id="ind_member_container">
-                        <img id="member_pic" src={member.profilePicture} onClick={(e) => passMemberInfo(member, e)}/>
+                        <img id="member_pic" src={member.pic} onClick={(e) => passMemberInfo(member, e)}/>
                         <a id="member_text" onClick={(e) => passMemberInfo(member, e)}>{member.name}</a>
                         {modalView}
                     </div>
@@ -119,7 +135,7 @@ class AdminMemberList extends React.Component {
                     <h2>Member Requests</h2>
                     {requested_members.map(requested_member => (
                         <div id="requested_member_container">
-                            <img id="requested_member_pic"  onClick={(e) => passMemberInfo(requested_member, e)} src={requested_member.profilePicture}/>
+                            <img id="requested_member_pic"  onClick={(e) => passMemberInfo(requested_member, e)} src={requested_member.pic}/>
                             <h2 id="requested_member_text"onClick={(e) => passMemberInfo(requested_member, e)}>{requested_member.name}</h2>
                             <div id="accept_button">
                                 <Button shape="round" size="medium" onClick={(e) => this.acceptMember(requested_member, e)}>Accept</Button>

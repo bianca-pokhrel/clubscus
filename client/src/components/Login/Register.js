@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, message } from 'antd';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
-import { register } from "../../actions/user";
+import { register, login } from "../../actions/user";
 
 
 const { Option } = Select;
@@ -23,7 +23,11 @@ class Register extends React.Component{
         console.log('Fields Filled');
         this.checkPasswordMatch(values)
         if (this.state.passwordMatch){
-            register(this.state.username, this.state.password, this.state.isAdmin? "admin":"user", this.state.name, this.props.app)
+            if(this.state.isAdmin){
+                login("admin", "admin", this.props.app)
+            } else{
+                register(this.state.username, this.state.password, "user", this.state.name, this.props.app)
+            }
             setTimeout(()=>{
                 if(this.state.isAdmin){
                     // const url = new Request(`/data/groups/`, {
