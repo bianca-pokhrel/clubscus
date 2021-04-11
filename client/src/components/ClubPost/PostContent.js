@@ -26,7 +26,7 @@ class PostContent extends React.Component{
 					// return a promise that resolves with the JSON body
 					return res.json();
 				} else {
-					alert("Could not get group");
+					console.log("Could not get group");
 				}
 			}).then(json => {
 				let groups = json

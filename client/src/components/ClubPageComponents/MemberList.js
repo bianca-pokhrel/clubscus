@@ -50,6 +50,7 @@ class MemberLinks extends React.Component {
 			this.setState({modalInsta:member.instagram});
 			this.setState({modalFacebook:member.facebook});
 			this.setState({modalProfilePic:member.pic});
+			this.setState({modalProfilePic:member.linkedin});
 		}
 
 		const handleCancel = () => {

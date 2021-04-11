@@ -32,6 +32,7 @@ class Feed extends React.Component{
 					this.setState({posts: this.state.posts.concat(p)})
 				})
 		})
+		console.log(this.state.posts)
 	}
 
 	handleClick = e => {

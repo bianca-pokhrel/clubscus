@@ -8,6 +8,10 @@
   margin-top: 5px;
   width: fit-content;
 }
+.header:hover {
+  color: lightskyblue;
+  cursor: pointer;
+}
 
 .ant-menu.menu {
   background-color: #00204e;

@@ -5,6 +5,7 @@ import PostContent from '../ClubPost/PostContent'
 import { message, Form, Input, Button, Menu, Dropdown, Col } from 'antd'
 import { DownOutlined } from '@ant-design/icons';
 import { Skeleton, Switch, List, Avatar } from 'antd';
+import { parseDate } from "../../actions/DateParser";
 
 
 const layout = {
@@ -17,7 +18,7 @@ const validateMessages = {
     required: '${label} is required!',
 };
 
-
+var key = 0
 class AdminFeed extends React.Component{
     constructor(props) {
         super(props)
@@ -26,7 +27,7 @@ class AdminFeed extends React.Component{
             ascending: -1,
             focus: -1,
             main_feed: 0,
-            posts: this.props.posts,
+            posts: [],
             club: this.props.club
         }
 
@@ -45,12 +46,6 @@ class AdminFeed extends React.Component{
         })
     }
 
-    parseDate = date => {
-        let t = date
-        date = date.replace(" ", "T") + ":00"
-        return Date.parse(date)
-    }
-
     handleClick = e => {
         if (e.domEvent.target.innerHTML == "Ascending") {
             this.setState({ascending: 1})
@@ -65,11 +60,12 @@ class AdminFeed extends React.Component{
     }
 
     addPost = (values) => {
+        console.log(this.props.club)
         let time = new Date()
+        let newPostId
         const formatted_date = time.getFullYear() + '-' + ("0" + (time.getMonth() + 1)).slice(-2) + '-' + ( "0" + time.getDate()).slice(-2)
         this.setState({posts: this.state.posts.concat([{id: this.props.posts.length, title: values.user.title, text: values.user.post,
             likes: [], date: formatted_date, comments: [], image: ""}])})
-        this.forceUpdate()
         const url = `/data/posts`;
         const request = new Request(url, {
             method: "post",
@@ -91,12 +87,46 @@ class AdminFeed extends React.Component{
                     message.success('New Post Has Been Made');
                     return res.json()
                 } else {
-                    alert("Could not accept requested members");
+                    alert("Post was not madeS");
                 }
+            })
+            .then(json => {
+                console.log(json)
+                newPostId = json._id
             })
             .catch(error => {
                 console.log(error);
             });
+        
+        setTimeout(() => {
+            console.log(newPostId)
+            let newArrayOfPostIds = []
+            newArrayOfPostIds = this.state.posts.map(post=>post._id)
+            newArrayOfPostIds.pop()
+            console.log(newArrayOfPostIds)
+            newArrayOfPostIds.push(newPostId)
+            console.log(newArrayOfPostIds)
+            const request2 = new Request(`/data/groups/${this.props.club._id}`, {
+                method: "put",
+                body: JSON.stringify({
+                    "posts" : newArrayOfPostIds
+                }),
+                headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json"
+                }
+            });
+            fetch(request2)
+                .then(function (res) {
+                    if (res.status === 200) {
+                        console.log('New Post Has Been Added to Group');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            this.forceUpdate()
+        }, 1300)
     };
 
 
@@ -118,16 +148,16 @@ class AdminFeed extends React.Component{
         }
 
         const gen = (post) => {
-            return <PostContent post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
+            return <PostContent post = {post} expand = {true} main_feed={this.state.main_feed} changeFocus={this.changeFocus} user={this.props.user}/>
         }
 
         const gen_all = () => {
-            this.state.posts.sort((a,b) => (this.parseDate(a.date) < this.parseDate(b.date) ? -this.state.ascending : (this.parseDate(a.date) > this.parseDate(b.date) ? this.state.ascending : 0)))
-
-            return this.state.posts.map(p => {
-                return <PostContent post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus}/>
-            })
-        }
+			let sorted = this.state.posts.sort((a,b) => (parseDate(a.date) < parseDate(b.date) ? -this.state.ascending : (parseDate(a.date) > parseDate(b.date) ? this.state.ascending : 0)))
+			
+			return sorted.map(p => {
+				return <PostContent key = {key++} post = {p} expand = {false} main_feed={this.state.main_feed} changeFocus={this.changeFocus} user={this.props.user}/>
+			})
+		}
         const check_url = () => {
             if (this.state.focus != -1) {
                 let id = this.state.focus

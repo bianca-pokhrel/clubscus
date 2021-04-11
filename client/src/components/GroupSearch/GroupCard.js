@@ -26,7 +26,7 @@ class GroupCard extends React.Component{
                     >
                         <div id="imgContainer">{this.props.img}</div>
                         <Meta 
-                            avatar={this.state.club.club ? <Tooltip title="Official Club"><CheckCircleTwoTone /></Tooltip>: <Tooltip title="Student Group"><UserAddOutlined /></Tooltip>}
+                            avatar={this.state.club.officiated ? <Tooltip title="Official Club"><CheckCircleTwoTone /></Tooltip>: <Tooltip title="Student Group"><UserAddOutlined /></Tooltip>}
                             title={this.state.club.name} 
                             description={this.state.club.description} 
                         />

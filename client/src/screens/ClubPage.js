@@ -48,9 +48,11 @@ class ClubPage extends React.Component{
 	};
     
 	render() {
+		console.log(this.props.user)
+
 		const club = this.props.club
-		const { user } = this.state.user;
-		const signedIn = user != null
+		const user = this.props.user? this.props.user: null;
+		const signedIn = user? user: null 
         
 		const get_navbar = () => {
 			return (<NavBar user={user}/>)
@@ -91,10 +93,10 @@ class ClubPage extends React.Component{
 							<AdminLinks links={club.links} club={club}/>
 						</div>
 						<div id="club_feed">
-							<AdminFeed posts={club.posts} main_feed={0} focus={-1} club={club}/>
+							<AdminFeed posts={club.posts} main_feed={0} focus={-1} club={club} user={user}/>
 						</div>
 						<div class="member_bars">
-							<AdminMemberList members={club.members} club={club}/>
+							<AdminMemberList members={club.members} reqMembers={club.reqMembers} club={club}/>
 						</div>
 					</div>
 				);
