@@ -62,6 +62,17 @@ class App extends React.Component {
 	}
 
 	assemble_routes = () => {
+
+		if (this.state.group_urls == null) return ("")
+
+		if (this.state.currentUser == INVALID_USER){
+			let g = this.state.group_urls.map((group) => {
+				return (<Route exact path={`/clubs/${group._id}/about`}>
+					<ClubPage club={group} about={true} user={null} app={this}/>
+					</Route>)
+			})
+		}
+
 		if (this.state.currentUser == INVALID_USER || this.state.group_urls == null) return ("")
 
 		let g = this.state.group_urls.map((group) => {

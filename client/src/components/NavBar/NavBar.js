@@ -53,6 +53,15 @@ class NavBar extends React.Component{
         window.location.href = "/"
     }
 
+    handleLogoRedirect = () => {
+        let userType = this.state.user == null ? "none" : this.state.user.userType
+        if(userType=="user"){
+            window.location.href = "/user/feed"
+        } else{
+            window.location.href = "/"
+        }
+    }
+
     render (){
         const { current } = this.state;
         let userType = this.state.user == null ? "none" : this.state.user.userType
@@ -122,7 +131,7 @@ class NavBar extends React.Component{
                 <Row>
                     <Col span={6}>
                         {/* Only make logo a link if user  */}
-                        <h2 className ="header">{userType=="user" || userType=="none"? <Link className ="header" to={userType=="user"? "/user/feed": "/"}>Clubcus</Link>:"Clubcus"}</h2>
+                        <h2 className ="header">{userType=="user" || userType=="none"? <span classname="header" onClick={this.handleLogoRedirect}>Clubcus</span>:"Clubcus"}</h2>
                     </Col>
                     <Col span={18}>
                         {navBarView()}     

@@ -48,9 +48,15 @@ class ClubPage extends React.Component{
 	};
     
 	render() {
+		console.log(this.props.user)
+
 		const club = this.props.club
-		const { user } = this.state.user;
-		const signedIn = user != null
+		const user = this.props.user? this.props.user: "";
+		const signedIn = user!= ""? user: null 
+
+		console.log(this.props.user)
+		console.log(user)
+		console.log(signedIn)
         
 		const get_navbar = () => {
 			return (<NavBar user={user}/>)
