@@ -1,3 +1,5 @@
+*Note: Last commit made 1 day after deadline
+
 # Clubcus
 
 ## Description 
